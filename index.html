@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI X 設計職人產業實戰工作坊 2026 — Taiwan AI Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --y: #F5D800;
+      --o: #F5A52A;
+      --k: #111111;
+      --w: #F7F4EC;
+      --d: #0D0D0D;
+      --g: rgba(17,17,17,0.45);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans TC', sans-serif; background: var(--w); color: var(--k); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: var(--y); border-bottom: 2.5px solid var(--k);
+      height: 58px; display: flex; align-items: center;
+      padding: 0 clamp(1.25rem, 5vw, 4rem);
+      justify-content: space-between;
+    }
+    nav .logo img { height: 30px; display: block; }
+    nav ul { list-style: none; display: flex; gap: 1.75rem; }
+    nav ul a { font-size: .8rem; font-weight: 700; color: var(--k); text-decoration: none; letter-spacing: .07em; text-transform: uppercase; }
+    nav ul a:hover { text-decoration: underline; }
+    @media(max-width:700px){ nav ul { display: none; } }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100svh; background: var(--y);
+      padding: 58px clamp(1.5rem,6vw,5rem) clamp(4rem,8vw,6rem);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; display: flex;
+      align-items: center; justify-content: center;
+      pointer-events: none; overflow: hidden;
+    }
+    .hero-bg img { width: 130%; max-width: none; opacity: .08; }
+    .year-pill {
+      position: absolute; top: 70px; right: clamp(1.5rem,6vw,5rem);
+      background: var(--o); color: var(--k);
+      font-size: clamp(2rem,4vw,3.5rem); font-weight: 900;
+      writing-mode: vertical-rl; letter-spacing: .12em;
+      padding: .9rem .65rem; line-height: 1;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--k); color: var(--y);
+      font-size: .72rem; font-weight: 900; letter-spacing: .14em;
+      text-transform: uppercase; padding: .3rem .75rem;
+      margin-bottom: 1.4rem; width: fit-content;
+    }
+    h1 {
+      font-size: clamp(2.8rem,8vw,7.5rem); font-weight: 900;
+      line-height: .98; letter-spacing: -.025em;
+      color: var(--k); max-width: 14ch;
+      margin-bottom: 1.4rem;
+    }
+    .hero-sub {
+      font-size: clamp(.95rem,1.6vw,1.25rem); font-weight: 500;
+      color: var(--k); opacity: .7; max-width: 52ch;
+      line-height: 1.65; margin-bottom: 2.5rem;
+    }
+    .date-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .date-chip {
+      background: var(--k); color: var(--y);
+      font-size: .78rem; font-weight: 700;
+      padding: .38rem .9rem; text-decoration: none;
+      transition: background .15s, color .15s;
+    }
+    .date-chip:hover { background: var(--d); color: var(--o); }
+
+    /* ── INTRO ── */
+    #intro {
+      background: var(--k); color: var(--w);
+      padding: clamp(4rem,9vw,9rem) clamp(1.5rem,6vw,5rem);
+    }
+    .intro-headline {
+      font-size: clamp(1.9rem,4.5vw,4rem); font-weight: 900;
+      line-height: 1.1; max-width: 20ch; margin-bottom: 1.5rem;
+    }
+    .intro-headline em { color: var(--y); font-style: normal; }
+    .intro-desc {
+      font-size: clamp(.95rem,1.4vw,1.15rem); line-height: 1.8;
+      opacity: .65; max-width: 56ch; margin-bottom: 4rem;
+    }
+    .stats {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      border: 1px solid rgba(255,255,255,.12);
+      max-width: 680px; margin-bottom: 4rem;
+    }
+    .stat { padding: 1.75rem 2rem; border-right: 1px solid rgba(255,255,255,.12); }
+    .stat:last-child { border-right: none; }
+    .stat-n { font-size: clamp(2.5rem,5vw,4rem); font-weight: 900; color: var(--y); line-height: 1; }
+    .stat-l { font-size: .85rem; opacity: .5; margin-top: .35rem; }
+    .school-list {
+      display: flex; flex-wrap: wrap; gap: 1rem 2.5rem;
+      font-size: .85rem; font-weight: 700; opacity: .45;
+    }
+
+    /* ── COURSES ── */
+    #courses {
+      padding: clamp(4rem,8vw,8rem) clamp(1.5rem,6vw,5rem);
+    }
+    .sec-hd { margin-bottom: 2.5rem; }
+    .sec-title { font-size: clamp(1.8rem,3.5vw,3rem); font-weight: 900; letter-spacing: -.02em; }
+    .sec-sub { font-size: .95rem; opacity: .5; margin-top: .35rem; }
+    .filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.5rem; }
+    .f-btn {
+      background: transparent; border: 2px solid var(--k); color: var(--k);
+      font-family: 'Noto Sans TC', sans-serif; font-size: .8rem; font-weight: 700;
+      padding: .35rem .95rem; cursor: pointer; transition: background .15s, color .15s;
+    }
+    .f-btn.on, .f-btn:hover { background: var(--k); color: var(--y); }
+    .grid-3 {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
+    }
+    @media(max-width:1080px){ .grid-3 { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:640px){ .grid-3 { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--k); color: var(--w);
+      display: flex; flex-direction: column;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,.25); }
+    .card-top {
+      background: var(--y); padding: 1.25rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .card-top img { width: 48px; height: 48px; object-fit: contain; }
+    .card-cat { font-size: .7rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; color: var(--k); }
+    .card-body { padding: 1.4rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .card-collab { font-size: .68rem; opacity: .4; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .4rem; }
+    .card-title { font-size: 1.05rem; font-weight: 900; line-height: 1.35; margin-bottom: 1.1rem; }
+    .meta { display: flex; flex-direction: column; gap: .35rem; margin-bottom: 1.1rem; }
+    .meta-row { display: flex; gap: .5rem; font-size: .8rem; }
+    .meta-lbl { opacity: .4; min-width: 2.2rem; font-weight: 500; }
+    .tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.25rem; }
+    .tag {
+      background: rgba(245,216,0,.1); border: 1px solid rgba(245,216,0,.25);
+      color: var(--y); font-size: .68rem; font-weight: 700;
+      padding: .18rem .5rem; letter-spacing: .04em;
+    }
+    .card-foot {
+      margin-top: auto; padding-top: .9rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .deadline { font-size: .72rem; opacity: .4; }
+    .reg-btn {
+      display: inline-block; background: var(--y); color: var(--k);
+      font-size: .78rem; font-weight: 900; padding: .45rem 1rem;
+      text-decoration: none; letter-spacing: .03em;
+      transition: background .15s;
+    }
+    .reg-btn:hover { background: var(--o); }
+    .reg-btn.closed { background: rgba(255,255,255,.08); color: rgba(255,255,255,.25); pointer-events: none; }
+    .card.hidden { display: none; }
+
+    /* ── SPEAKERS ── */
+    #speakers {
+      background: #191919; color: var(--w);
+      padding: clamp(4rem,8vw,8rem) clamp(1.5rem,6vw,5rem);
+    }
+    #speakers .sec-title { color: var(--w); }
+    #speakers .sec-sub { color: rgba(255,255,255,.4); }
+    .spk-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 1.75rem;
+      margin-top: 3rem;
+    }
+    @media(max-width:900px){ .spk-grid { grid-template-columns: repeat(3,1fr); } }
+    @media(max-width:580px){ .spk-grid { grid-template-columns: repeat(2,1fr); } }
+    .spk img {
+      width: 100%; aspect-ratio: 1; object-fit: cover; object-position: top;
+      display: block; filter: grayscale(15%); transition: filter .3s;
+    }
+    .spk:hover img { filter: grayscale(0%); }
+    .spk-info { padding: .85rem 0; }
+    .spk-name { font-size: .95rem; font-weight: 900; margin-bottom: .2rem; }
+    .spk-role { font-size: .75rem; opacity: .45; line-height: 1.5; margin-bottom: .55rem; }
+    .spk-tag {
+      display: inline-block; background: rgba(245,216,0,.1);
+      border: 1px solid rgba(245,216,0,.2); color: var(--y);
+      font-size: .68rem; font-weight: 700; padding: .18rem .5rem;
+      text-decoration: none; letter-spacing: .04em; transition: background .15s;
+    }
+    .spk-tag:hover { background: rgba(245,216,0,.22); }
+
+    /* ── SCHOOLS ── */
+    #schools {
+      background: var(--w);
+      border-top: 2.5px solid var(--k); border-bottom: 2.5px solid var(--k);
+      padding: clamp(3rem,6vw,5rem) clamp(1.5rem,6vw,5rem);
+    }
+    #schools .sec-hd { text-align: center; margin-bottom: 3rem; }
+    .sch-grid {
+      display: grid; grid-template-columns: repeat(5,1fr); gap: 1.5rem;
+      text-align: center;
+    }
+    @media(max-width:860px){ .sch-grid { grid-template-columns: repeat(3,1fr); } }
+    @media(max-width:500px){ .sch-grid { grid-template-columns: repeat(2,1fr); } }
+    .sch-item { display: flex; flex-direction: column; gap: .4rem; align-items: center; }
+    .sch-name { font-size: .88rem; font-weight: 700; }
+    .sch-city { font-size: .75rem; opacity: .4; }
+    .sch-count {
+      display: inline-block; background: var(--y);
+      font-size: .68rem; font-weight: 900;
+      padding: .15rem .5rem; margin-top: .2rem;
+    }
+
+    /* ── FORUM ── */
+    #forum {
+      background: var(--d); color: var(--w);
+      padding: clamp(5rem,10vw,11rem) clamp(1.5rem,6vw,5rem);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .forum-lbl {
+      display: inline-block; background: var(--o); color: var(--k);
+      font-size: .7rem; font-weight: 900; letter-spacing: .14em;
+      text-transform: uppercase; padding: .3rem .75rem; margin-bottom: 2rem;
+    }
+    .forum-title {
+      font-size: clamp(3.5rem,11vw,9.5rem); font-weight: 900;
+      line-height: .92; letter-spacing: -.03em; color: var(--y);
+      margin-bottom: 1.5rem;
+    }
+    .forum-sub { font-size: clamp(1rem,1.8vw,1.6rem); opacity: .55; margin-bottom: .75rem; }
+    .forum-date { font-size: clamp(.9rem,1.3vw,1.15rem); opacity: .35; line-height: 2; margin-bottom: 3rem; }
+    .forum-cta {
+      display: inline-block; background: var(--y); color: var(--k);
+      font-size: .9rem; font-weight: 900; padding: .85rem 2.5rem;
+      text-decoration: none; letter-spacing: .06em;
+      transition: background .15s, transform .15s;
+    }
+    .forum-cta:hover { background: var(--o); transform: translateY(-2px); }
+
+    /* ── FAQ ── */
+    #faq {
+      background: var(--y);
+      padding: clamp(4rem,8vw,8rem) clamp(1.5rem,6vw,5rem);
+    }
+    .faq-list { max-width: 780px; margin-top: 3rem; }
+    .faq-item { border-bottom: 2px solid var(--k); }
+    .faq-item:first-child { border-top: 2px solid var(--k); }
+    .faq-q {
+      width: 100%; background: none; border: none;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 0; gap: 1rem;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 1rem; font-weight: 700; color: var(--k);
+      cursor: pointer; text-align: left;
+    }
+    .faq-plus { font-size: 1.4rem; font-weight: 300; flex-shrink: 0; transition: transform .2s; }
+    .faq-item.open .faq-plus { transform: rotate(45deg); }
+    .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .25s ease; }
+    .faq-item.open .faq-a { grid-template-rows: 1fr; }
+    .faq-a-inner { overflow: hidden; }
+    .faq-a p { padding-bottom: 1.2rem; font-size: .92rem; line-height: 1.75; opacity: .7; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--k); color: var(--w);
+      padding: clamp(3rem,6vw,5rem) clamp(1.5rem,6vw,5rem);
+    }
+    .ft-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    @media(max-width:580px){ .ft-grid { grid-template-columns: 1fr; } }
+    .ft-logo img { height: 36px; margin-bottom: 1.1rem; display: block; }
+    .ft-org { font-size: .82rem; opacity: .5; line-height: 1.8; }
+    .ft-links-label { font-size: .7rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; opacity: .35; margin-bottom: 1rem; }
+    .ft-links { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+    .ft-links a { color: var(--w); text-decoration: none; font-size: .82rem; opacity: .5; transition: opacity .15s; }
+    .ft-links a:hover { opacity: 1; }
+    .ft-bottom {
+      border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.75rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .ft-copy { font-size: .75rem; opacity: .3; }
+
+    /* ── REVEAL ── */
+    .rv { opacity: 0; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }
+    .rv.in { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo"><img src="img/logo/D-Logo-1-n.svg" alt="Taiwan AI Academy"></a>
+  <ul>
+    <li><a href="#courses">工作坊</a></li>
+    <li><a href="#speakers">講師</a></li>
+    <li><a href="#forum">大論壇</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"><img src="img/logo/Design-1.svg" alt="" aria-hidden="true"></div>
+  <div class="year-pill" aria-hidden="true">2026</div>
+  <div class="hero-tag">Taiwan AI Academy × 設計產業</div>
+  <h1>AI X<br>設計職人<br>產業實戰<br>工作坊</h1>
+  <p class="hero-sub">從動畫、影視、產品、空間到品牌，用 AI 賦能產業迎戰高衝擊浪潮</p>
+  <nav class="date-row" aria-label="場次快速跳轉">
+    <a href="#course-1" class="date-chip">5/06 台南</a>
+    <a href="#course-2" class="date-chip">5/09 台北</a>
+    <a href="#course-3" class="date-chip">5/27 台南</a>
+    <a href="#course-4" class="date-chip">6/05 台中</a>
+    <a href="#course-5" class="date-chip">6/13 桃園</a>
+    <a href="#course-6" class="date-chip">6/15 台中</a>
+    <a href="#course-7" class="date-chip">7/16 宜蘭</a>
+  </nav>
+</section>
+
+<!-- INTRO -->
+<section id="intro">
+  <h2 class="intro-headline rv">AI 正在改變<br><em>設計產業</em>，<br>你準備好了嗎？</h2>
+  <p class="intro-desc rv">人工智慧技術正以前所未有的速度滲透各設計領域。從概念發想到最終呈現，工具、流程與思維都在快速轉型。這系列工作坊由 Taiwan AI Academy 聯合五所大學，帶領設計職人從實戰中掌握 AI 新工作法。</p>
+  <div class="stats rv">
+    <div class="stat"><div class="stat-n">7</div><div class="stat-l">場工作坊</div></div>
+    <div class="stat"><div class="stat-n">5</div><div class="stat-l">所合作大學</div></div>
+    <div class="stat"><div class="stat-n">4</div><div class="stat-l">大城市巡迴</div></div>
+  </div>
+  <div class="school-list rv">
+    <span>南臺科技大學</span>
+    <span>國立臺灣科技大學</span>
+    <span>逢甲大學</span>
+    <span>元智大學</span>
+    <span>宜蘭大學</span>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="sec-hd rv">
+    <h2 class="sec-title">工作坊場次</h2>
+    <p class="sec-sub">選擇適合你的場次，立即報名</p>
+  </div>
+  <div class="filters rv">
+    <button class="f-btn on" data-r="all">全部</button>
+    <button class="f-btn" data-r="north">北部</button>
+    <button class="f-btn" data-r="central">中部</button>
+    <button class="f-btn" data-r="south">南部</button>
+    <button class="f-btn" data-r="east">東部</button>
+  </div>
+  <div class="grid-3 rv">
+
+    <div class="card" id="course-1" data-r="south">
+      <div class="card-top">
+        <img src="img/course_icons/1.影視動畫.png" alt="">
+        <span class="card-cat">影視動畫</span>
+      </div>
+      <div class="card-body">
+        <div class="card-collab">AIA × 南臺科大</div>
+        <h3 class="card-title">AI 影像生成實戰營</h3>
+        <div class="meta">
+          <div class="meta-row"><span class="meta-lbl">日期</span><span>5/06（三）10:00–12:00 / 14:00–16:00</span></div>
+          <div class="meta-row"><span class="meta-lbl">地點</span><span>台南・南臺科大 W棟 808/810</span></div>
+          <div class="meta-row"><span class="meta-lbl">講師</span><span>黃飛藏｜夢想動畫 AI 產品經理</span></div>
+        </div>
+        <div class="tags">
+          <span class="tag">moonland</span><span class="tag">Gemini</span><span class="tag">LLM</span>
+        </div>
+        <div class="card-foot">
+          <span class="deadline">截止 4/27</span>
+          <a href="https://neti.cc/V7y5Y71" class="reg-btn" target="_blank" rel="noopener">立即報名 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="course-2" data-r="north">
+      <div class="card-top">
+        <img src="img/course_icons/2.設計方法.png" alt="">
+        <span class="card-cat">設計方法</span>
+      </div>
+      <div class="card-body">
+        <div class="card-collab">AIA × 元智大學</div>
+        <h3 class="card-title">AI 設計工作系統</h3>
+        <div class="meta">
+          <div class="meta-row"><span class="meta-lbl">日期</span><span>5/09（六）13:00–17:00</span></div>
+          <div class="meta-row"><span class="meta-lbl">地點</span><span>台北・臺科大 E2-324</span></div>
+          <div class="meta-row"><span class="meta-lbl">講師</span><span>邵唯晏｜竹工凡木設計研究室 創辦人</span></div>
+        </div>
+        <div class="tags">
+          <span class="tag">Gemini</span><span class="tag">NotebookLM</span>
+        </div>
+        <div class="card-foot">
+          <span class="deadline">截止 5/1</span>
+          <a href="https://neti.cc/Y9x1Lqn" class="reg-btn" target="_blank" rel="noopener">立即報名 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="course-3" data-r="south">
+      <div class="card-top">
+        <img src="img/course_icons/3.商業視覺.png" alt="">
+        <span class="card-cat">商業視覺</span>
+      </div>
+      <div class="card-body">
+        <div class="card-collab">AIA × 南臺科大</div>
+        <h3 class="card-title">AI 傳達設計工作坊</h3>
+        <div class="meta">
+          <div class="meta-row"><span class="meta-lbl">日期</span><span>5/27（三）10:00–12:00 / 14:00–16:00</span></div>
+          <div class="meta-row"><span class="meta-lbl">地點</span><span>台南・南臺科大 W棟 808/810</span></div>
+          <div class="meta-row"><span class="meta-lbl">講師</span><span>黃綝怡・沈彥霖</span></div>
+        </div>
+        <div class="tags">
+          <span class="tag">Lovart</span><span class="tag">Adobe Firefly</span><span class="tag">Gemini</span>
+        </div>
+        <div class="card-foot">
+          <span class="deadline">截止 5/18</span>
+          <a href="https://neti.cc/EewkZK4" class="reg-btn" target="_blank" rel="noopener">立即報名 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="course-4" data-r="central">
+      <div class="card-top">
+        <img src="img/course_icons/4.產品設計.png" alt="">
+        <span class="card-cat">產品設計</span>
+      </div>
+      <div class="card-body">
+        <div class="card-collab">AIA × 逢甲大學</div>
+        <h3 class="card-title">3D 邏輯建模視覺化工作坊</h3>
+        <div class="meta">
+          <div class="meta-row"><span class="meta-lbl">日期</span><span>6/05（五）13:30–17:30</span></div>
+          <div class="meta-row"><span class="meta-lbl">地點</span><span>台中・逢甲大學 行政一館 208</span></div>
+          <div class="meta-row"><span class="meta-lbl">講師</span><span>陳柏全｜逢甲大學兼任助理教授</span></div>
+        </div>
+        <div class="tags">
+          <span class="tag">ChatGPT</span><span class="tag">SolidWorks</span><span class="tag">Keyshot AI</span>
+        </div>
+        <div class="card-foot">
+          <span class="deadline">截止 6/2</span>
+          <a href="https://neti.cc/Nq9n5vm" class="reg-btn" target="_blank" rel="noopener">立即報名 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="course-5" data-r="north">
+      <div class="card-top">
+        <img src="img/course_icons/5.產品空間.png" alt="">
+        <span class="card-cat">產品空間</span>
+      </div>
+      <div class="card-body">
+        <div class="card-collab">AIA × 元智大學</div>
+        <h3 class="card-title">Rhino × AI 渲染工作流</h3>
+        <div class="meta">
+          <div class="meta-row"><span class="meta-lbl">日期</span><span>6/13（六）13:00–17:00</span></div>
+          <div class="meta-row"><span class="meta-lbl">地點</span><span>桃園・元智大學 三館 3204</span></div>
+          <div class="meta-row"><span class="meta-lbl">講師</span><span>林楚卿｜元智大學 藝術與設計學 系主任</span></div>
+        </div>
+        <div class="tags">
+          <span class="tag">Rhino</span><span class="tag">AI 渲染</span>
+        </div>
+        <div class="card-foot">
+          <span class="deadline">截止 6/5</span>
+          <a href="https://neti.cc/W7Mb0yO" class="reg-btn" target="_blank" rel="noopener">立即報名 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="course-6" data-r="central">
+      <div class="card-top">
+        <img src="img/course_icons/6.室內設計.png" alt="">
+        <span class="card-cat">室內設計</span>
+      </div>
+      <div class="card-body">
+        <div class="card-collab">AIA × 逢甲大學</div>
+        <h3 class="card-title">用 AI 加速空間提案工作坊</h3>
+        <div class="meta">
+          <div class="meta-row"><span class="meta-lbl">日期</span><span>6/15（一）13:30–17:30</span></div>
+          <div class="meta-row"><span class="meta-lbl">地點</span><span>台中・逢甲大學 行政一館 208</span></div>
+          <div class="meta-row"><span class="meta-lbl">講師</span><span>李元榮｜逢甲大學 室內設計 學程主任</span></div>
+        </div>
+        <div class="tags">
+          <span class="tag">Gemini</span><span class="tag">Midjourney</span><span class="tag">KLING</span>
+        </div>
+        <div class="card-foot">
+          <span class="deadline">截止 6/10</span>
+          <a href="https://neti.cc/gZRWxVN" class="reg-btn" target="_blank" rel="noopener">立即報名 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="course-7" data-r="east">
+      <div class="card-top">
+        <img src="img/course_icons/7.概念提案.png" alt="">
+        <span class="card-cat">概念提案</span>
+      </div>
+      <div class="card-body">
+        <div class="card-collab">AIA × 宜蘭大學</div>
+        <h3 class="card-title">AI 設計實務工作坊</h3>
+        <div class="meta">
+          <div class="meta-row"><span class="meta-lbl">日期</span><span>7/16（四）13:00–17:00</span></div>
+          <div class="meta-row"><span class="meta-lbl">地點</span><span>宜蘭・宜蘭大學 圖資大樓 電腦教室 2</span></div>
+          <div class="meta-row"><span class="meta-lbl">講師</span><span>蘇迺薇・楊俊益</span></div>
+        </div>
+        <div class="tags">
+          <span class="tag">Gemini</span><span class="tag">Nano Banana 2</span><span class="tag">Canva AI</span>
+        </div>
+        <div class="card-foot">
+          <span class="deadline">截止 7/13</span>
+          <a href="https://neti.cc/MpOvME7" class="reg-btn" target="_blank" rel="noopener">立即報名 →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SPEAKERS -->
+<section id="speakers">
+  <div class="rv">
+    <h2 class="sec-title">講師陣容</h2>
+    <p class="sec-sub">來自產學界的設計 × AI 實踐者</p>
+  </div>
+  <div class="spk-grid rv">
+    <div class="spk">
+      <img src="img/speakers/黃飛藏.png" alt="黃飛藏">
+      <div class="spk-info">
+        <div class="spk-name">黃飛藏</div>
+        <div class="spk-role">夢想動畫 AI 產品經理</div>
+        <a href="#course-1" class="spk-tag">影視動畫</a>
+      </div>
+    </div>
+    <div class="spk">
+      <img src="img/speakers/邵唯晏.png" alt="邵唯晏">
+      <div class="spk-info">
+        <div class="spk-name">邵唯晏</div>
+        <div class="spk-role">竹工凡木設計研究室 創辦人/總監</div>
+        <a href="#course-2" class="spk-tag">設計方法</a>
+      </div>
+    </div>
+    <div class="spk">
+      <img src="img/speakers/黃綝怡.png" alt="黃綝怡">
+      <div class="spk-info">
+        <div class="spk-name">黃綝怡</div>
+        <div class="spk-role">南臺科大 視覺傳達設計 系主任</div>
+        <a href="#course-3" class="spk-tag">商業視覺</a>
+      </div>
+    </div>
+    <div class="spk">
+      <img src="img/speakers/沈彥霖.png" alt="沈彥霖">
+      <div class="spk-info">
+        <div class="spk-name">沈彥霖</div>
+        <div class="spk-role">獨立視覺設計師</div>
+        <a href="#course-3" class="spk-tag">商業視覺</a>
+      </div>
+    </div>
+    <div class="spk">
+      <img src="img/speakers/陳柏全.png" alt="陳柏全">
+      <div class="spk-info">
+        <div class="spk-name">陳柏全</div>
+        <div class="spk-role">逢甲大學 通識教育中心兼任助理教授</div>
+        <a href="#course-4" class="spk-tag">產品設計</a>
+      </div>
+    </div>
+    <div class="spk">
+      <img src="img/speakers/林楚卿.png" alt="林楚卿">
+      <div class="spk-info">
+        <div class="spk-name">林楚卿</div>
+        <div class="spk-role">元智大學 藝術與設計學 系主任兼所長</div>
+        <a href="#course-5" class="spk-tag">產品空間</a>
+      </div>
+    </div>
+    <div class="spk">
+      <img src="img/speakers/李元榮.png" alt="李元榮">
+      <div class="spk-info">
+        <div class="spk-name">李元榮</div>
+        <div class="spk-role">逢甲大學 室內設計學士學位學程 主任</div>
+        <a href="#course-6" class="spk-tag">室內設計</a>
+      </div>
+    </div>
+    <div class="spk">
+      <img src="img/speakers/蘇迺薇.png" alt="蘇迺薇">
+      <div class="spk-info">
+        <div class="spk-name">蘇迺薇</div>
+        <div class="spk-role">資策會 數位教育研究所 人才發展中心主任</div>
+        <a href="#course-7" class="spk-tag">概念提案</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHOOLS -->
+<section id="schools">
+  <div class="sec-hd rv">
+    <h2 class="sec-title">合作學校</h2>
+  </div>
+  <div class="sch-grid rv">
+    <div class="sch-item">
+      <div class="sch-name">南臺科技大學</div>
+      <div class="sch-city">台南</div>
+      <span class="sch-count">2 場</span>
+    </div>
+    <div class="sch-item">
+      <div class="sch-name">國立臺灣科技大學</div>
+      <div class="sch-city">台北</div>
+      <span class="sch-count">1 場</span>
+    </div>
+    <div class="sch-item">
+      <div class="sch-name">逢甲大學</div>
+      <div class="sch-city">台中</div>
+      <span class="sch-count">2 場</span>
+    </div>
+    <div class="sch-item">
+      <div class="sch-name">元智大學</div>
+      <div class="sch-city">桃園</div>
+      <span class="sch-count">1 場</span>
+    </div>
+    <div class="sch-item">
+      <div class="sch-name">宜蘭大學</div>
+      <div class="sch-city">宜蘭</div>
+      <span class="sch-count">1 場</span>
+    </div>
+  </div>
+</section>
+
+<!-- FORUM -->
+<section id="forum">
+  <div class="forum-lbl">即將到來</div>
+  <h2 class="forum-title">AI × 設計<br>大論壇</h2>
+  <p class="forum-sub">2026 壓軸・全台設計界年度盛事</p>
+  <p class="forum-date">
+    10/1（四）中研院人文館國際會議廳<br>
+    10/8（四）集思交通部國際會議中心
+  </p>
+  <a href="#" class="forum-cta">訂閱最新消息</a>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="rv">
+    <h2 class="sec-title">常見問題</h2>
+  </div>
+  <div class="faq-list rv">
+    <div class="faq-item">
+      <button class="faq-q"><span>課程費用是否免費？</span><span class="faq-plus">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>各場工作坊費用請以報名頁面為準，部分場次可能有名額限制，請點擊課程卡片上的報名連結查看最新資訊。</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>需要具備 AI 工具使用經驗嗎？</span><span class="faq-plus">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>各場工作坊設計給不同背景的設計師。建議先閱讀各場次的課程介紹與適合對象說明，若有疑問可聯繫主辦單位確認。</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>各場次可以跨城市報名嗎？</span><span class="faq-plus">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>可以！每場工作坊對全台設計師開放報名，不限居住地。請依照各場次截止日期前完成報名手續。</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>有提供課後補課或錄影嗎？</span><span class="faq-plus">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>工作坊以現場實作互動為主，請以出席為原則。錄影及補課安排請洽各場次主辦單位確認。</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>如何確認報名成功？</span><span class="faq-plus">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>報名完成後將收到確認 Email。若未收到請檢查垃圾信件匣，或聯繫 Taiwan AI Academy 客服確認報名狀態。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div>
+      <div class="ft-logo"><img src="img/logo/D-Logo-1-w.svg" alt="Taiwan AI Academy"></div>
+      <div class="ft-org">
+        主辦單位<br>財團法人台灣人工智慧學校基金會<br><br>
+        共同主辦<br>南臺科技大學・國立臺灣科技大學<br>逢甲大學・元智大學・宜蘭大學
+      </div>
+    </div>
+    <div>
+      <div class="ft-links-label">工作坊場次</div>
+      <ul class="ft-links">
+        <li><a href="#course-1">影視動畫：AI 影像生成實戰營（5/06）</a></li>
+        <li><a href="#course-2">設計方法：AI 設計工作系統（5/09）</a></li>
+        <li><a href="#course-3">商業視覺：AI 傳達設計工作坊（5/27）</a></li>
+        <li><a href="#course-4">產品設計：3D 邏輯建模視覺化工作坊（6/05）</a></li>
+        <li><a href="#course-5">產品空間：Rhino × AI 渲染工作流（6/13）</a></li>
+        <li><a href="#course-6">室內設計：用 AI 加速空間提案工作坊（6/15）</a></li>
+        <li><a href="#course-7">概念提案：AI 設計實務工作坊（7/16）</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span class="ft-copy">© 2026 Taiwan AI Academy. All rights reserved.</span>
+    <span class="ft-copy">aiacademy.tw</span>
+  </div>
+</footer>
+
+<script>
+  // Filter
+  document.querySelectorAll('.f-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      const r = btn.dataset.r;
+      document.querySelectorAll('.card').forEach(c => {
+        c.classList.toggle('hidden', r !== 'all' && c.dataset.r !== r);
+      });
+    });
+  });
+
+  // FAQ
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!open) item.classList.add('open');
+    });
+  });
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+  // Deadline check
+  const today = new Date();
+  const dl = { 'course-1': '2026-04-27', 'course-2': '2026-05-01', 'course-3': '2026-05-18',
+               'course-4': '2026-06-02', 'course-5': '2026-06-05', 'course-6': '2026-06-10', 'course-7': '2026-07-13' };
+  Object.entries(dl).forEach(([id, d]) => {
+    if (today > new Date(d)) {
+      const btn = document.querySelector('#' + id + ' .reg-btn');
+      if (btn) { btn.textContent = '報名已截止'; btn.classList.add('closed'); btn.removeAttribute('href'); }
+    }
+  });
+</script>
+</body>
+</html>
