@@ -93,16 +93,6 @@
       font-size: clamp(.9rem,1.5vw,1.15rem); line-height: 1.7;
       color: var(--ts); max-width: 52ch; margin-bottom: 2.5rem;
     }
-    .hero-green-bar { height: 4px; background: var(--g); border-radius: 2px; max-width: 480px; margin-bottom: 2rem; position: relative; z-index: 1; }
-    .date-row { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: .5rem; }
-    .date-chip {
-      background: var(--t); color: var(--y);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: .78rem; font-weight: 700;
-      padding: .38rem .9rem; text-decoration: none; border-radius: 4px;
-      transition: background .15s, color .15s;
-    }
-    .date-chip:hover { background: var(--p); color: #fff; }
 
     /* ── INTRO ── */
     #intro {
@@ -127,7 +117,6 @@
     .stat:last-child { border-right: none; }
     .stat-n { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem,4.5vw,3.5rem); font-weight: 900; color: var(--y); line-height: 1; }
     .stat-l { font-size: .82rem; color: rgba(255,255,255,.45); margin-top: .3rem; }
-    .school-list { display: flex; flex-wrap: wrap; gap: .75rem 2rem; font-size: .82rem; font-weight: 700; color: rgba(255,255,255,.35); }
 
     /* ── COURSES ── */
     #courses {
@@ -203,11 +192,6 @@
 
     .course-name { font-size: .98rem; font-weight: 700; color: var(--t); line-height: 1.35; margin-bottom: .3rem; border-bottom: 2.5px solid var(--g); display: inline-block; padding-bottom: 1px; }
     .course-speaker { font-size: .78rem; color: var(--ts); margin-bottom: .5rem; }
-    .tools-row { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .6rem; }
-    .tool-pill {
-      background: var(--bg); border: 1px solid var(--line);
-      font-size: .67rem; color: var(--ts); padding: .15rem .45rem; border-radius: 20px;
-    }
     .reg-link {
       display: inline-block; background: var(--p); color: #fff;
       font-size: .75rem; font-weight: 700; padding: .4rem 1rem;
@@ -327,17 +311,9 @@
       background: var(--t); color: #fff;
       padding: clamp(3rem,6vw,5rem) clamp(1.5rem,6vw,4rem);
     }
-    .ft-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;
-      margin-bottom: 2.5rem;
-    }
-    @media(max-width:560px){ .ft-grid { grid-template-columns: 1fr; } }
+    .ft-inner { margin-bottom: 2rem; }
     .ft-logo img { height: 34px; margin-bottom: .9rem; display: block; }
     .ft-org { font-size: .8rem; color: rgba(255,255,255,.45); line-height: 1.9; }
-    .ft-lbl { font-size: .7rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: .85rem; }
-    .ft-links { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
-    .ft-links a { color: rgba(255,255,255,.5); text-decoration: none; font-size: .8rem; transition: color .15s; }
-    .ft-links a:hover { color: var(--y); }
     .ft-bottom {
       border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem;
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem;
@@ -373,16 +349,6 @@
   <div class="hero-tag">Taiwan AI Academy × 設計產業</div>
   <h1>AI X<br>設計職人<br>產業實戰<br>工作坊</h1>
   <p class="hero-sub">從動畫、影視、產品、空間到品牌，用 AI 賦能產業迎戰高衝擊浪潮</p>
-  <div class="hero-green-bar"></div>
-  <nav class="date-row" aria-label="場次快速跳轉">
-    <a href="#course-1" class="date-chip">5/06 台南</a>
-    <a href="#course-2" class="date-chip">5/09 台北</a>
-    <a href="#course-3" class="date-chip">5/27 台南</a>
-    <a href="#course-4" class="date-chip">6/05 台中</a>
-    <a href="#course-5" class="date-chip">6/13 桃園</a>
-    <a href="#course-6" class="date-chip">6/15 台中</a>
-    <a href="#course-7" class="date-chip">7/16 宜蘭</a>
-  </nav>
 </section>
 
 <!-- INTRO -->
@@ -393,13 +359,6 @@
     <div class="stat"><div class="stat-n">7</div><div class="stat-l">場工作坊</div></div>
     <div class="stat"><div class="stat-n">5</div><div class="stat-l">所合作大學</div></div>
     <div class="stat"><div class="stat-n">4</div><div class="stat-l">大城市巡迴</div></div>
-  </div>
-  <div class="school-list rv2">
-    <span>南臺科技大學</span>
-    <span>國立臺灣科技大學</span>
-    <span>逢甲大學</span>
-    <span>元智大學</span>
-    <span>宜蘭大學</span>
   </div>
 </section>
 
@@ -430,12 +389,7 @@
           <span class="cat-tag cat-film">影視動畫</span>
         </div>
         <div class="course-name">AI 影像生成實戰營</div>
-        <div class="course-speaker">黃飛藏｜夢想動畫 AI 產品經理</div>
-        <div class="tools-row">
-          <span class="tool-pill">moonland</span>
-          <span class="tool-pill">Gemini</span>
-          <span class="tool-pill">LLM</span>
-        </div>
+        <div class="course-speaker">黃飛藏</div>
         <a href="https://neti.cc/V7y5Y71" class="reg-link" target="_blank" rel="noopener">立即報名 →</a>
         <div class="deadline-note">報名截止：4/27</div>
       </div>
@@ -452,11 +406,7 @@
           <span class="cat-tag cat-method">設計方法</span>
         </div>
         <div class="course-name">AI 設計工作系統</div>
-        <div class="course-speaker">邵唯晏｜竹工凡木設計研究室 創辦人</div>
-        <div class="tools-row">
-          <span class="tool-pill">Gemini</span>
-          <span class="tool-pill">NotebookLM</span>
-        </div>
+        <div class="course-speaker">邵唯晏</div>
         <a href="https://neti.cc/Y9x1Lqn" class="reg-link" target="_blank" rel="noopener">立即報名 →</a>
         <div class="deadline-note">報名截止：5/1</div>
       </div>
@@ -474,11 +424,6 @@
         </div>
         <div class="course-name">AI 傳達設計工作坊</div>
         <div class="course-speaker">黃綝怡・沈彥霖</div>
-        <div class="tools-row">
-          <span class="tool-pill">Lovart</span>
-          <span class="tool-pill">Adobe Firefly</span>
-          <span class="tool-pill">Gemini</span>
-        </div>
         <a href="https://neti.cc/EewkZK4" class="reg-link" target="_blank" rel="noopener">立即報名 →</a>
         <div class="deadline-note">報名截止：5/18</div>
       </div>
@@ -495,12 +440,7 @@
           <span class="cat-tag cat-product">產品設計</span>
         </div>
         <div class="course-name">3D 邏輯建模視覺化工作坊</div>
-        <div class="course-speaker">陳柏全｜逢甲大學兼任助理教授</div>
-        <div class="tools-row">
-          <span class="tool-pill">ChatGPT</span>
-          <span class="tool-pill">SolidWorks</span>
-          <span class="tool-pill">Keyshot AI</span>
-        </div>
+        <div class="course-speaker">陳柏全</div>
         <a href="https://neti.cc/Nq9n5vm" class="reg-link" target="_blank" rel="noopener">立即報名 →</a>
         <div class="deadline-note">報名截止：6/2</div>
       </div>
@@ -517,11 +457,7 @@
           <span class="cat-tag cat-space">產品空間</span>
         </div>
         <div class="course-name">Rhino × AI 渲染工作流</div>
-        <div class="course-speaker">林楚卿｜元智大學 藝術與設計學 系主任</div>
-        <div class="tools-row">
-          <span class="tool-pill">Rhino</span>
-          <span class="tool-pill">AI 渲染</span>
-        </div>
+        <div class="course-speaker">林楚卿</div>
         <a href="https://neti.cc/W7Mb0yO" class="reg-link" target="_blank" rel="noopener">立即報名 →</a>
         <div class="deadline-note">報名截止：6/5</div>
       </div>
@@ -538,12 +474,7 @@
           <span class="cat-tag cat-interior">室內設計</span>
         </div>
         <div class="course-name">用 AI 加速空間提案工作坊</div>
-        <div class="course-speaker">李元榮｜逢甲大學 室內設計 學程主任</div>
-        <div class="tools-row">
-          <span class="tool-pill">Gemini</span>
-          <span class="tool-pill">Midjourney</span>
-          <span class="tool-pill">KLING</span>
-        </div>
+        <div class="course-speaker">李元榮</div>
         <a href="https://neti.cc/gZRWxVN" class="reg-link" target="_blank" rel="noopener">立即報名 →</a>
         <div class="deadline-note">報名截止：6/10</div>
       </div>
@@ -561,11 +492,6 @@
         </div>
         <div class="course-name">AI 設計實務工作坊</div>
         <div class="course-speaker">蘇迺薇・楊俊益</div>
-        <div class="tools-row">
-          <span class="tool-pill">Gemini</span>
-          <span class="tool-pill">Nano Banana 2</span>
-          <span class="tool-pill">Canva AI</span>
-        </div>
         <a href="https://neti.cc/MpOvME7" class="reg-link" target="_blank" rel="noopener">立即報名 →</a>
         <div class="deadline-note">報名截止：7/13</div>
       </div>
@@ -719,25 +645,11 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="ft-grid">
-    <div>
-      <div class="ft-logo"><img src="img/logo/D-Logo-1-w.svg" alt="Taiwan AI Academy"></div>
-      <div class="ft-org">
-        主辦單位<br>財團法人台灣人工智慧學校基金會<br><br>
-        共同主辦<br>南臺科技大學・國立臺灣科技大學<br>逢甲大學・元智大學・宜蘭大學
-      </div>
-    </div>
-    <div>
-      <div class="ft-lbl">工作坊場次</div>
-      <ul class="ft-links">
-        <li><a href="#course-1">影視動畫：AI 影像生成實戰營（5/06）</a></li>
-        <li><a href="#course-2">設計方法：AI 設計工作系統（5/09）</a></li>
-        <li><a href="#course-3">商業視覺：AI 傳達設計工作坊（5/27）</a></li>
-        <li><a href="#course-4">產品設計：3D 邏輯建模視覺化工作坊（6/05）</a></li>
-        <li><a href="#course-5">產品空間：Rhino × AI 渲染工作流（6/13）</a></li>
-        <li><a href="#course-6">室內設計：用 AI 加速空間提案工作坊（6/15）</a></li>
-        <li><a href="#course-7">概念提案：AI 設計實務工作坊（7/16）</a></li>
-      </ul>
+  <div class="ft-inner">
+    <div class="ft-logo"><img src="img/logo/D-Logo-1-w.svg" alt="Taiwan AI Academy"></div>
+    <div class="ft-org">
+      主辦單位&ensp;財團法人台灣人工智慧學校基金會<br>
+      共同主辦&ensp;南臺科技大學・國立臺灣科技大學・逢甲大學・元智大學・宜蘭大學
     </div>
   </div>
   <div class="ft-bottom">
