@@ -60,12 +60,12 @@
     /* ── HERO ── */
     #hero {
       min-height: 100svh; background: var(--y);
-      padding: 56px clamp(1.5rem,6vw,4rem) clamp(4rem,8vw,6rem);
-      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: clamp(80px,14vh,160px) clamp(1.5rem,6vw,4rem) clamp(4rem,8vw,6rem);
+      display: flex; flex-direction: column; justify-content: flex-start;
       position: relative; overflow: hidden;
     }
     #design-logo {
-      position: absolute; top: 50%; left: 50%;
+      position: absolute; top: 72%; left: 50%;
       transform: translate(-50%, -50%);
       width: clamp(300px, 86vw, 960px);
       user-select: none;
@@ -90,14 +90,21 @@
     }
     h1 {
       position: relative; z-index: 1;
-      font-size: clamp(2.6rem,7.5vw,7rem); font-weight: 900;
-      line-height: .96; letter-spacing: -.025em;
-      color: var(--t); max-width: 13ch; margin-bottom: 1.2rem;
+      margin-bottom: 1.2rem;
+      max-width: min(85vw, 900px);
+    }
+    h1 img { display: block; width: 100%; height: auto; }
+    @media (max-width: 639px) {
+      h1 { max-width: min(85vw, 340px); }
     }
     .hero-sub {
       position: relative; z-index: 1;
-      font-size: clamp(.9rem,1.5vw,1.15rem); line-height: 1.7;
-      color: var(--ts); max-width: 52ch; margin-bottom: 2.5rem;
+      margin-bottom: 2.5rem;
+      max-width: min(85vw, 900px);
+    }
+    .hero-sub img { display: block; width: 100%; height: auto; }
+    @media (max-width: 639px) {
+      .hero-sub { max-width: min(85vw, 380px); }
     }
 
     /* ── INTRO ── */
@@ -360,8 +367,18 @@
     </div>
   </div>
   <div class="hero-tag">Taiwan AI Academy × 設計產業</div>
-  <h1>AI X<br>設計職人<br>產業實戰<br>工作坊</h1>
-  <p class="hero-sub">從動畫、影視、產品、空間到品牌，用 AI 賦能產業迎戰高衝擊浪潮</p>
+  <h1>
+    <picture>
+      <source media="(min-width: 640px)" srcset="img/logo/D-Logo-1-w.svg" type="image/svg+xml">
+      <img src="img/logo/D-Logo-1-n.svg" alt="AI X 設計職人 產業實戰 工作坊">
+    </picture>
+  </h1>
+  <p class="hero-sub">
+    <picture>
+      <source media="(min-width: 640px)" srcset="img/logo/D-Logo-2-w.svg" type="image/svg+xml">
+      <img src="img/logo/D-Logo-2-n.svg" alt="從動畫、影視、產品、空間到品牌，用 AI 賦能產業迎戰高衝擊浪潮">
+    </picture>
+  </p>
 </section>
 
 <!-- INTRO -->
