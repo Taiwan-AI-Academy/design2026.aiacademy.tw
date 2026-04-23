@@ -64,16 +64,22 @@
       display: flex; flex-direction: column; justify-content: flex-end;
       position: relative; overflow: hidden;
     }
-    .design-bg {
+    #design-logo {
       position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(80px,18vw,200px); font-weight: 900;
-      letter-spacing: 8px; color: rgba(0,0,0,.1);
-      border: 3px dashed rgba(0,0,0,.12);
-      padding: 0 clamp(12px,2vw,24px);
-      pointer-events: none; white-space: nowrap;
-      user-select: none; border-radius: 8px;
+      transform: translate(-50%, -50%);
+      width: clamp(300px, 86vw, 960px);
+      user-select: none;
+    }
+    .dl-inner {
+      position: relative; width: 100%;
+      padding-bottom: calc(100% * 704.9 / 3002.8);
+    }
+    .dl-layer {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      will-change: transform;
+      pointer-events: none;
+      opacity: 0.5;
     }
     .hero-tag {
       position: relative; z-index: 1;
@@ -345,7 +351,14 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="design-bg" aria-hidden="true">DESIGN</div>
+  <div id="design-logo" aria-hidden="true">
+    <div class="dl-inner">
+      <img class="dl-layer" data-layer="1" src="img/logo/Design-1.svg" alt="">
+      <img class="dl-layer" data-layer="2" src="img/logo/Design-2.svg" alt="">
+      <img class="dl-layer" data-layer="3" src="img/logo/Design-3.svg" alt="">
+      <img class="dl-layer" data-layer="4" src="img/logo/Design-4.svg" alt="">
+    </div>
+  </div>
   <div class="hero-tag">Taiwan AI Academy × 設計產業</div>
   <h1>AI X<br>設計職人<br>產業實戰<br>工作坊</h1>
   <p class="hero-sub">從動畫、影視、產品、空間到品牌，用 AI 賦能產業迎戰高衝擊浪潮</p>
@@ -687,6 +700,72 @@
     });
   }, { threshold: 0.07 });
   document.querySelectorAll('.rv, .rv2').forEach(el => obs.observe(el));
+
+  // Design Logo Parallax
+  (function () {
+    const layers = document.querySelectorAll('#design-logo .dl-layer');
+    const logo   = document.getElementById('design-logo');
+    if (!logo || !layers.length) return;
+
+    // Spread direction for each layer (normalised vectors)
+    const DIRS = [
+      [ 0.7,  0.7],   // Layer 1: right-down
+      [-1.0,  0.0],   // Layer 2: left
+      [ 0.0, -1.0],   // Layer 3: up
+      [ 0.0,  1.0],   // Layer 4: down
+    ];
+    const BASE_SPREAD_MAX = 12;  // px, resting base offset
+    const MAX_SPREAD      = 20;  // px, additional spread from scroll/mouse
+    const MAX_TILT        = 28;  // px, global parallax shift from mouse
+    const LERP            = 0.22;
+
+    let mx = 0, my = 0;
+    let currentBase = BASE_SPREAD_MAX;
+    let targetBase  = BASE_SPREAD_MAX;
+    let raf = null;
+
+    function getScrollFactor() {
+      const rect = logo.getBoundingClientRect();
+      const lcy  = rect.top + rect.height / 2;
+      const vcy  = window.innerHeight / 2;
+      const maxD = window.innerHeight / 2 + rect.height / 2;
+      return Math.min(1, Math.abs(lcy - vcy) / maxD);
+    }
+
+    function render() {
+      raf = null;
+      currentBase += (targetBase - currentBase) * LERP;
+
+      const sf       = getScrollFactor();
+      const mouseMag = Math.sqrt(mx * mx + my * my) / Math.SQRT2;
+      const spread   = currentBase + (sf * 0.65 + mouseMag * 0.35) * MAX_SPREAD;
+
+      layers.forEach((el, i) => {
+        const [dx, dy] = DIRS[i];
+        const tx = dx * spread - mx * MAX_TILT;
+        const ty = dy * spread - my * MAX_TILT;
+        el.style.transform = `translate(${tx.toFixed(2)}px,${ty.toFixed(2)}px)`;
+      });
+
+      // keep animating while base is still lerping
+      if (Math.abs(currentBase - targetBase) > 0.05) schedule();
+    }
+
+    function schedule() { if (!raf) raf = requestAnimationFrame(render); }
+
+    logo.addEventListener('mouseenter', () => { targetBase = 0; schedule(); });
+    logo.addEventListener('mouseleave', () => { targetBase = BASE_SPREAD_MAX; schedule(); });
+
+    window.addEventListener('mousemove', e => {
+      mx = (e.clientX / window.innerWidth  - 0.5) * 2;
+      my = (e.clientY / window.innerHeight - 0.5) * 2;
+      schedule();
+    });
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+
+    schedule();
+  })();
 
   // Deadline check
   const today = new Date();
