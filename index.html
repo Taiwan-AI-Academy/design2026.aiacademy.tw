@@ -59,15 +59,19 @@
 
     /* ── HERO ── */
     #hero {
-      min-height: 100svh; background: var(--y);
+      height: 100svh; background: var(--y);
       padding: clamp(80px,14vh,160px) clamp(1.5rem,6vw,4rem) clamp(4rem,8vw,6rem);
-      display: flex; flex-direction: column; justify-content: flex-start;
-      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;
+      position: sticky; top: 0; z-index: 1; overflow: hidden;
+    }
+    @media (min-width: 900px) {
+      #hero { align-items: center; text-align: center; }
+      .hero-tag { margin-left: auto; margin-right: auto; }
     }
     #design-logo {
-      position: absolute; top: 72%; left: 50%;
+      position: absolute; top: 58%; left: 50%;
       transform: translate(-50%, -50%);
-      width: clamp(300px, 86vw, 960px);
+      width: clamp(300px, 88vw, 1600px);
       user-select: none;
     }
     .dl-inner {
@@ -91,21 +95,30 @@
     h1 {
       position: relative; z-index: 1;
       margin-bottom: 1.2rem;
-      max-width: min(85vw, 900px);
+      max-width: clamp(300px, 62vw, 1300px);
     }
     h1 img { display: block; width: 100%; height: auto; }
+    @media (min-width: 900px) {
+      h1 img { width: clamp(600px, 60vw, 1300px); }
+    }
     @media (max-width: 639px) {
-      h1 { max-width: min(85vw, 340px); }
+      h1 img { width: min(85vw, 340px); }
     }
     .hero-sub {
       position: relative; z-index: 1;
       margin-bottom: 2.5rem;
-      max-width: min(85vw, 900px);
+      max-width: clamp(280px, 52vw, 1100px);
     }
     .hero-sub img { display: block; width: 100%; height: auto; }
-    @media (max-width: 639px) {
-      .hero-sub { max-width: min(85vw, 380px); }
+    @media (min-width: 900px) {
+      .hero-sub img { width: clamp(480px, 50vw, 1100px); }
     }
+    @media (max-width: 639px) {
+      .hero-sub img { width: min(85vw, 380px); }
+    }
+
+    /* All sections after hero stack above it */
+    section:not(#hero), footer { position: relative; z-index: 2; }
 
     /* ── INTRO ── */
     #intro {
@@ -742,11 +755,8 @@
     let raf = null;
 
     function getScrollFactor() {
-      const rect = logo.getBoundingClientRect();
-      const lcy  = rect.top + rect.height / 2;
-      const vcy  = window.innerHeight / 2;
-      const maxD = window.innerHeight / 2 + rect.height / 2;
-      return Math.min(1, Math.abs(lcy - vcy) / maxD);
+      const heroH = document.getElementById('hero').offsetHeight || window.innerHeight;
+      return Math.min(1, window.scrollY / heroH);
     }
 
     function render() {
