@@ -161,68 +161,148 @@
     }
     .f-btn.on, .f-btn:hover { background: var(--t); color: var(--y); }
 
-    /* Course list — vertical stack on yellow */
+    /* Course list — Story Tiles layout */
     .course-list {
-      display: flex; flex-direction: column; gap: 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
       background: transparent; border: none; border-radius: 0; overflow: visible;
     }
 
     .course-row {
-      display: flex; flex-direction: column; gap: .5rem;
+      background: var(--bg);
+      border-radius: 24px;
+      padding: 32px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .2s;
+    }
+    .course-row:hover {
+      transform: translateY(-4px);
     }
     .course-row.hidden { display: none; }
 
-    .course-top {
-      display: flex; align-items: center;
-    }
+    .course-row:nth-child(1) { grid-column: span 2; background: rgba(94, 194, 35, 0.5); padding-right: 120px; }
+    .course-row:nth-child(2) { grid-column: span 1; background: rgba(0, 161, 242, 0.5); padding-right: 120px; }
+    .course-row:nth-child(3) { grid-column: span 1; background: rgba(94, 194, 35, 0.5); padding-right: 120px; }
+    .course-row:nth-child(4) { grid-column: span 2; background: rgba(0, 161, 242, 0.5); padding-right: 120px; }
+    .course-row:nth-child(5) { grid-column: span 2; background: rgba(94, 194, 35, 0.5); padding-right: 120px; }
+    .course-row:nth-child(6) { grid-column: span 1; background: rgba(0, 161, 242, 0.5); padding-right: 120px; }
+    .course-row:nth-child(7) { grid-column: span 3; background: rgba(94, 194, 35, 0.5); padding-right: 120px; }
 
-    .icon-circle {
-      width: 80px; height: 80px; flex-shrink: 0;
+    .course-row .icon-circle {
+      display: block;
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      border: 3px solid var(--p);
+      background: #fff;
+      border: 2px solid rgba(94, 194, 35, 1);
       overflow: hidden;
-      background: var(--y);
-      position: relative; z-index: 2;
-      margin-right: -20px;
-      transition: transform .2s, box-shadow .2s;
+      flex-shrink: 0;
     }
-    .icon-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .course-row:hover .icon-circle { transform: scale(1.06); box-shadow: 0 4px 18px rgba(255,112,162,.45); }
+    .course-row .icon-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-    .course-content {
-      flex: 1; min-width: 0;
-      padding: .6rem 1.4rem .65rem 1.75rem;
-      border-radius: 10px;
+    @media (max-width: 767px) {
+      .course-list {
+        grid-template-columns: 1fr;
+      }
+      .course-row { grid-column: span 1 !important; padding: 24px; }
     }
-    .course-row.color-blue  .course-content { background: rgba(0, 161, 242, 0.5); }
-    .course-row.color-green .course-content { background: rgba(94, 194, 35, 0.5); }
+
+    .course-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--t);
+      opacity: 0.65;
+      padding: 0;
+      border: none;
+      background: transparent;
+      margin: 0;
+      align-self: flex-start;
+      display: block;
+    }
+
+    .course-row.color-blue   { border: 2px solid rgba(0,0,0,0.08); }
+    .course-row.color-green  { border: 2px solid rgba(0,0,0,0.08); }
+    .course-row.color-pink   { border: 2px solid rgba(0,0,0,0.08); }
+    .course-row.color-yellow { border: 2px solid rgba(51,51,51,0.15); }
+
+    .course-name {
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      color: var(--t);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .course-row:nth-child(1) .course-name,
+    .course-row:nth-child(4) .course-name,
+    .course-row:nth-child(5) .course-name,
+    .course-row:nth-child(7) .course-name {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+    }
+
+    .course-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      margin: 0;
+    }
 
     .date-uni {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: .82rem; font-weight: 700; color: var(--t);
-      white-space: nowrap; margin-bottom: .15rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      opacity: 0.7;
+      color: var(--t);
     }
-    .course-name {
-      font-size: 1.05rem; font-weight: 900; color: var(--t);
-      line-height: 1.3; text-align: right;
+    
+    .course-speaker {
+      font-size: .85rem; font-weight: 700; color: var(--t);
     }
 
     .course-bottom {
       display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
-      padding-left: 68px;
+      margin-top: auto;
     }
-    .course-speaker {
-      font-size: .92rem; font-weight: 700; color: var(--t);
-    }
+
     .more-link {
-      display: inline-block; background: var(--p); color: #fff;
-      font-size: .75rem; font-weight: 700; padding: .35rem .9rem;
-      border-radius: 6px; border: none; cursor: pointer;
+      display: inline-block; 
+      background: var(--t); 
+      color: #fff;
+      font-size: 0.75rem; 
+      font-weight: 700; 
+      padding: 0.4rem 1.1rem;
+      border-radius: 40px; 
+      border: none; 
+      cursor: pointer;
       font-family: 'Noto Sans TC', sans-serif;
-      transition: background .15s, transform .15s;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background .15s, color .15s, transform .15s;
     }
-    .more-link:hover { background: #e05590; transform: translateY(-1px); }
-    .deadline-note { font-size: .72rem; color: rgba(51,51,51,.5); }
+    .more-link:hover { 
+      background: rgba(51,51,51,0.75); 
+      transform: translateY(-1px); 
+    }
+    
+    .deadline-note { font-size: .72rem; color: rgba(51,51,51,.7); font-weight: 700; }
 
     /* ── LIGHTBOX ── */
     .lb-overlay {
@@ -584,110 +664,102 @@
   <div class="course-list rv">
 
     <div class="course-row color-blue" id="course-1" data-r="south">
-      <div class="course-top">
-        <div class="icon-circle"><img src="img/course_icons/1.影視動畫.png" alt="影視動畫"></div>
-        <div class="course-content">
-          <div class="date-uni">5/06（三）&ensp;南臺科大</div>
-          <div class="course-name">影視動畫：AI 影像生成實戰營</div>
-        </div>
+      <div class="icon-circle"><img src="img/course_icons/1.影視動畫.png" alt="影視動畫"></div>
+      <div class="course-tag">影視動畫</div>
+      <div class="course-name">AI 影像生成實戰營</div>
+      <div class="course-meta">
+        <div class="date-uni">5/06（三）&ensp;南臺科大</div>
+        <div class="course-speaker">黃飛藏</div>
       </div>
       <div class="course-bottom">
-        <span class="course-speaker">黃飛藏</span>
         <button class="more-link" data-course="1">了解更多</button>
         <span class="deadline-note">報名截止：4/27</span>
       </div>
     </div>
 
     <div class="course-row color-green" id="course-2" data-r="north">
-      <div class="course-top">
-        <div class="icon-circle"><img src="img/course_icons/2.設計方法.png" alt="設計方法"></div>
-        <div class="course-content">
-          <div class="date-uni">5/09（六）&ensp;臺科大</div>
-          <div class="course-name">設計方法：AI 設計工作系統</div>
-        </div>
+      <div class="icon-circle"><img src="img/course_icons/2.設計方法.png" alt="設計方法"></div>
+      <div class="course-tag">設計方法</div>
+      <div class="course-name">AI 設計工作系統</div>
+      <div class="course-meta">
+        <div class="date-uni">5/09（六）&ensp;臺科大</div>
+        <div class="course-speaker">邵唯晏</div>
       </div>
       <div class="course-bottom">
-        <span class="course-speaker">邵唯晏</span>
         <button class="more-link" data-course="2">了解更多</button>
         <span class="deadline-note">報名截止：5/1</span>
       </div>
     </div>
 
-    <div class="course-row color-blue" id="course-3" data-r="south">
-      <div class="course-top">
-        <div class="icon-circle"><img src="img/course_icons/3.商業視覺.png" alt="商業視覺"></div>
-        <div class="course-content">
-          <div class="date-uni">5/27（三）&ensp;南臺科大</div>
-          <div class="course-name">商業視覺：AI 傳達設計工作坊</div>
-        </div>
+    <div class="course-row color-pink" id="course-3" data-r="south">
+      <div class="icon-circle"><img src="img/course_icons/3.商業視覺.png" alt="商業視覺"></div>
+      <div class="course-tag">商業視覺</div>
+      <div class="course-name">AI 傳達設計工作坊</div>
+      <div class="course-meta">
+        <div class="date-uni">5/27（三）&ensp;南臺科大</div>
+        <div class="course-speaker">黃綝怡・沈彥霖</div>
       </div>
       <div class="course-bottom">
-        <span class="course-speaker">黃綝怡・沈彥霖</span>
         <button class="more-link" data-course="3">了解更多</button>
         <span class="deadline-note">報名截止：5/18</span>
       </div>
     </div>
 
-    <div class="course-row color-green" id="course-4" data-r="central">
-      <div class="course-top">
-        <div class="icon-circle"><img src="img/course_icons/4.產品設計.png" alt="產品設計"></div>
-        <div class="course-content">
-          <div class="date-uni">6/05（五）&ensp;逢甲大學</div>
-          <div class="course-name">產品設計：3D 邏輯建模視覺化工作坊</div>
-        </div>
+    <div class="course-row color-yellow" id="course-4" data-r="central">
+      <div class="icon-circle"><img src="img/course_icons/4.產品設計.png" alt="產品設計"></div>
+      <div class="course-tag">產品設計</div>
+      <div class="course-name">3D 邏輯建模視覺化工作坊</div>
+      <div class="course-meta">
+        <div class="date-uni">6/05（五）&ensp;逢甲大學</div>
+        <div class="course-speaker">陳柏全</div>
       </div>
       <div class="course-bottom">
-        <span class="course-speaker">陳柏全</span>
         <button class="more-link" data-course="4">了解更多</button>
         <span class="deadline-note">報名截止：6/2</span>
       </div>
     </div>
 
     <div class="course-row color-blue" id="course-5" data-r="north">
-      <div class="course-top">
-        <div class="icon-circle"><img src="img/course_icons/5.產品空間.png" alt="產品空間"></div>
-        <div class="course-content">
-          <div class="date-uni">6/13（六）&ensp;元智大學</div>
-          <div class="course-name">產品空間：Rhino × AI 渲染工作流</div>
-        </div>
+      <div class="icon-circle"><img src="img/course_icons/5.產品空間.png" alt="產品空間"></div>
+      <div class="course-tag">產品空間</div>
+      <div class="course-name">Rhino × AI 渲染工作流</div>
+      <div class="course-meta">
+        <div class="date-uni">6/13（六）&ensp;元智大學</div>
+        <div class="course-speaker">林楚卿</div>
       </div>
       <div class="course-bottom">
-        <span class="course-speaker">林楚卿</span>
         <button class="more-link" data-course="5">了解更多</button>
         <span class="deadline-note">報名截止：6/5</span>
       </div>
     </div>
 
     <div class="course-row color-green" id="course-6" data-r="central">
-      <div class="course-top">
-        <div class="icon-circle"><img src="img/course_icons/6.室內設計.png" alt="室內設計"></div>
-        <div class="course-content">
-          <div class="date-uni">6/15（一）&ensp;逢甲大學</div>
-          <div class="course-name">室內設計：用 AI 加速空間提案工作坊</div>
-        </div>
+      <div class="icon-circle"><img src="img/course_icons/6.室內設計.png" alt="室內設計"></div>
+      <div class="course-tag">室內設計</div>
+      <div class="course-name">用 AI 加速空間提案工作坊</div>
+      <div class="course-meta">
+        <div class="date-uni">6/15（一）&ensp;逢甲大學</div>
+        <div class="course-speaker">李元榮</div>
       </div>
       <div class="course-bottom">
-        <span class="course-speaker">李元榮</span>
         <button class="more-link" data-course="6">了解更多</button>
         <span class="deadline-note">報名截止：6/10</span>
       </div>
     </div>
 
-    <div class="course-row color-blue" id="course-7" data-r="east">
-      <div class="course-top">
-        <div class="icon-circle"><img src="img/course_icons/7.概念提案.png" alt="概念提案"></div>
-        <div class="course-content">
-          <div class="date-uni">7/16（四）&ensp;宜蘭大學</div>
-          <div class="course-name">概念提案：AI 設計實務工作坊</div>
-        </div>
+    <div class="course-row color-pink" id="course-7" data-r="east">
+      <div class="icon-circle"><img src="img/course_icons/7.概念提案.png" alt="概念提案"></div>
+      <div class="course-tag">概念提案</div>
+      <div class="course-name">AI 設計實務工作坊</div>
+      <div class="course-meta">
+        <div class="date-uni">7/16（四）&ensp;宜蘭大學</div>
+        <div class="course-speaker">蘇迺薇・楊俊益</div>
       </div>
       <div class="course-bottom">
-        <span class="course-speaker">蘇迺薇・楊俊益</span>
         <button class="more-link" data-course="7">了解更多</button>
         <span class="deadline-note">報名截止：7/13</span>
       </div>
     </div>
-
   </div>
 </section>
 
