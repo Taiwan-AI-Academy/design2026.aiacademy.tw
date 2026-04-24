@@ -214,15 +214,113 @@
     .course-speaker {
       font-size: .92rem; font-weight: 700; color: var(--t);
     }
-    .reg-link {
+    .more-link {
       display: inline-block; background: var(--p); color: #fff;
       font-size: .75rem; font-weight: 700; padding: .35rem .9rem;
-      border-radius: 6px; text-decoration: none;
+      border-radius: 6px; border: none; cursor: pointer;
+      font-family: 'Noto Sans TC', sans-serif;
       transition: background .15s, transform .15s;
     }
-    .reg-link:hover { background: #e05590; transform: translateY(-1px); }
-    .reg-link.closed { background: rgba(51,51,51,.12); color: rgba(51,51,51,.35); pointer-events: none; }
+    .more-link:hover { background: #e05590; transform: translateY(-1px); }
     .deadline-note { font-size: .72rem; color: rgba(51,51,51,.5); }
+
+    /* ── LIGHTBOX ── */
+    .lb-overlay {
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(51,51,51,.45);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity .22s;
+    }
+    .lb-overlay.open { opacity: 1; pointer-events: auto; }
+    .lb-box {
+      background: #fff;
+      border: 3px solid var(--p);
+      border-radius: 14px;
+      max-width: 560px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
+      position: relative;
+      transform: translateY(16px);
+      transition: transform .22s;
+      scrollbar-width: thin;
+    }
+    .lb-overlay.open .lb-box { transform: translateY(0); }
+    .lb-close {
+      position: sticky; top: .75rem; float: right; margin: .75rem .75rem 0 0;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,112,162,.12); border: none; cursor: pointer;
+      font-size: 1.1rem; line-height: 32px; text-align: center; color: var(--p);
+      font-weight: 900; transition: background .15s;
+      z-index: 10;
+    }
+    .lb-close:hover { background: rgba(255,112,162,.28); }
+    .lb-header {
+      padding: 1.5rem 1.5rem .9rem;
+      border-bottom: 1.5px solid rgba(255,112,162,.2);
+    }
+    .lb-course-name {
+      font-size: 1.12rem; font-weight: 900; color: var(--t);
+      line-height: 1.35; margin-bottom: .5rem;
+    }
+    .lb-meta {
+      display: flex; flex-wrap: wrap; gap: .45rem .9rem;
+    }
+    .lb-meta-item {
+      font-size: .78rem; color: #666; display: flex; align-items: center; gap: .3rem;
+    }
+    .lb-meta-item strong { color: var(--t); }
+    .lb-body { padding: 1.25rem 1.5rem; }
+    .lb-tools {
+      display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.25rem;
+    }
+    .lb-tool-tag {
+      font-size: .7rem; font-weight: 700; padding: .18rem .6rem;
+      border-radius: 4px; background: rgba(255,112,162,.12); color: var(--p);
+      border: 1px solid rgba(255,112,162,.3);
+    }
+    .lb-section-label {
+      font-size: .72rem; font-weight: 700; color: #999; letter-spacing: .06em;
+      text-transform: uppercase; margin-bottom: .75rem;
+    }
+    .lb-speakers { display: flex; flex-direction: column; gap: 1.1rem; }
+    .lb-speaker {
+      display: flex; gap: .9rem; align-items: flex-start;
+    }
+    .lb-spk-photo {
+      width: 56px; height: 56px; flex-shrink: 0;
+      border-radius: 50%; overflow: hidden;
+      border: 2px solid var(--p);
+    }
+    .lb-spk-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .lb-spk-info { flex: 1; min-width: 0; }
+    .lb-spk-name { font-size: .95rem; font-weight: 900; color: var(--t); }
+    .lb-spk-role { font-size: .78rem; color: #666; margin: .15rem 0 .4rem; }
+    .lb-spk-bio { font-size: .78rem; color: #666; line-height: 1.6; }
+    .lb-footer {
+      padding: 1rem 1.5rem 1.5rem;
+      border-top: 1.5px solid rgba(255,112,162,.2);
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .lb-deadline { font-size: .78rem; color: #999; }
+    .lb-deadline strong { color: var(--p); }
+    .lb-reg-btn {
+      display: inline-block; background: var(--p); color: #fff;
+      font-size: .82rem; font-weight: 700; padding: .5rem 1.4rem;
+      border-radius: 8px; text-decoration: none;
+      transition: background .15s, transform .15s;
+    }
+    .lb-reg-btn:hover { background: #e05590; transform: translateY(-1px); }
+    .lb-reg-btn.closed {
+      background: rgba(51,51,51,.12); color: rgba(51,51,51,.35); pointer-events: none;
+    }
+    @media(max-width:480px){
+      .lb-box { border-radius: 10px; }
+      .lb-header, .lb-body, .lb-footer { padding-left: 1.1rem; padding-right: 1.1rem; }
+      .lb-speaker { gap: .65rem; }
+      .lb-spk-photo { width: 46px; height: 46px; }
+    }
 
     @media(max-width:600px){
       .icon-circle { width: 60px; height: 60px; margin-right: -14px; }
@@ -460,7 +558,7 @@
       </div>
       <div class="course-bottom">
         <span class="course-speaker">黃飛藏</span>
-        <a href="https://neti.cc/V7y5Y71" class="reg-link" target="_blank" rel="noopener">立即報名 →</a>
+        <button class="more-link" data-course="1">了解更多</button>
         <span class="deadline-note">報名截止：4/27</span>
       </div>
     </div>
@@ -475,7 +573,7 @@
       </div>
       <div class="course-bottom">
         <span class="course-speaker">邵唯晏</span>
-        <a href="https://neti.cc/Y9x1Lqn" class="reg-link" target="_blank" rel="noopener">立即報名 →</a>
+        <button class="more-link" data-course="2">了解更多</button>
         <span class="deadline-note">報名截止：5/1</span>
       </div>
     </div>
@@ -490,7 +588,7 @@
       </div>
       <div class="course-bottom">
         <span class="course-speaker">黃綝怡・沈彥霖</span>
-        <a href="https://neti.cc/EewkZK4" class="reg-link" target="_blank" rel="noopener">立即報名 →</a>
+        <button class="more-link" data-course="3">了解更多</button>
         <span class="deadline-note">報名截止：5/18</span>
       </div>
     </div>
@@ -505,7 +603,7 @@
       </div>
       <div class="course-bottom">
         <span class="course-speaker">陳柏全</span>
-        <a href="https://neti.cc/Nq9n5vm" class="reg-link" target="_blank" rel="noopener">立即報名 →</a>
+        <button class="more-link" data-course="4">了解更多</button>
         <span class="deadline-note">報名截止：6/2</span>
       </div>
     </div>
@@ -520,7 +618,7 @@
       </div>
       <div class="course-bottom">
         <span class="course-speaker">林楚卿</span>
-        <a href="https://neti.cc/W7Mb0yO" class="reg-link" target="_blank" rel="noopener">立即報名 →</a>
+        <button class="more-link" data-course="5">了解更多</button>
         <span class="deadline-note">報名截止：6/5</span>
       </div>
     </div>
@@ -535,7 +633,7 @@
       </div>
       <div class="course-bottom">
         <span class="course-speaker">李元榮</span>
-        <a href="https://neti.cc/gZRWxVN" class="reg-link" target="_blank" rel="noopener">立即報名 →</a>
+        <button class="more-link" data-course="6">了解更多</button>
         <span class="deadline-note">報名截止：6/10</span>
       </div>
     </div>
@@ -550,7 +648,7 @@
       </div>
       <div class="course-bottom">
         <span class="course-speaker">蘇迺薇・楊俊益</span>
-        <a href="https://neti.cc/MpOvME7" class="reg-link" target="_blank" rel="noopener">立即報名 →</a>
+        <button class="more-link" data-course="7">了解更多</button>
         <span class="deadline-note">報名截止：7/13</span>
       </div>
     </div>
@@ -686,6 +784,27 @@
   </div>
 </footer>
 
+<!-- COURSE LIGHTBOX -->
+<div id="course-lightbox" class="lb-overlay" role="dialog" aria-modal="true" aria-label="場次詳情">
+  <div class="lb-box">
+    <button class="lb-close" id="lb-close-btn" aria-label="關閉">×</button>
+    <div class="lb-header">
+      <div class="lb-course-name" id="lb-name"></div>
+      <div class="lb-meta" id="lb-meta"></div>
+    </div>
+    <div class="lb-body">
+      <div class="lb-section-label">核心 AI 工具</div>
+      <div class="lb-tools" id="lb-tools"></div>
+      <div class="lb-section-label">講師</div>
+      <div class="lb-speakers" id="lb-speakers"></div>
+    </div>
+    <div class="lb-footer">
+      <div class="lb-deadline" id="lb-deadline-note"></div>
+      <a href="#" class="lb-reg-btn" id="lb-reg-btn" target="_blank" rel="noopener">立即報名 →</a>
+    </div>
+  </div>
+</div>
+
 <script>
   // Filter
   document.querySelectorAll('.f-btn').forEach(btn => {
@@ -780,18 +899,174 @@
   })();
 
 
-  // Deadline check
-  const today = new Date();
-  const dl = {
-    'course-1': '2026-04-27', 'course-2': '2026-05-01', 'course-3': '2026-05-18',
-    'course-4': '2026-06-02', 'course-5': '2026-06-05', 'course-6': '2026-06-10',
-    'course-7': '2026-07-13'
-  };
-  Object.entries(dl).forEach(([id, d]) => {
-    if (today > new Date(d)) {
-      const btn = document.querySelector('#' + id + ' .reg-link');
-      if (btn) { btn.textContent = '報名已截止'; btn.classList.add('closed'); btn.removeAttribute('href'); }
+  // Course lightbox data
+  const COURSES = {
+    1: {
+      name: '影視動畫：AI 影像生成實戰營',
+      dateDisplay: '2026年 5/06（三）',
+      uni: '南臺科技大學',
+      venue: '台南市永康區南台街1號 W棟808教室、810教室',
+      url: 'https://neti.cc/V7y5Y71',
+      deadline: '2026-04-27',
+      deadlineDisplay: '4/27',
+      tools: ['moonland', 'Gemini', 'LLM'],
+      speakers: [
+        { name: '黃飛藏', role: '夢想動畫 AI 產品經理', photo: 'img/speakers/黃飛藏.png',
+          bio: '經歷：前製概念美術 Concept Artist、AI 技術美術 Technical Artists、AI 產品經理 Product Manager。專業項目：AI 工具開發測試、AI 社群經營、AI 製程結合應用、前製概念美術設計。' }
+      ]
+    },
+    2: {
+      name: '設計方法：AI 設計工作系統',
+      dateDisplay: '2026年 5/09（六）',
+      uni: '臺科大',
+      venue: '臺北市大安區基隆路四段43號 工程二館 E2-324 教室',
+      url: 'https://neti.cc/Y9x1Lqn',
+      deadline: '2026-05-01',
+      deadlineDisplay: '5/1',
+      tools: ['Gemini', 'NotebookLM'],
+      speakers: [
+        { name: '邵唯晏', role: '竹工凡木設計研究室 創辦人／總監', photo: 'img/speakers/邵唯晏.png',
+          bio: '台灣建築與設計領域的重要實踐者，長期致力於設計、科技與研究的跨域整合。工作橫跨建築、室內、產品與策展，強調以「使用者為核心」的設計方法，並結合理性分析與感性創造，建立整合性設計思維。' }
+      ]
+    },
+    3: {
+      name: '商業視覺：AI 傳達設計工作坊',
+      dateDisplay: '2026年 5/27（三）',
+      uni: '南臺科技大學',
+      venue: '台南市永康區南台街1號 W棟808教室、810教室',
+      url: 'https://neti.cc/EewkZK4',
+      deadline: '2026-05-18',
+      deadlineDisplay: '5/18',
+      tools: ['Google Mixboard', 'Nano Banana 2 & Pro', 'Lovart', 'Adobe Firefly', 'Photoshop', 'Gemini'],
+      speakers: [
+        { name: '黃綝怡', role: '南臺科大 視覺傳達設計系主任 ／ 品牌及包裝設計中心主任', photo: 'img/speakers/黃綝怡.png',
+          bio: '專長領域：企業識別系統、廣告企劃、包裝設計、網頁設計、感性工學研究、使用性工程研究。' },
+        { name: '沈彥霖', role: '獨立視覺設計師', photo: 'img/speakers/沈彥霖.png', bio: '' }
+      ]
+    },
+    4: {
+      name: '產品設計：3D 邏輯建模視覺化工作坊',
+      dateDisplay: '2026年 6/05（五）',
+      uni: '逢甲大學',
+      venue: '台中市西屯區文華路100號 行政一館2F 208電腦教室',
+      url: 'https://neti.cc/Nq9n5vm',
+      deadline: '2026-06-02',
+      deadlineDisplay: '6/2',
+      tools: ['ChatGPT', 'SolidWorks', 'KeyShot AI'],
+      speakers: [
+        { name: '陳柏全', role: '逢甲大學 通識教育中心兼任助理教授 ／ 全盛電機 董事長', photo: 'img/speakers/陳柏全.png',
+          bio: '專長：初階產品3D建模、電腦輔助產品設計、創新產品設計與思考、創新商品設計與設計邏輯觀念建立、時事脈動分析與創造。全英文教學。' }
+      ]
+    },
+    5: {
+      name: '產品空間：Rhino × AI 渲染工作流',
+      dateDisplay: '2026年 6/13（六）',
+      uni: '元智大學',
+      venue: '桃園市中壢區遠東路135號 三館二樓 3204電腦教室',
+      url: 'https://neti.cc/W7Mb0yO',
+      deadline: '2026-06-05',
+      deadlineDisplay: '6/5',
+      tools: ['Rhino', 'AI 渲染'],
+      speakers: [
+        { name: '林楚卿', role: '元智大學 藝術與設計學系主任兼所長', photo: 'img/speakers/林楚卿.png',
+          bio: '研究主軸為數位設計之相關應用，研究、教學與設計並重。鑽研數位構築、數位工具、設計思考、互動設計、跨領域數位設計整合，探討其在建築、藝術、產品、工程等領域的設計應用。' }
+      ]
+    },
+    6: {
+      name: '室內設計：用 AI 加速空間提案工作坊',
+      dateDisplay: '2026年 6/15（一）',
+      uni: '逢甲大學',
+      venue: '台中市西屯區文華路100號 行政一館2F 208電腦教室',
+      url: 'https://neti.cc/gZRWxVN',
+      deadline: '2026-06-10',
+      deadlineDisplay: '6/10',
+      tools: ['Gemini', 'NotebookLM', 'Midjourney', 'KLING'],
+      speakers: [
+        { name: '李元榮', role: '逢甲大學 室內設計學士學位學程主任', photo: 'img/speakers/李元榮.png',
+          bio: '專長：建築設計、室內設計、數位構築、互動設計。' }
+      ]
+    },
+    7: {
+      name: '概念提案：AI 設計實務工作坊',
+      dateDisplay: '2026年 7/16（四）',
+      uni: '宜蘭大學',
+      venue: '宜蘭縣宜蘭市神農路1段1號 圖資大樓一樓 電腦教室 2',
+      url: 'https://neti.cc/MpOvME7',
+      deadline: '2026-07-13',
+      deadlineDisplay: '7/13',
+      tools: ['Gemini', 'Nano Banana 2', 'Canva AI'],
+      speakers: [
+        { name: '蘇迺薇', role: '資策會 數位教育研究所人才發展中心主任', photo: 'img/speakers/蘇迺薇.png', bio: '' },
+        { name: '楊俊益', role: '', photo: '', bio: '' }
+      ]
     }
+  };
+
+  // Lightbox
+  const lbOverlay  = document.getElementById('course-lightbox');
+  const lbName     = document.getElementById('lb-name');
+  const lbMeta     = document.getElementById('lb-meta');
+  const lbTools    = document.getElementById('lb-tools');
+  const lbSpeakers = document.getElementById('lb-speakers');
+  const lbDeadline = document.getElementById('lb-deadline-note');
+  const lbRegBtn   = document.getElementById('lb-reg-btn');
+
+  function openLightbox(courseId) {
+    const c = COURSES[courseId];
+    if (!c) return;
+    const isClosed = new Date() > new Date(c.deadline);
+
+    lbName.textContent = c.name;
+
+    lbMeta.innerHTML = `
+      <span class="lb-meta-item">📅 <strong>${c.dateDisplay}</strong></span>
+      <span class="lb-meta-item">🏫 <strong>${c.uni}</strong></span>
+      <span class="lb-meta-item">📍 ${c.venue}</span>
+    `;
+
+    lbTools.innerHTML = c.tools.map(t => `<span class="lb-tool-tag">${t}</span>`).join('');
+
+    lbSpeakers.innerHTML = c.speakers.map(s => `
+      <div class="lb-speaker">
+        ${s.photo ? `<div class="lb-spk-photo"><img src="${s.photo}" alt="${s.name}"></div>` : ''}
+        <div class="lb-spk-info">
+          <div class="lb-spk-name">${s.name}</div>
+          ${s.role ? `<div class="lb-spk-role">${s.role}</div>` : ''}
+          ${s.bio  ? `<div class="lb-spk-bio">${s.bio}</div>`  : ''}
+        </div>
+      </div>
+    `).join('');
+
+    lbDeadline.innerHTML = isClosed
+      ? '<strong>報名已截止</strong>'
+      : `報名截止：<strong>${c.deadlineDisplay}</strong>`;
+
+    if (isClosed) {
+      lbRegBtn.textContent = '報名已截止';
+      lbRegBtn.classList.add('closed');
+      lbRegBtn.removeAttribute('href');
+    } else {
+      lbRegBtn.textContent = '立即報名 →';
+      lbRegBtn.classList.remove('closed');
+      lbRegBtn.href = c.url;
+    }
+
+    lbOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lb-close-btn').focus();
+  }
+
+  function closeLightbox() {
+    lbOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lb-close-btn').addEventListener('click', closeLightbox);
+  lbOverlay.addEventListener('click', e => { if (e.target === lbOverlay) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  document.querySelectorAll('.more-link').forEach(btn => {
+    btn.addEventListener('click', () => openLightbox(parseInt(btn.dataset.course)));
   });
 
   // Marquee entrance: WAAPI playbackRate 無縫減速
