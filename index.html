@@ -297,6 +297,26 @@
     .lb-spk-name { font-size: .95rem; font-weight: 900; color: var(--t); }
     .lb-spk-role { font-size: .78rem; color: #666; margin: .15rem 0 .4rem; }
     .lb-spk-bio { font-size: .78rem; color: #666; line-height: 1.6; }
+    .lb-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .6rem 1.5rem;
+      border-bottom: 1.5px solid rgba(255,112,162,.12);
+    }
+    .lb-nav-btn {
+      display: flex; align-items: center; gap: .35rem;
+      background: none; border: none; cursor: pointer;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: .76rem; font-weight: 700; color: var(--p);
+      padding: .3rem .5rem; border-radius: 6px;
+      transition: background .15s, opacity .15s;
+    }
+    .lb-nav-btn:hover:not(:disabled) { background: rgba(255,112,162,.1); }
+    .lb-nav-btn:disabled { opacity: .25; cursor: default; }
+    .lb-nav-btn .arrow { font-size: .9rem; }
+    .lb-nav-counter {
+      font-size: .72rem; font-weight: 700; color: #999;
+      letter-spacing: .04em;
+    }
     .lb-footer {
       padding: 1rem 1.5rem 1.5rem;
       border-top: 1.5px solid rgba(255,112,162,.2);
@@ -787,6 +807,15 @@
 <!-- COURSE LIGHTBOX -->
 <div id="course-lightbox" class="lb-overlay" role="dialog" aria-modal="true" aria-label="場次詳情">
   <div class="lb-box">
+    <div class="lb-nav">
+      <button class="lb-nav-btn" id="lb-prev-btn" aria-label="上一場次">
+        <span class="arrow">←</span> 上一場
+      </button>
+      <span class="lb-nav-counter" id="lb-nav-counter"></span>
+      <button class="lb-nav-btn" id="lb-next-btn" aria-label="下一場次">
+        下一場 <span class="arrow">→</span>
+      </button>
+    </div>
     <button class="lb-close" id="lb-close-btn" aria-label="關閉">×</button>
     <div class="lb-header">
       <div class="lb-course-name" id="lb-name"></div>
@@ -1003,18 +1032,28 @@
   };
 
   // Lightbox
-  const lbOverlay  = document.getElementById('course-lightbox');
-  const lbName     = document.getElementById('lb-name');
-  const lbMeta     = document.getElementById('lb-meta');
-  const lbTools    = document.getElementById('lb-tools');
-  const lbSpeakers = document.getElementById('lb-speakers');
-  const lbDeadline = document.getElementById('lb-deadline-note');
-  const lbRegBtn   = document.getElementById('lb-reg-btn');
+  const lbOverlay    = document.getElementById('course-lightbox');
+  const lbName       = document.getElementById('lb-name');
+  const lbMeta       = document.getElementById('lb-meta');
+  const lbTools      = document.getElementById('lb-tools');
+  const lbSpeakers   = document.getElementById('lb-speakers');
+  const lbDeadline   = document.getElementById('lb-deadline-note');
+  const lbRegBtn     = document.getElementById('lb-reg-btn');
+  const lbPrevBtn    = document.getElementById('lb-prev-btn');
+  const lbNextBtn    = document.getElementById('lb-next-btn');
+  const lbNavCounter = document.getElementById('lb-nav-counter');
+  const COURSE_IDS   = Object.keys(COURSES).map(Number);
+  let currentCourseId = null;
 
   function openLightbox(courseId) {
     const c = COURSES[courseId];
     if (!c) return;
+    currentCourseId = courseId;
     const isClosed = new Date() > new Date(c.deadline);
+    const idx = COURSE_IDS.indexOf(courseId);
+    lbPrevBtn.disabled = idx === 0;
+    lbNextBtn.disabled = idx === COURSE_IDS.length - 1;
+    lbNavCounter.textContent = `${idx + 1} / ${COURSE_IDS.length}`;
 
     lbName.textContent = c.name;
 
@@ -1067,7 +1106,22 @@
 
   document.getElementById('lb-close-btn').addEventListener('click', closeLightbox);
   lbOverlay.addEventListener('click', e => { if (e.target === lbOverlay) closeLightbox(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  lbPrevBtn.addEventListener('click', () => {
+    const idx = COURSE_IDS.indexOf(currentCourseId);
+    if (idx > 0) openLightbox(COURSE_IDS[idx - 1]);
+  });
+  lbNextBtn.addEventListener('click', () => {
+    const idx = COURSE_IDS.indexOf(currentCourseId);
+    if (idx < COURSE_IDS.length - 1) openLightbox(COURSE_IDS[idx + 1]);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeLightbox(); return; }
+    if (!lbOverlay.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft'  && !lbPrevBtn.disabled) lbPrevBtn.click();
+    if (e.key === 'ArrowRight' && !lbNextBtn.disabled) lbNextBtn.click();
+  });
 
   document.querySelectorAll('.more-link').forEach(btn => {
     btn.addEventListener('click', () => openLightbox(parseInt(btn.dataset.course)));
