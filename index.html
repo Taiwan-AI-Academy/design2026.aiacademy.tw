@@ -1018,10 +1018,14 @@
 
     lbName.textContent = c.name;
 
+    const iconCalendar = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="vertical-align:-2px;flex-shrink:0"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M8 2v4m8-4v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></g></svg>`;
+    const iconSchool = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="vertical-align:-2px;flex-shrink:0"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 21v-3a2 2 0 0 0-4 0v3m8-16.067V21M4 6l7.106-3.79a2 2 0 0 1 1.788 0L20 6"/><path d="m6 11l-3.52 2.147a1 1 0 0 0-.48.854V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a1 1 0 0 0-.48-.853L18 11M6 4.933V21"/><circle cx="12" cy="9" r="2"/></g></svg>`;
+    const iconMapPin = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="vertical-align:-2px;flex-shrink:0"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></g></svg>`;
+
     lbMeta.innerHTML = `
-      <span class="lb-meta-item">📅 <strong>${c.dateDisplay}</strong></span>
-      <span class="lb-meta-item">🏫 <strong>${c.uni}</strong></span>
-      <span class="lb-meta-item">📍 ${c.venue}</span>
+      <span class="lb-meta-item">${iconCalendar} <strong>${c.dateDisplay}</strong></span>
+      <span class="lb-meta-item">${iconSchool} <strong>${c.uni}</strong></span>
+      <span class="lb-meta-item">${iconMapPin} ${c.venue}</span>
     `;
 
     lbTools.innerHTML = c.tools.map(t => `<span class="lb-tool-tag">${t}</span>`).join('');
