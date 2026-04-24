@@ -234,30 +234,46 @@
       transition: opacity .22s;
     }
     .lb-overlay.open { opacity: 1; pointer-events: auto; }
-    .lb-box {
-      background: #fff;
-      border: 3px solid var(--p);
-      border-radius: 14px;
-      max-width: 560px; width: 100%;
-      max-height: 90vh; overflow-y: auto;
+
+    /* Stage = sizing wrapper holding layers + box */
+    .lb-stage {
       position: relative;
-      transform: translateY(16px);
-      transition: transform .22s;
+      max-width: 560px; width: 100%;
+      transform: translateY(20px);
+      transition: transform .25s cubic-bezier(.2,0,0,1);
+    }
+    .lb-overlay.open .lb-stage { transform: translateY(0); }
+
+    /* Three colour layers behind the main box */
+    .lb-layer {
+      position: absolute; inset: 0;
+      pointer-events: none; will-change: transform;
+      opacity: .5;
+    }
+    .lb-l1 { background: var(--p); z-index: 1; } /* pink  – furthest */
+    .lb-l2 { background: var(--b); z-index: 2; } /* blue  – middle  */
+    .lb-l3 { background: var(--g); z-index: 3; } /* green – closest */
+
+    .lb-box {
+      background: var(--y);
+      border: 2px dashed var(--t);
+      border-radius: 0;
+      max-height: 88vh; overflow-y: auto;
+      position: relative; z-index: 4;
       scrollbar-width: thin;
     }
-    .lb-overlay.open .lb-box { transform: translateY(0); }
     .lb-close {
       position: sticky; top: .75rem; float: right; margin: .75rem .75rem 0 0;
       width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(255,112,162,.12); border: none; cursor: pointer;
-      font-size: 1.1rem; line-height: 32px; text-align: center; color: var(--p);
+      background: rgba(51,51,51,.1); border: none; cursor: pointer;
+      font-size: 1.1rem; line-height: 32px; text-align: center; color: var(--t);
       font-weight: 900; transition: background .15s;
       z-index: 10;
     }
-    .lb-close:hover { background: rgba(255,112,162,.28); }
+    .lb-close:hover { background: rgba(51,51,51,.22); }
     .lb-header {
       padding: 1.5rem 1.5rem .9rem;
-      border-bottom: 1.5px solid rgba(255,112,162,.2);
+      border-bottom: 1.5px solid rgba(51,51,51,.15);
     }
     .lb-course-name {
       font-size: 1.12rem; font-weight: 900; color: var(--t);
@@ -300,17 +316,17 @@
     .lb-nav {
       display: flex; align-items: center; justify-content: space-between;
       padding: .6rem 1.5rem;
-      border-bottom: 1.5px solid rgba(255,112,162,.12);
+      border-bottom: 1.5px solid rgba(51,51,51,.15);
     }
     .lb-nav-btn {
       display: flex; align-items: center; gap: .35rem;
       background: none; border: none; cursor: pointer;
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: .76rem; font-weight: 700; color: var(--p);
-      padding: .3rem .5rem; border-radius: 6px;
+      font-size: .76rem; font-weight: 700; color: var(--t);
+      padding: .3rem .5rem; border-radius: 0;
       transition: background .15s, opacity .15s;
     }
-    .lb-nav-btn:hover:not(:disabled) { background: rgba(255,112,162,.1); }
+    .lb-nav-btn:hover:not(:disabled) { background: rgba(51,51,51,.08); }
     .lb-nav-btn:disabled { opacity: .25; cursor: default; }
     .lb-nav-btn .arrow { font-size: .9rem; }
     .lb-nav-counter {
@@ -319,12 +335,12 @@
     }
     .lb-footer {
       padding: 1rem 1.5rem 1.5rem;
-      border-top: 1.5px solid rgba(255,112,162,.2);
+      border-top: 1.5px solid rgba(51,51,51,.15);
       display: flex; align-items: center; justify-content: space-between; gap: 1rem;
       flex-wrap: wrap;
     }
-    .lb-deadline { font-size: .78rem; color: #999; }
-    .lb-deadline strong { color: var(--p); }
+    .lb-deadline { font-size: .78rem; color: rgba(51,51,51,.5); }
+    .lb-deadline strong { color: var(--t); }
     .lb-reg-btn {
       display: inline-block; background: var(--p); color: #fff;
       font-size: .82rem; font-weight: 700; padding: .5rem 1.4rem;
@@ -336,7 +352,6 @@
       background: rgba(51,51,51,.12); color: rgba(51,51,51,.35); pointer-events: none;
     }
     @media(max-width:480px){
-      .lb-box { border-radius: 10px; }
       .lb-header, .lb-body, .lb-footer { padding-left: 1.1rem; padding-right: 1.1rem; }
       .lb-speaker { gap: .65rem; }
       .lb-spk-photo { width: 46px; height: 46px; }
@@ -806,6 +821,10 @@
 
 <!-- COURSE LIGHTBOX -->
 <div id="course-lightbox" class="lb-overlay" role="dialog" aria-modal="true" aria-label="場次詳情">
+  <div class="lb-stage" id="lb-stage">
+    <div class="lb-layer lb-l1" id="lb-l1"></div>
+    <div class="lb-layer lb-l2" id="lb-l2"></div>
+    <div class="lb-layer lb-l3" id="lb-l3"></div>
   <div class="lb-box">
     <div class="lb-nav">
       <button class="lb-nav-btn" id="lb-prev-btn" aria-label="上一場次">
@@ -831,7 +850,8 @@
       <div class="lb-deadline" id="lb-deadline-note"></div>
       <a href="#" class="lb-reg-btn" id="lb-reg-btn" target="_blank" rel="noopener">立即報名 →</a>
     </div>
-  </div>
+  </div><!-- lb-box -->
+  </div><!-- lb-stage -->
 </div>
 
 <script>
@@ -1033,6 +1053,7 @@
 
   // Lightbox
   const lbOverlay    = document.getElementById('course-lightbox');
+  const lbStage      = document.getElementById('lb-stage');
   const lbName       = document.getElementById('lb-name');
   const lbMeta       = document.getElementById('lb-meta');
   const lbTools      = document.getElementById('lb-tools');
@@ -1044,6 +1065,43 @@
   const lbNavCounter = document.getElementById('lb-nav-counter');
   const COURSE_IDS   = Object.keys(COURSES).map(Number);
   let currentCourseId = null;
+
+  // Parallax layer state — direction vectors match hero visual
+  // l1=pink(右下), l2=blue(左上), l3=green(上)
+  const LB_DIRS = [
+    [ 0.7,  0.7],   // pink  → lower-right
+    [-0.7, -0.7],   // blue  → upper-left
+    [ 0.0, -1.0],   // green → up
+  ];
+  const LB_BASE = 22;   // base spread magnitude (px)
+  const LB_TILT = 22;   // max mouse tilt (px)
+  const lbLayerEls = [
+    document.getElementById('lb-l1'),
+    document.getElementById('lb-l2'),
+    document.getElementById('lb-l3')
+  ];
+  let lbMx = 0, lbMy = 0;
+  let lbTargetSpread = 1;
+  let lbCurrentSpread = 1;
+  let lbRaf = null;
+
+  function lbParallaxRender() {
+    lbRaf = null;
+    lbCurrentSpread += (lbTargetSpread - lbCurrentSpread) * 0.15;
+    lbLayerEls.forEach((layer, i) => {
+      const [dx, dy] = LB_DIRS[i];
+      const spread = LB_BASE * lbCurrentSpread;
+      const tx = (dx * spread - lbMx * LB_TILT * lbCurrentSpread).toFixed(2);
+      const ty = (dy * spread - lbMy * LB_TILT * lbCurrentSpread).toFixed(2);
+      layer.style.transform = `translate(${tx}px,${ty}px)`;
+    });
+    if (Math.abs(lbCurrentSpread - lbTargetSpread) > 0.004) {
+      lbRaf = requestAnimationFrame(lbParallaxRender);
+    }
+  }
+  function lbParallaxSchedule() {
+    if (!lbRaf) lbRaf = requestAnimationFrame(lbParallaxRender);
+  }
 
   function openLightbox(courseId) {
     const c = COURSES[courseId];
@@ -1094,6 +1152,10 @@
       lbRegBtn.href = c.url;
     }
 
+    // Reset parallax immediately (no lerp) then re-attach
+    lbMx = 0; lbMy = 0; lbTargetSpread = 1; lbCurrentSpread = 1;
+    lbParallaxRender();
+
     lbOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
     document.getElementById('lb-close-btn').focus();
@@ -1105,7 +1167,20 @@
   }
 
   document.getElementById('lb-close-btn').addEventListener('click', closeLightbox);
-  lbOverlay.addEventListener('click', e => { if (e.target === lbOverlay) closeLightbox(); });
+  lbOverlay.addEventListener('click', e => { if (!lbStage.contains(e.target)) closeLightbox(); });
+
+  // Parallax: track mouse relative to stage centre
+  lbOverlay.addEventListener('mousemove', e => {
+    const r = lbStage.getBoundingClientRect();
+    lbMx = (e.clientX - r.left  - r.width  / 2) / (r.width  / 2);
+    lbMy = (e.clientY - r.top   - r.height / 2) / (r.height / 2);
+    lbParallaxSchedule();
+  });
+  lbOverlay.addEventListener('mouseleave', () => { lbMx = 0; lbMy = 0; lbParallaxSchedule(); });
+
+  // Reg button hover → collapse layers
+  lbRegBtn.addEventListener('mouseenter', () => { lbTargetSpread = 0; lbParallaxSchedule(); });
+  lbRegBtn.addEventListener('mouseleave', () => { lbTargetSpread = 1; lbParallaxSchedule(); });
 
   lbPrevBtn.addEventListener('click', () => {
     const idx = COURSE_IDS.indexOf(currentCourseId);
