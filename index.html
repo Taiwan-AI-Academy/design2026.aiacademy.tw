@@ -597,18 +597,18 @@
     }
     .pin-dot {
       position: absolute;
-      width: 10px; height: 10px;
+      width: 14px; height: 14px;
       background: var(--g);
       border-radius: 50%;
       border: 2px solid var(--t);
       transform: translate(-50%,-50%);
       transition: transform 0.15s ease, box-shadow 0.15s;
       z-index: 3;
-      box-shadow: 0 0 0 3px rgba(94,194,35,0.3);
+      box-shadow: 0 0 0 4px rgba(94,194,35,0.3);
     }
     .sch-pin:hover .pin-dot {
       transform: translate(-50%,-50%) scale(1.5);
-      box-shadow: 0 0 0 5px rgba(94,194,35,0.2);
+      box-shadow: 0 0 0 6px rgba(94,194,35,0.2);
     }
     .pin-arm {
       position: absolute;
@@ -617,10 +617,10 @@
       align-items: center;
       transform: translateY(-50%);
     }
-    .pin-right .pin-arm { left: 5px; flex-direction: row; }
-    .pin-left  .pin-arm { right: 5px; flex-direction: row-reverse; }
+    .pin-right .pin-arm { left: 7px; flex-direction: row; }
+    .pin-left  .pin-arm { right: 7px; flex-direction: row-reverse; }
     .pin-line {
-      width: 24px; height: 2px;
+      width: 28px; height: 2px;
       background: var(--t);
       flex-shrink: 0;
     }
@@ -628,24 +628,24 @@
     .pin-card {
       background: var(--t);
       color: var(--bg);
-      padding: 5px 9px 4px;
-      border-radius: 5px;
+      padding: 8px 14px 7px;
+      border-radius: 6px;
       white-space: nowrap;
       line-height: 1.3;
       cursor: pointer;
       user-select: none;
-      transition: background 0.15s;
+      transition: background 0.15s, color 0.15s;
     }
-    .sch-pin:hover .pin-card { background: #111; }
-    .pin-name { font-size: 10.5px; font-weight: 700; letter-spacing: 0.01em; }
-    .pin-city-tag { font-size: 9px; opacity: 0.6; margin-top: 1px; }
+    .sch-pin:hover .pin-card { background: var(--y); color: var(--t); }
+    .pin-name { font-size: 21px; font-weight: 700; letter-spacing: 0.01em; }
+    .pin-city-tag { font-size: 14px; opacity: 0.6; margin-top: 2px; }
     .pin-dropdown {
       position: absolute;
       top: 100%;
       background: var(--t);
       border-top: 1px solid rgba(250,250,245,0.15);
-      border-radius: 0 0 5px 5px;
-      min-width: 178px;
+      border-radius: 0 0 6px 6px;
+      min-width: 220px;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.25s ease, opacity 0.2s;
@@ -654,7 +654,7 @@
       pointer-events: none;
     }
     .sch-pin:hover .pin-dropdown {
-      max-height: 220px;
+      max-height: 280px;
       opacity: 1;
       pointer-events: auto;
     }
@@ -662,7 +662,7 @@
     .pin-left  .pin-dropdown { right: 0; }
     .pin-sess {
       display: block; width: 100%;
-      padding: 7px 10px;
+      padding: 10px 14px;
       text-align: left;
       background: none;
       border: none;
@@ -670,17 +670,21 @@
       color: var(--bg);
       cursor: pointer;
       font-family: inherit;
-      line-height: 1.45;
+      line-height: 1.5;
       white-space: nowrap;
     }
     .pin-sess:first-child { border-top: none; }
     .pin-sess:hover { background: rgba(250,250,245,0.09); }
-    .ps-date { display: block; font-size: 9px; opacity: 0.6; }
-    .ps-name { font-size: 10.5px; font-weight: 600; }
+    .ps-date { display: block; font-size: 14px; opacity: 0.6; }
+    .ps-name { font-size: 18px; font-weight: 600; }
     @media (max-width: 480px) {
-      .sch-map-wrap { max-width: 300px; }
-      .pin-line { width: 16px; }
-      .pin-dropdown { min-width: 148px; }
+      .sch-map-wrap { max-width: 320px; }
+      .pin-line { width: 20px; }
+      .pin-name { font-size: 16px; }
+      .pin-city-tag { font-size: 12px; }
+      .pin-dropdown { min-width: 180px; }
+      .ps-date { font-size: 12px; }
+      .ps-name { font-size: 14px; }
     }
 
     /* ── FORUM ── */
@@ -999,8 +1003,8 @@
       <img class="sch-map-img" src="img/taiwan-political-division.svg" alt="合作學校分佈地圖">
       <div class="sch-pins">
 
-        <!-- 南臺科技大學 台南 -->
-        <div class="sch-pin pin-left" style="--px:38%;--py:61%">
+        <!-- 南臺科技大學 台南 23.02509, 120.22581 -->
+        <div class="sch-pin pin-left" style="--px:33%;--py:65%">
           <div class="pin-dot"></div>
           <div class="pin-arm">
             <div class="pin-line"></div>
@@ -1023,14 +1027,14 @@
           </div>
         </div>
 
-        <!-- 國立臺灣科技大學 台北 -->
-        <div class="sch-pin pin-left" style="--px:50%;--py:10%">
+        <!-- 國立臺灣科技大學 台北 25.01427, 121.54188 -->
+        <div class="sch-pin pin-right" style="--px:82%;--py:9%">
           <div class="pin-dot"></div>
           <div class="pin-arm">
             <div class="pin-line"></div>
             <div class="pin-card-wrap">
               <div class="pin-card">
-                <div class="pin-name">國立臺灣科技大學</div>
+                <div class="pin-name">臺科大</div>
                 <div class="pin-city-tag">台北・1 場</div>
               </div>
               <div class="pin-dropdown">
@@ -1043,8 +1047,8 @@
           </div>
         </div>
 
-        <!-- 逢甲大學 台中 -->
-        <div class="sch-pin pin-left" style="--px:41%;--py:40%">
+        <!-- 逢甲大學 台中 24.17906, 120.64671 -->
+        <div class="sch-pin pin-left" style="--px:48%;--py:33%">
           <div class="pin-dot"></div>
           <div class="pin-arm">
             <div class="pin-line"></div>
@@ -1067,8 +1071,8 @@
           </div>
         </div>
 
-        <!-- 元智大學 桃園 -->
-        <div class="sch-pin pin-left" style="--px:44%;--py:18%">
+        <!-- 元智大學 桃園 24.97031, 121.26344 -->
+        <div class="sch-pin pin-left" style="--px:72%;--py:11%">
           <div class="pin-dot"></div>
           <div class="pin-arm">
             <div class="pin-line"></div>
@@ -1087,8 +1091,8 @@
           </div>
         </div>
 
-        <!-- 宜蘭大學 宜蘭 -->
-        <div class="sch-pin pin-right" style="--px:80%;--py:14%">
+        <!-- 宜蘭大學 宜蘭 24.74624, 121.7477 -->
+        <div class="sch-pin pin-left" style="--px:90%;--py:17%">
           <div class="pin-dot"></div>
           <div class="pin-arm">
             <div class="pin-line"></div>
