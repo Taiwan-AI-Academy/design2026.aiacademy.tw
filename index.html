@@ -619,6 +619,7 @@
     }
     .pin-right .pin-arm { left: 7px; flex-direction: row; }
     .pin-left  .pin-arm { right: 7px; flex-direction: row-reverse; }
+    .pin-right.pin-below .pin-arm { top: 7px; transform: none; align-items: flex-start; }
     .pin-line {
       width: 28px; height: 2px;
       background: var(--t);
@@ -1092,7 +1093,7 @@
         </div>
 
         <!-- 宜蘭大學 宜蘭 24.74624, 121.7477 -->
-        <div class="sch-pin pin-left" style="--px:90%;--py:17%">
+        <div class="sch-pin pin-right pin-below" style="--px:90%;--py:17%">
           <div class="pin-dot"></div>
           <div class="pin-arm">
             <div class="pin-line"></div>
