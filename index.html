@@ -144,221 +144,270 @@
     .stat-n { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem,4.5vw,3.5rem); font-weight: 900; color: var(--y); line-height: 1; }
     .stat-l { font-size: .82rem; color: rgba(255,255,255,.45); margin-top: .3rem; }
 
-    /* ── COURSES ── */
-    #courses {
-      background: var(--y);
-      padding: clamp(4rem,8vw,7rem) clamp(1.5rem,6vw,4rem);
-    }
-    .sec-hd { margin-bottom: 2.25rem; }
-    .sec-title { font-size: clamp(1.7rem,3.5vw,2.8rem); font-weight: 900; letter-spacing: -.02em; color: var(--t); }
-    .sec-sub { font-size: .9rem; color: var(--t); opacity: .6; margin-top: .3rem; }
-    .filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.25rem; }
-    .f-btn {
-      background: transparent; border: 2px solid var(--t); color: var(--t);
-      font-family: 'Noto Sans TC', sans-serif; font-size: .78rem; font-weight: 700;
-      padding: .32rem .9rem; border-radius: 4px; cursor: pointer;
-      transition: background .15s, color .15s;
-    }
-    .f-btn.on, .f-btn:hover { background: var(--t); color: var(--y); }
+    /* ── COURSES (new design) ── */
 
-    /* Course list — Story Tiles layout */
-    .course-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      background: transparent; border: none; border-radius: 0; overflow: visible;
-    }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* Wrapper: full width, flex row containing colored block + icon */
-    .course-wrapper {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      align-items: stretch;
-      gap: 0;
-    }
-    .course-wrapper.hidden { display: none; }
+:root {
+  --y: #F5E400;
+  --g: #5EC223;
+  --b: #00A1F2;
+  --p: #FF70A2;
+  --ink: #333333;
+  --ink2: #666666;
+  --bg: #FAFAF5;
+}
 
-    .course-row {
-      flex: 2;
-      background: var(--bg);
-      border-radius: 24px;
-      padding: 0;
-      min-height: 200px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
-      transition: transform .2s;
-    }
-    .course-row:hover { transform: translateY(-4px); }
+body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var(--ink); }
 
-    /* Color bg per row - alternating green/blue */
-    .course-row.color-green  { background: rgba(94, 194, 35, 0.45); border: 2px solid rgba(0,0,0,0.08); }
-    .course-row.color-blue   { background: rgba(0, 161, 242, 0.45); border: 2px solid rgba(0,0,0,0.08); }
+/* ─── SECTION ─── */
+.courses {
+  background: var(--y);
+  padding: 80px 0 100px;
+}
+.wrap {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
 
-    /* Info block */
-    .course-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding: 36px 40px;
-      position: relative;
-    }
+/* ─── TOP BAR ─── */
+.top-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.heading-group {}
+.en-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--ink2);
+  margin-bottom: 6px;
+}
+.main-title {
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+.main-title em {
+  font-style: normal;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 48px;
+  opacity: .18;
+  margin-left: 8px;
+  letter-spacing: 2px;
+}
 
-    /* Icon block — outside the colored block, 1/3 width */
-    .course-icon-block {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      padding: 24px;
-      overflow: hidden;
-    }
+/* filter pills */
+.filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.f-btn {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 99px;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.f-btn.active, .f-btn:hover {
+  background: var(--ink);
+  color: var(--y);
+}
 
-    /* Even rows: icon on left */
-    .course-wrapper:nth-child(even) .course-icon-block { order: -1; }
+/* ─── MONTH GROUPS ─── */
+.month-group {
+  margin-bottom: 16px;
+}
+.month-label-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.month-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 80px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--ink);
+  opacity: .1;
+  flex-shrink: 0;
+  width: 80px;
+}
+.month-line {
+  flex: 1;
+  height: 1.5px;
+  background: rgba(0,0,0,.15);
+}
+.month-tag {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--ink2);
+}
 
-     /* ── Icon flip (no preserve-3d, so mix-blend-mode works) ── */
-     .icon-flip {
-       position: relative;
-       width: clamp(90px, 11vw, 170px);
-       height: clamp(90px, 11vw, 170px);
-       flex-shrink: 0;
-     }
-     .icon-flip-inner {
-       width: 100%; height: 100%;
-       position: relative;
-     }
-     .icon-front, .icon-back {
-       position: absolute; inset: 0;
-       transition: opacity .3s ease, transform .55s cubic-bezier(.4,0,.2,1);
-     }
-     .icon-front {
-       opacity: 1;
-       transform: rotateY(0deg);
-       background-size: 80% 80%;
-       background-repeat: no-repeat;
-       background-position: center;
-       background-color: #fff;
-       border-radius: 50%;
-       overflow: hidden;
-     }
-     .icon-back {
-       border-radius: 50%; overflow: hidden;
-       opacity: 0;
-       transform: rotateY(-90deg) scale(.85);
-     }
-     .course-row:hover .icon-front {
-       opacity: 0;
-       transform: rotateY(90deg) scale(.85);
-     }
-     .course-row:hover .icon-back {
-       opacity: 1;
-       transform: rotateY(0deg) scale(1);
-     }
+/* ─── CARD GRID ─── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.card-grid.single { grid-template-columns: 1fr; }
 
-     .icon-back img {
-       width: 100%; height: 100%;
-       object-fit: cover; object-position: top;
-       display: block;
-     }
+/* ─── CARD ─── */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: 16px 16px 0 0;
+}
+.card[data-cat="影視動畫"]::before { background: var(--ink); }
+.card[data-cat="設計方法"]::before  { background: var(--g); }
+.card[data-cat="商業視覺"]::before  { background: var(--b); }
+.card[data-cat="產品設計"]::before  { background: var(--b); }
+.card[data-cat="產品空間"]::before  { background: var(--g); }
+.card[data-cat="室內設計"]::before  { background: var(--p); }
+.card[data-cat="概念提案"]::before  { background: var(--ink); }
 
-    /* Hover-reveal speaker name */
-    .course-speaker, .deadline-note { display: none; }
-    .hover-speaker {
-      font-size: 1rem; font-weight: 900;
-      color: var(--t);
-      opacity: 0;
-      transition: opacity .3s ease .1s;
-      text-align: center;
-      pointer-events: none;
-    }
-    .course-row:hover .hover-speaker { opacity: 1; }
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.10);
+}
 
-    @media (max-width: 767px) {
-      .course-wrapper { flex-direction: column; }
-      .course-wrapper:nth-child(even) .course-icon-block { order: 0; }
-      .course-info { padding: 24px 24px 16px; }
-      .course-icon-block { padding: 16px 24px 24px; flex-direction: row; gap: 16px; }
-    }
+/* card top row */
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.date-big {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1;
+  color: var(--ink);
+}
+.date-dow {
+  font-size: 11px;
+  color: var(--ink2);
+  margin-top: 3px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.cat-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.card[data-cat="影視動畫"] .cat-badge { background: var(--ink); color: var(--y); }
+.card[data-cat="設計方法"]  .cat-badge { background: var(--g); color: #fff; }
+.card[data-cat="商業視覺"]  .cat-badge { background: var(--b); color: #fff; }
+.card[data-cat="產品設計"]  .cat-badge { background: var(--b); color: #fff; }
+.card[data-cat="產品空間"]  .cat-badge { background: var(--g); color: #fff; }
+.card[data-cat="室內設計"]  .cat-badge { background: var(--p); color: #fff; }
+.card[data-cat="概念提案"]  .cat-badge { background: var(--ink); color: var(--y); }
 
-    .course-tag {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--t);
-      opacity: 0.65;
-      padding: 0;
-      border: none;
-      background: transparent;
-      margin: 0;
-      align-self: flex-start;
-      display: block;
-    }
+/* title */
+.card-title {
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
 
-    .course-name {
-      font-size: clamp(1.6rem, 3vw, 2.6rem);
-      font-weight: 900;
-      color: var(--t);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin: 0;
-    }
+/* meta */
+.card-meta {
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.8;
+  flex: 1;
+}
+.card-meta .loc { font-weight: 700; color: var(--ink); }
 
-    .course-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-      margin: 0;
-    }
+/* bottom */
+.card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0,0,0,.07);
+}
+.region-pill {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  border: 1.5px solid rgba(0,0,0,.15);
+  color: var(--ink2);
+}
+.more-link {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 18px;
+  background: var(--p);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: filter .15s, transform .15s;
+}
+.more-link:hover { filter: brightness(.9); transform: translateY(-1px); }
 
-    .date-uni {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      opacity: 0.7;
-      color: var(--t);
-    }
-    
-    .course-speaker {
-      font-size: .85rem; font-weight: 700; color: var(--t);
-    }
+/* hidden */
+.card[data-hidden] { display: none; }
 
-    .course-bottom {
-      display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
-      margin-top: auto;
-    }
+/* ③ 奇數卡片置中 */
+.card-grid.col1 { grid-template-columns: minmax(0, 640px); justify-content: center; }
 
-    .more-link {
-      display: inline-block; 
-      background: var(--t); 
-      color: #fff;
-      font-size: 0.75rem; 
-      font-weight: 700; 
-      padding: 0.4rem 1.1rem;
-      border-radius: 40px; 
-      border: none; 
-      cursor: pointer;
-      font-family: 'Noto Sans TC', sans-serif;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: background .15s, color .15s, transform .15s;
-    }
-    .more-link:hover { 
-      background: rgba(51,51,51,0.75); 
-      transform: translateY(-1px); 
-    }
-    
-    .deadline-note { font-size: .72rem; color: rgba(51,51,51,.7); font-weight: 700; }
 
-    /* ── LIGHTBOX ── */
+/* ─── MOBILE ─── */
+@media (max-width: 700px) {
+  .wrap { padding: 0 20px; }
+  .main-title { font-size: 34px; }
+  .main-title em { font-size: 30px; }
+  .card-grid { grid-template-columns: 1fr; }
+  .month-num { font-size: 56px; width: 56px; }
+  .top-bar { flex-direction: column; align-items: flex-start; }
+}
+
+        /* ── LIGHTBOX ── */
     .lb-overlay {
       position: fixed; inset: 0; z-index: 9000;
       background: rgba(51,51,51,.45);
@@ -497,6 +546,7 @@
       .course-name { font-size: .9rem; }
       .course-bottom { padding-left: 52px; }
     }
+
 
     /* ── SPEAKERS ── */
      #speakers {
@@ -813,147 +863,193 @@
 </section>
 
 <!-- COURSES -->
-<section id="courses">
-  <div class="sec-hd rv">
-    <h2 class="sec-title">工作坊場次</h2>
-    <p class="sec-sub">選擇適合你的場次，立即報名</p>
-  </div>
-  <div class="filters rv">
-    <button class="f-btn on" data-r="all">全部</button>
-    <button class="f-btn" data-r="north">北部</button>
-    <button class="f-btn" data-r="central">中部</button>
-    <button class="f-btn" data-r="south">南部</button>
-    <button class="f-btn" data-r="east">東部</button>
-  </div>
+<section class="courses">
+<div class="wrap">
 
-  <div class="course-list rv">
-
-    <div class="course-wrapper" id="course-1" data-r="south">
-      <div class="course-row color-green">
-        <div class="course-info">
-          <div class="course-tag">影視動畫</div>
-          <div class="course-name">AI 影像生成實戰營</div>
-          <div class="course-meta"><div class="date-uni">5/06（三）&ensp;南臺科大</div></div>
-          <div class="course-bottom"><button class="more-link" data-course="1">了解更多</button></div>
-        </div>
-      </div>
-      <div class="course-icon-block">
-        <div class="icon-flip"><div class="icon-flip-inner">
-          <div class="icon-front" style="background-image:url('img/course_icons/1.影視動畫.png')"></div>
-          <div class="icon-back"><img src="img/speakers/黃飛藏.png" alt="黃飛藏"></div>
-        </div></div>
-        <div class="hover-speaker">黃飛藏</div>
-      </div>
+  <div class="top-bar">
+    <div class="heading-group">
+      <div class="en-label">Workshop Schedule · 2026</div>
+      <h2 class="main-title">工作坊場次 <em>SCHEDULE</em></h2>
     </div>
-
-    <div class="course-wrapper" id="course-2" data-r="north">
-      <div class="course-row color-blue">
-        <div class="course-info">
-          <div class="course-tag">設計方法</div>
-          <div class="course-name">AI 設計工作系統</div>
-          <div class="course-meta"><div class="date-uni">5/09（六）&ensp;臺科大</div></div>
-          <div class="course-bottom"><button class="more-link" data-course="2">了解更多</button></div>
-        </div>
-      </div>
-      <div class="course-icon-block">
-        <div class="icon-flip"><div class="icon-flip-inner">
-          <div class="icon-front" style="background-image:url('img/course_icons/2.設計方法.png')"></div>
-          <div class="icon-back"><img src="img/speakers/邵唯晏.png" alt="邵唯晏"></div>
-        </div></div>
-        <div class="hover-speaker">邵唯晏</div>
-      </div>
-    </div>
-
-    <div class="course-wrapper" id="course-3" data-r="south">
-      <div class="course-row color-green">
-        <div class="course-info">
-          <div class="course-tag">商業視覺</div>
-          <div class="course-name">AI 傳達設計工作坊</div>
-          <div class="course-meta"><div class="date-uni">5/27（三）&ensp;南臺科大</div></div>
-          <div class="course-bottom"><button class="more-link" data-course="3">了解更多</button></div>
-        </div>
-      </div>
-      <div class="course-icon-block">
-        <div class="icon-flip"><div class="icon-flip-inner">
-          <div class="icon-front" style="background-image:url('img/course_icons/3.商業視覺.png')"></div>
-          <div class="icon-back"><img src="img/speakers/黃綝怡.png" alt="黃綝怡"></div>
-        </div></div>
-        <div class="hover-speaker">黃綝怡・沈彥霖</div>
-      </div>
-    </div>
-
-    <div class="course-wrapper" id="course-4" data-r="central">
-      <div class="course-row color-blue">
-        <div class="course-info">
-          <div class="course-tag">產品設計</div>
-          <div class="course-name">3D 邏輯建模視覺化工作坊</div>
-          <div class="course-meta"><div class="date-uni">6/05（五）&ensp;逢甲大學</div></div>
-          <div class="course-bottom"><button class="more-link" data-course="4">了解更多</button></div>
-        </div>
-      </div>
-      <div class="course-icon-block">
-        <div class="icon-flip"><div class="icon-flip-inner">
-          <div class="icon-front" style="background-image:url('img/course_icons/4.產品設計.png')"></div>
-          <div class="icon-back"><img src="img/speakers/陳柏全.png" alt="陳柏全"></div>
-        </div></div>
-        <div class="hover-speaker">陳柏全</div>
-      </div>
-    </div>
-
-    <div class="course-wrapper" id="course-5" data-r="north">
-      <div class="course-row color-green">
-        <div class="course-info">
-          <div class="course-tag">產品空間</div>
-          <div class="course-name">Rhino × AI 渲染工作流</div>
-          <div class="course-meta"><div class="date-uni">6/13（六）&ensp;元智大學</div></div>
-          <div class="course-bottom"><button class="more-link" data-course="5">了解更多</button></div>
-        </div>
-      </div>
-      <div class="course-icon-block">
-        <div class="icon-flip"><div class="icon-flip-inner">
-          <div class="icon-front" style="background-image:url('img/course_icons/5.產品空間.png')"></div>
-          <div class="icon-back"><img src="img/speakers/林楚卿.png" alt="林楚卿"></div>
-        </div></div>
-        <div class="hover-speaker">林楚卿</div>
-      </div>
-    </div>
-
-    <div class="course-wrapper" id="course-6" data-r="central">
-      <div class="course-row color-blue">
-        <div class="course-info">
-          <div class="course-tag">室內設計</div>
-          <div class="course-name">用 AI 加速空間提案工作坊</div>
-          <div class="course-meta"><div class="date-uni">6/15（一）&ensp;逢甲大學</div></div>
-          <div class="course-bottom"><button class="more-link" data-course="6">了解更多</button></div>
-        </div>
-      </div>
-      <div class="course-icon-block">
-        <div class="icon-flip"><div class="icon-flip-inner">
-          <div class="icon-front" style="background-image:url('img/course_icons/6.室內設計.png')"></div>
-          <div class="icon-back"><img src="img/speakers/李元榮.png" alt="李元榮"></div>
-        </div></div>
-        <div class="hover-speaker">李元榮</div>
-      </div>
-    </div>
-
-    <div class="course-wrapper" id="course-7" data-r="east">
-      <div class="course-row color-green">
-        <div class="course-info">
-          <div class="course-tag">概念提案</div>
-          <div class="course-name">AI 設計實務工作坊</div>
-          <div class="course-meta"><div class="date-uni">7/16（四）&ensp;宜蘭大學</div></div>
-          <div class="course-bottom"><button class="more-link" data-course="7">了解更多</button></div>
-        </div>
-      </div>
-      <div class="course-icon-block">
-        <div class="icon-flip"><div class="icon-flip-inner">
-          <div class="icon-front" style="background-image:url('img/course_icons/7.概念提案.png')"></div>
-          <div class="icon-back"><img src="img/speakers/蘇迺薇.png" alt="蘇迺薇"></div>
-        </div></div>
-        <div class="hover-speaker">蘇迺薇・楊俊益</div>
-      </div>
+    <div class="filters">
+      <button class="f-btn active" data-filter="all">全部 7場</button>
+      <button class="f-btn" data-filter="north">北部</button>
+      <button class="f-btn" data-filter="central">中部</button>
+      <button class="f-btn" data-filter="south">南部</button>
+      <button class="f-btn" data-filter="east">東部</button>
     </div>
   </div>
+
+  <!-- ── 5月 ── -->
+  <div class="month-group" data-month="5">
+    <div class="month-label-row">
+      <div class="month-num">05</div>
+      <div class="month-line"></div>
+      <div class="month-tag">MAY</div>
+    </div>
+    <div class="card-grid">
+
+      <div class="card" id="course-1" data-region="南部" data-r="south" data-cat="影視動畫">
+        <div class="card-top">
+          <div>
+            <div class="date-big">5/06</div>
+            <div class="date-dow">週三・台南</div>
+          </div>
+          <span class="cat-badge">影視動畫</span>
+        </div>
+        <div class="card-title">AI 影像生成實戰營</div>
+        <div class="card-meta">
+          <span class="loc">南臺科技大學</span><br>
+          黃飛藏｜夢想動畫 AI 產品經理
+        </div>
+        <div class="card-bottom">
+          <span class="region-pill">南部</span>
+          <button class="more-link" data-course="1">了解更多</button>
+        </div>
+      </div>
+
+      <div class="card" id="course-2" data-region="北部" data-r="north" data-cat="設計方法">
+        <div class="card-top">
+          <div>
+            <div class="date-big">5/09</div>
+            <div class="date-dow">週六・台北</div>
+          </div>
+          <span class="cat-badge">設計方法</span>
+        </div>
+        <div class="card-title">AI 設計工作系統</div>
+        <div class="card-meta">
+          <span class="loc">臺灣科技大學</span><br>
+          邵唯晏｜竹工凡木設計研究室 創辦人／總監
+        </div>
+        <div class="card-bottom">
+          <span class="region-pill">北部</span>
+          <button class="more-link" data-course="2">了解更多</button>
+        </div>
+      </div>
+
+      <div class="card" id="course-3" data-region="南部" data-r="south" data-cat="商業視覺">
+        <div class="card-top">
+          <div>
+            <div class="date-big">5/27</div>
+            <div class="date-dow">週三・台南</div>
+          </div>
+          <span class="cat-badge">商業視覺</span>
+        </div>
+        <div class="card-title">AI 傳達設計工作坊</div>
+        <div class="card-meta">
+          <span class="loc">南臺科技大學</span><br>
+          黃綝怡 系主任・沈彥霖 視覺設計師
+        </div>
+        <div class="card-bottom">
+          <span class="region-pill">南部</span>
+          <button class="more-link" data-course="3">了解更多</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── 6月 ── -->
+  <div class="month-group" data-month="6">
+    <div class="month-label-row">
+      <div class="month-num">06</div>
+      <div class="month-line"></div>
+      <div class="month-tag">JUN</div>
+    </div>
+    <div class="card-grid">
+
+      <div class="card" id="course-4" data-region="中部" data-r="central" data-cat="產品設計">
+        <div class="card-top">
+          <div>
+            <div class="date-big">6/05</div>
+            <div class="date-dow">週五・台中</div>
+          </div>
+          <span class="cat-badge">產品設計</span>
+        </div>
+        <div class="card-title">3D 邏輯建模視覺化工作坊</div>
+        <div class="card-meta">
+          <span class="loc">逢甲大學</span><br>
+          陳柏全｜逢甲大學 通識教育中心
+        </div>
+        <div class="card-bottom">
+          <span class="region-pill">中部</span>
+          <button class="more-link" data-course="4">了解更多</button>
+        </div>
+      </div>
+
+      <div class="card" id="course-5" data-region="北部" data-r="north" data-cat="產品空間">
+        <div class="card-top">
+          <div>
+            <div class="date-big">6/13</div>
+            <div class="date-dow">週六・桃園</div>
+          </div>
+          <span class="cat-badge">產品空間</span>
+        </div>
+        <div class="card-title">Rhino × AI 渲染工作流</div>
+        <div class="card-meta">
+          <span class="loc">元智大學</span><br>
+          林楚卿｜藝術與設計學 系主任兼所長
+        </div>
+        <div class="card-bottom">
+          <span class="region-pill">北部</span>
+          <button class="more-link" data-course="5">了解更多</button>
+        </div>
+      </div>
+
+      <div class="card" id="course-6" data-region="中部" data-r="central" data-cat="室內設計">
+        <div class="card-top">
+          <div>
+            <div class="date-big">6/15</div>
+            <div class="date-dow">週一・台中</div>
+          </div>
+          <span class="cat-badge">室內設計</span>
+        </div>
+        <div class="card-title">用 AI 加速空間提案工作坊</div>
+        <div class="card-meta">
+          <span class="loc">逢甲大學</span><br>
+          李元榮｜室內設計學士學位學程 主任
+        </div>
+        <div class="card-bottom">
+          <span class="region-pill">中部</span>
+          <button class="more-link" data-course="6">了解更多</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── 7月 ── -->
+  <div class="month-group" data-month="7">
+    <div class="month-label-row">
+      <div class="month-num">07</div>
+      <div class="month-line"></div>
+      <div class="month-tag">JUL</div>
+    </div>
+    <div class="card-grid single">
+
+      <div class="card" id="course-7" data-region="東部" data-r="east" data-cat="概念提案">
+        <div class="card-top">
+          <div>
+            <div class="date-big">7/16</div>
+            <div class="date-dow">週四・宜蘭</div>
+          </div>
+          <span class="cat-badge">概念提案</span>
+        </div>
+        <div class="card-title">AI 設計實務工作坊</div>
+        <div class="card-meta">
+          <span class="loc">宜蘭大學</span><br>
+          蘇迺薇・楊俊益
+        </div>
+        <div class="card-bottom">
+          <span class="region-pill">東部</span>
+          <button class="more-link" data-course="7">了解更多</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
 </section>
 
 <!-- SPEAKERS -->
@@ -1209,19 +1305,41 @@
 </div>
 
 <script>
-  // Filter
-  document.querySelectorAll('.f-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('on'));
-      btn.classList.add('on');
-      const r = btn.dataset.r;
-      document.querySelectorAll('.course-wrapper').forEach(row => {
-        row.classList.toggle('hidden', r !== 'all' && row.dataset.r !== r);
-      });
+  const fBtns = document.querySelectorAll('.f-btn');
+const cards = document.querySelectorAll('.card');
+const months = document.querySelectorAll('.month-group');
+
+function updateGridLayout() {
+  months.forEach(mg => {
+    const grids = mg.querySelectorAll('.card-grid');
+    grids.forEach(grid => {
+      const visible = [...grid.querySelectorAll('.card')].filter(c => !c.hasAttribute('data-hidden'));
+      grid.classList.toggle('col1', visible.length === 1);
     });
   });
+}
 
-  // FAQ
+fBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    fBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+
+    cards.forEach(c => {
+      const show = f === 'all' || c.dataset.r === f;
+      c.toggleAttribute('data-hidden', !show);
+    });
+
+    months.forEach(mg => {
+      const visible = [...mg.querySelectorAll('.card')].some(c => !c.hasAttribute('data-hidden'));
+      mg.style.display = visible ? '' : 'none';
+    });
+
+    updateGridLayout();
+  });
+});
+
+    // FAQ
   document.querySelectorAll('.faq-item').forEach(item => {
     item.querySelector('.faq-q').addEventListener('click', () => {
       const open = item.classList.contains('open');
