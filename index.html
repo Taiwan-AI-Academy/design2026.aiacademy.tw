@@ -422,6 +422,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     .lb-stage {
       position: relative;
       max-width: 560px; width: 100%;
+      overflow: hidden;
       transform: translateY(20px);
       transition: transform .25s cubic-bezier(.2,0,0,1);
     }
@@ -533,6 +534,11 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     .lb-reg-btn:hover { background: #e05590; transform: translateY(-1px); }
     .lb-reg-btn.closed {
       background: rgba(51,51,51,.12); color: rgba(51,51,51,.35); pointer-events: none;
+    }
+    @media(max-width:600px){
+      .lb-overlay { padding: .75rem; align-items: flex-end; }
+      .lb-stage { max-height: 92vh; }
+      .lb-box { max-height: 85vh; border-radius: 16px 16px 0 0; }
     }
     @media(max-width:480px){
       .lb-header, .lb-body, .lb-footer { padding-left: 1.1rem; padding-right: 1.1rem; }
