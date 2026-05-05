@@ -297,13 +297,13 @@
 
     .map-stage {
       position: relative;
-      min-height: 900px;
+      min-height: 0;
       display: grid;
       place-items: center;
       background: var(--bg);
       border: 2px solid var(--t);
       overflow: visible;
-      padding: 24px 60px 24px 24px;
+      padding: 8px 48px 8px 16px;
     }
 
     .map-stage::before {
@@ -313,7 +313,7 @@
     .map-wrap {
       position: relative;
       width: min(400px, 78%);
-      margin: 16px auto 16px;
+      margin: 4px auto;
     }
 
     .map-img {
@@ -1370,24 +1370,24 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
             <div class="map-wrap">
               <img class="map-img" src="img/taiwan-political-division.svg" alt="台灣地圖">
 
-              <div class="school-pin is-left" style="--x:80%; --y:11%; --pin-c:var(--g);" aria-label="臺科大，台北">
-                <div class="pin-label"><span class="pin-name">臺科大</span><span class="pin-city">台北</span></div>
+              <div class="school-pin is-right" style="--x:82%; --y:9%; --pin-c:var(--g);" aria-label="臺科大">
+                <div class="pin-label"><span class="pin-name">臺科大</span></div>
               </div>
 
-              <div class="school-pin is-left" style="--x:62%; --y:19%; --pin-c:var(--b);" aria-label="元智大學，桃園">
-                <div class="pin-label"><span class="pin-name">元智大學</span><span class="pin-city">桃園</span></div>
+              <div class="school-pin is-left" style="--x:72%; --y:11%; --pin-c:var(--b);" aria-label="元智大學">
+                <div class="pin-label"><span class="pin-name">元智大學</span></div>
               </div>
 
-              <div class="school-pin is-left" style="--x:88%; --y:30%; --pin-c:var(--p);" aria-label="宜蘭大學，宜蘭">
-                <div class="pin-label"><span class="pin-name">宜蘭大學</span><span class="pin-city">宜蘭</span></div>
+              <div class="school-pin is-left" style="--x:90%; --y:17%; --pin-c:var(--p);" aria-label="宜蘭大學">
+                <div class="pin-label"><span class="pin-name">宜蘭大學</span></div>
               </div>
 
-              <div class="school-pin is-left" style="--x:48%; --y:38%; --pin-c:var(--g);" aria-label="逢甲大學，台中">
-                <div class="pin-label"><span class="pin-name">逢甲大學</span><span class="pin-city">台中</span></div>
+              <div class="school-pin is-left" style="--x:48%; --y:33%; --pin-c:var(--g);" aria-label="逢甲大學">
+                <div class="pin-label"><span class="pin-name">逢甲大學</span></div>
               </div>
 
-              <div class="school-pin is-left" style="--x:33%; --y:65%; --pin-c:var(--p);" aria-label="南臺科技大學，台南">
-                <div class="pin-label"><span class="pin-name">南臺科技大學</span><span class="pin-city">台南</span></div>
+              <div class="school-pin is-left" style="--x:33%; --y:65%; --pin-c:var(--p);" aria-label="南臺科技大學">
+                <div class="pin-label"><span class="pin-name">南臺科技大學</span></div>
               </div>
             </div>
           </div>
