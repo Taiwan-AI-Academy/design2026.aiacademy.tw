@@ -55,7 +55,7 @@
       text-decoration: none; letter-spacing: .07em; text-transform: uppercase;
     }
     .topnav ul a:hover { text-decoration: underline; }
-    @media(max-width:700px){ .topnav ul { display: none; } }
+    @media(max-width:700px){ .topnav ul { display: none; } nav.topnav { width: 100%; } }
 
     /* ── HERO ── */
     #hero {
@@ -120,29 +120,563 @@
     /* All sections after hero stack above it */
     section:not(#hero), footer { position: relative; z-index: 2; }
 
-    /* ── INTRO ── */
-    #intro {
-      background: var(--t); color: #fff;
-      padding: clamp(4rem,9vw,8rem) clamp(1.5rem,6vw,4rem);
+    /* ── HERO + SCHOOLS INTEGRATED ── */
+.integrated-hero-schools {
+      position: relative;
+      overflow: hidden;
+      background: var(--t);
+      isolation: isolate;
     }
-    .intro-headline {
-      font-size: clamp(1.9rem,4.5vw,3.8rem); font-weight: 900;
-      line-height: 1.1; max-width: 20ch; margin-bottom: 1.4rem;
+
+    .integrated-hero-schools::before,
+    .integrated-hero-schools::after {
+      content: '';
+      position: absolute;
+      border: 2px dashed rgba(255, 255, 255, 0.24);
+      border-radius: 999px;
+      pointer-events: none;
+      z-index: -1;
     }
-    .intro-headline em { color: var(--y); font-style: normal; }
-    .intro-desc {
-      font-size: clamp(.9rem,1.4vw,1.1rem); line-height: 1.9;
-      color: rgba(255,255,255,.6); max-width: 54ch; margin-bottom: 3.5rem;
+
+    .integrated-hero-schools::before {
+      width: clamp(260px, 36vw, 520px);
+      height: clamp(260px, 36vw, 520px);
+      top: -150px;
+      right: -110px;
+      background: rgba(0, 161, 242, 0.5);
     }
-    .stats {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      border: 1px solid rgba(255,255,255,.12);
-      max-width: 640px; margin-bottom: 3.5rem;
+
+    .integrated-hero-schools::after {
+      width: clamp(190px, 28vw, 420px);
+      height: clamp(190px, 28vw, 420px);
+      left: -120px;
+      bottom: 18%;
+      background: rgba(255, 112, 162, 0.5);
     }
-    .stat { padding: 1.6rem 1.75rem; border-right: 1px solid rgba(255,255,255,.12); }
-    .stat:last-child { border-right: none; }
-    .stat-n { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem,4.5vw,3.5rem); font-weight: 900; color: var(--y); line-height: 1; }
-    .stat-l { font-size: .82rem; color: rgba(255,255,255,.45); margin-top: .3rem; }
+
+    .hs-shell {
+      width: min(1200px, calc(100% - 64px));
+      margin: 0 auto;
+      padding: clamp(72px, 9vw, 128px) 0 clamp(80px, 10vw, 140px);
+    }
+
+    .hs-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      color: var(--y);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .hs-kicker::before {
+      content: '';
+      width: 40px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--g);
+    }
+
+    .hs-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(360px, 0.78fr);
+      gap: clamp(44px, 7vw, 96px);
+      align-items: start;
+    }
+
+    .hs-title {
+      max-width: 10.8em;
+      margin: 0;
+      color: #fff;
+      font-size: clamp(42px, 6.8vw, 88px);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.06em;
+    }
+
+    .hs-title em {
+      color: var(--y);
+      font-style: normal;
+    }
+
+    .hs-desc {
+      max-width: 52ch;
+      margin: 28px 0 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: clamp(15px, 1.45vw, 18px);
+      line-height: 2;
+    }
+
+    .hs-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: clamp(32px, 5vw, 52px);
+      border: 2px solid var(--y);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hs-stat {
+      min-height: 128px;
+      padding: 22px 18px;
+      display: grid;
+      align-content: center;
+      gap: 8px;
+      border-left: 2px solid var(--y);
+    }
+
+    .hs-stat:first-child { border-left: 0; }
+
+    .hs-stat strong {
+      color: var(--y);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 700;
+      line-height: 0.95;
+    }
+
+    .hs-stat span {
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .schools-card {
+      position: relative;
+      min-width: 0;
+      border: 2px solid var(--t);
+      background: var(--y);
+      box-shadow: 14px 14px 0 var(--g);
+      padding: clamp(22px, 3vw, 32px);
+    }
+
+    .schools-card::before {
+      content: 'COLLABORATION';
+      position: absolute;
+      top: -16px;
+      left: 24px;
+      padding: 6px 12px;
+      background: var(--p);
+      border: 2px solid var(--t);
+      color: var(--t);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    }
+
+    .schools-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 20px;
+      border-bottom: 4px solid var(--t);
+      padding-bottom: 16px;
+    }
+
+    .schools-heading h2 {
+      margin: 0;
+      font-size: clamp(28px, 3.3vw, 44px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .schools-heading p {
+      margin: 0;
+      color: var(--ts);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .map-stage {
+      position: relative;
+      min-height: 560px;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      border: 2px solid var(--t);
+      overflow: visible;
+    }
+
+    .map-stage::before {
+      content: 'TAIWAN TOUR';
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      z-index: 3;
+      padding: 7px 10px;
+      border-radius: 6px;
+      background: var(--t);
+      color: var(--y);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+
+    .map-wrap {
+      position: relative;
+      width: min(320px, 72%);
+      margin: 32px auto 18px;
+    }
+
+    .map-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      opacity: 0.92;
+      filter: drop-shadow(12px 12px 0 rgba(51, 51, 51, 0.14));
+    }
+
+    .school-pin {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border: 2px solid var(--t);
+      border-radius: 999px;
+      background: var(--g);
+      box-shadow: inset 0 0 0 7px var(--bg), 5px 5px 0 rgba(51, 51, 51, 0.18);
+    }
+
+    .school-pin:nth-of-type(2n) { background: var(--b); }
+    .school-pin:nth-of-type(3n) { background: var(--p); }
+
+    .pin-label {
+      position: absolute;
+      top: 50%;
+      display: grid;
+      gap: 2px;
+      min-width: 104px;
+      padding: 8px 10px;
+      border: 2px solid var(--t);
+      background: #fff;
+      color: var(--t);
+      transform: translateY(-50%);
+      font-weight: 900;
+      line-height: 1.2;
+      box-shadow: 5px 5px 0 var(--p);
+      pointer-events: none;
+    }
+
+    .pin-label::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 22px;
+      height: 2px;
+      background: var(--t);
+    }
+
+    .school-pin.is-left .pin-label {
+      right: calc(100% + 28px);
+      text-align: right;
+    }
+
+    .school-pin.is-left .pin-label::before {
+      left: 100%;
+    }
+
+    .school-pin.is-right .pin-label {
+      left: calc(100% + 28px);
+      text-align: left;
+    }
+
+    .school-pin.is-right .pin-label::before {
+      right: 100%;
+    }
+
+    .pin-name {
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .pin-city {
+      color: var(--ts);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .school-list-mobile { display: none; }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .hs-grid {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .schools-card {
+        width: min(760px, 100%);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hs-shell {
+        width: min(100% - 40px, 680px);
+        padding: 64px 0 72px;
+      }
+
+      .integrated-hero-schools::before {
+        top: -120px;
+        right: -160px;
+      }
+
+      .integrated-hero-schools::after {
+        left: -150px;
+        bottom: 36%;
+      }
+
+      .hs-title {
+        font-size: clamp(38px, 12vw, 56px);
+        letter-spacing: -0.05em;
+      }
+
+      .hs-desc {
+        margin-top: 22px;
+        font-size: 15px;
+        line-height: 1.9;
+      }
+
+      .hs-grid {
+        display: block;
+      }
+
+      .hs-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hs-stat {
+        min-height: auto;
+        grid-template-columns: auto 1fr;
+        align-items: baseline;
+        padding: 16px 18px;
+        border-left: 0;
+        border-top: 2px solid var(--y);
+      }
+
+      .hs-stat:first-child { border-top: 0; }
+      .hs-stat strong { font-size: 42px; }
+      .hs-stat span { font-size: 14px; }
+
+      .schools-card {
+        margin-top: 20px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .schools-card.reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .schools-card::before {
+        display: none;
+      }
+
+      .schools-heading {
+        display: none;
+      }
+
+      .map-stage {
+        display: grid;
+        min-height: 0;
+        height: auto;
+        padding: 18px 10px 20px;
+        margin: 0 0 18px;
+        border: 2px solid var(--t);
+        background: var(--bg);
+        overflow: hidden;
+        place-items: center;
+      }
+
+      .map-stage::before {
+        content: 'TAIWAN TOUR';
+        left: 12px;
+        top: 12px;
+        font-size: 10px;
+        padding: 5px 8px;
+      }
+
+      .map-wrap {
+        width: min(270px, 78vw);
+        margin: 52px auto 0;
+      }
+
+      .map-img {
+        filter: drop-shadow(8px 8px 0 rgba(51, 51, 51, 0.12));
+        opacity: 1;
+      }
+
+      .school-pin {
+        width: 20px;
+        height: 20px;
+        box-shadow: inset 0 0 0 5px var(--bg), 4px 4px 0 rgba(51, 51, 51, 0.18);
+      }
+
+      .pin-label {
+        min-width: auto;
+        padding: 4px 6px;
+        box-shadow: 3px 3px 0 var(--p);
+      }
+
+      .pin-label::before {
+        display: none;
+      }
+
+      .pin-label::after {
+        content: '';
+        position: absolute;
+        height: 1.5px;
+        background: var(--t);
+        opacity: 0.75;
+        transform-origin: left center;
+      }
+
+      .school-pin.is-left .pin-label {
+        right: calc(100% + 18px);
+      }
+
+      .school-pin.is-right .pin-label {
+        left: calc(100% + 18px);
+      }
+
+      .school-pin.is-left .pin-label::after {
+        left: 100%;
+        top: 50%;
+        width: 18px;
+      }
+
+      .school-pin.is-right .pin-label::after {
+        right: 100%;
+        top: 50%;
+        width: 18px;
+      }
+
+      .school-pin[aria-label="臺科大，台北"] .pin-label {
+        left: auto;
+        right: calc(100% + 34px);
+        top: -62px;
+        text-align: right;
+      }
+
+      .school-pin[aria-label="臺科大，台北"] .pin-label::after {
+        left: 100%;
+        right: auto;
+        top: calc(100% - 6px);
+        width: 48px;
+        transform: rotate(44deg);
+      }
+
+      .school-pin[aria-label="元智大學，桃園"] .pin-label {
+        right: calc(100% + 28px);
+        top: 22px;
+        text-align: right;
+      }
+
+      .school-pin[aria-label="元智大學，桃園"] .pin-label::after {
+        left: 100%;
+        top: 7px;
+        width: 34px;
+        transform: rotate(-22deg);
+      }
+
+      .school-pin[aria-label="宜蘭大學，宜蘭"] .pin-label {
+        left: auto;
+        right: calc(100% + 24px);
+        top: 54px;
+        text-align: right;
+      }
+
+      .school-pin[aria-label="宜蘭大學，宜蘭"] .pin-label::after {
+        left: 100%;
+        right: auto;
+        top: 5px;
+        width: 58px;
+        transform: rotate(-48deg);
+      }
+
+      .pin-name {
+        font-size: 11px;
+      }
+
+      .pin-city {
+        display: none;
+      }
+
+      .school-list-mobile {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0 12px 12px 0;
+        list-style: none;
+      }
+
+      .school-list-mobile li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 15px 16px;
+        border: 2px solid var(--t);
+        background: var(--bg);
+        box-shadow: 4px 4px 0 var(--p);
+      }
+
+      .school-list-mobile strong {
+        font-size: 16px;
+        font-weight: 900;
+      }
+
+      .school-list-mobile span {
+        color: var(--ts);
+        font-size: 14px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hs-shell { width: min(100% - 28px, 680px); }
+      .hs-kicker { font-size: 11px; letter-spacing: 0.12em; }
+      .hs-title { font-size: 36px; }
+      .schools-card { padding-left: 14px; padding-right: 14px; }
+      .school-list-mobile li {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
 
     /* ── COURSES (new design) ── */
 
@@ -163,7 +697,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 /* ─── SECTION ─── */
 .courses {
   background: var(--y);
-  padding: 80px 0 100px;
+  padding: 80px 0 56px;
 }
 .wrap {
   max-width: 1140px;
@@ -538,7 +1072,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     @media(max-width:600px){
       .lb-overlay { position: fixed; inset: 0; padding: 0; align-items: flex-end; }
       .lb-overlay .lb-stage,
-      .lb-overlay.open .lb-stage { position: fixed; left: var(--vv-left, 0px); right: auto; bottom: 0; width: 100vw; max-width: 100vw; max-height: 92vh; padding: 0 .75rem .75rem; margin: 0; box-sizing: border-box; transform: none !important; }
+      .lb-overlay.open .lb-stage { position: fixed; left: var(--vv-left, 0px); right: auto; bottom: 0; width: 100%; max-width: 100%; max-height: 92vh; padding: 0 .75rem .75rem; margin: 0; box-sizing: border-box; transform: none !important; }
       .lb-box { max-height: 85vh; border-radius: 16px 16px 0 0; }
     }
     @media(max-width:480px){
@@ -556,48 +1090,195 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 
 
     /* ── SPEAKERS ── */
-     #speakers {
-       background: var(--t);
-       border-top: 1.5px solid #444;
-       padding: clamp(4rem,8vw,7rem) 0 clamp(4rem,8vw,7rem);
-       overflow: hidden;
-     }
+    #speakers {
+      background: var(--t);
+      border-top: 1.5px solid rgba(250,250,245,.18);
+      padding: clamp(4rem,8vw,7rem) 0 clamp(4rem,8vw,7rem);
+      overflow: hidden;
+    }
     #speakers > .rv {
       padding: 0 clamp(1.5rem,6vw,4rem);
     }
     #speakers .sec-title { color: #FAFAF5; }
+    #speakers .sec-sub { color: rgba(250,250,245,.68); }
+    .spk-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(1rem, 2vw, 1.5rem);
+      max-width: 1180px;
+      margin: 2.5rem auto 0;
+      padding: 0 clamp(1.5rem,6vw,4rem);
+    }
+    .spk-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100%;
+      padding: 1.35rem 1rem 1.25rem;
+      border: 1px solid rgba(250,250,245,.18);
+      border-radius: 18px;
+      background: rgba(250,250,245,.06);
+      text-align: center;
+      overflow: hidden;
+      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+    }
+    .spk-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: var(--p);
+    }
+    .spk-card:nth-child(3n+2)::before { background: var(--g); }
+    .spk-card:nth-child(3n+3)::before { background: var(--b); }
+    .spk-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(250,250,245,.35);
+      background: rgba(250,250,245,.1);
+    }
+    .spk-card-photo {
+      width: clamp(104px, 12vw, 156px);
+      height: clamp(104px, 12vw, 156px);
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2.5px solid var(--p);
+      flex-shrink: 0;
+      background: rgba(250,250,245,.16);
+      margin-bottom: .9rem;
+      transition: transform .28s ease;
+    }
+    .spk-card:nth-child(3n+2) .spk-card-photo { border-color: var(--g); }
+    .spk-card:nth-child(3n+3) .spk-card-photo { border-color: var(--b); }
+    .spk-card:hover .spk-card-photo { transform: scale(1.045); }
+    .spk-card-photo img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block;
+    }
+    .spk-card-name {
+      font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+      font-weight: 900;
+      color: #FAFAF5;
+      line-height: 1.2;
+      margin-bottom: .35rem;
+    }
+    .spk-card-role {
+      min-height: 2.9em;
+      font-size: clamp(.82rem, .95vw, .9rem);
+      line-height: 1.45;
+      color: rgba(250,250,245,.72);
+      margin-bottom: .85rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .spk-card.is-pending { display: none; }
+    .spk-card-tag {
+      margin-top: auto;
+      font-size: clamp(.68rem, .8vw, .78rem);
+      font-weight: 700;
+      padding: .22rem .55rem;
+      border-radius: 4px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .spk-card-tag.cat-film     { background: #FAFAF5; color: var(--t); }
+    .spk-card-tag.cat-method   { background: var(--g); color: #FAFAF5; }
+    .spk-card-tag.cat-visual   { background: var(--b); color: #FAFAF5; }
+    .spk-card-tag.cat-product  { background: var(--b); color: #FAFAF5; }
+    .spk-card-tag.cat-space    { background: var(--g); color: #FAFAF5; }
+    .spk-card-tag.cat-interior { background: var(--p); color: #FAFAF5; }
+    .spk-card-tag.cat-concept  { background: var(--p); color: #FAFAF5; }
+
+    @media(max-width:900px){
+      .spk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media(max-width:600px){
+      #speakers { padding-bottom: clamp(3.25rem, 10vw, 4.5rem); }
+      .spk-grid { grid-template-columns: 1fr; gap: .85rem; margin-top: 2rem; }
+      .spk-card {
+        display: grid;
+        grid-template-columns: 72px minmax(0, 1fr);
+        grid-template-areas:
+          "photo name"
+          "photo role"
+          "photo tag";
+        column-gap: 1rem;
+        align-items: center;
+        text-align: left;
+        padding: 1rem;
+      }
+      .spk-card::before { width: 4px; height: 100%; inset: 0 auto 0 0; }
+      .spk-card-photo { grid-area: photo; width: 72px; height: 72px; margin: 0; }
+      .spk-card-name { grid-area: name; margin: 0 0 .25rem; }
+      .spk-card-role { grid-area: role; min-height: 0; margin: 0 0 .5rem; font-size: .94rem; }
+      .spk-card-tag { grid-area: tag; justify-self: start; margin-top: 0; }
+    }
+
+    /* ── SPEAKERS view toggle ── */
+    .spk-head-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .spk-view-toggle {
+      display: inline-flex;
+      gap: .25rem;
+      padding: .25rem;
+      border: 1px solid rgba(250,250,245,.2);
+      border-radius: 999px;
+      background: rgba(250,250,245,.06);
+      flex-shrink: 0;
+    }
+    .spk-view-btn {
+      border: 0;
+      border-radius: 999px;
+      padding: .28rem .65rem;
+      background: transparent;
+      color: rgba(250,250,245,.62);
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease;
+    }
+    .spk-view-btn[aria-pressed="true"] { background: var(--y); color: var(--t); }
+    .spk-view[hidden] { display: none !important; }
+
     /* ── SPEAKERS marquee ── */
-    .spk-marquee-wrap {
+    .spk-view-marquee .spk-marquee-wrap {
       display: flex; flex-direction: column; gap: 1.75rem;
       margin-top: 2.5rem;
       overflow: hidden;
       max-width: 100%;
       padding-bottom: 2.25rem;
     }
-    .spk-marquee-row {
+    .spk-view-marquee .spk-marquee-row {
       display: flex; width: max-content;
       overflow: visible;
     }
     @keyframes mq-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
     @keyframes mq-right { from { transform: translateX(-50%); } to { transform: translateX(0); }    }
-    .spk-marquee-row.left  { animation: mq-left  16s linear infinite; }
-    .spk-marquee-row.right { animation: mq-right 16s linear infinite; }
-    /* hover pause handled in JS via WAAPI */
-
-    .spk-card {
+    .spk-view-marquee .spk-marquee-row.left  { animation: mq-left  16s linear infinite; }
+    .spk-view-marquee .spk-marquee-row.right { animation: mq-right 16s linear infinite; }
+    .spk-view-marquee .spk-card {
       display: inline-flex; flex-direction: column; align-items: center;
       gap: .4rem; width: 25vw; flex-shrink: 0; padding: 1rem 0;
+      min-height: 0; border: 0; border-radius: 0; background: transparent; overflow: visible;
     }
-    .spk-card-photo {
+    .spk-view-marquee .spk-card::before { display: none; }
+    .spk-view-marquee .spk-card-photo {
       width: clamp(72px, 18vw, 220px); height: clamp(72px, 18vw, 220px);
       border-radius: 50%; overflow: hidden;
       border: 2.5px solid var(--p); flex-shrink: 0;
       transition: transform .35s ease;
+      background: rgba(250,250,245,.16); margin-bottom: 0;
     }
-    .spk-card-photo img {
+    .spk-view-marquee .spk-card-photo img {
       width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block;
     }
-    .spk-card-photo.placeholder {
+    .spk-view-marquee .spk-card-photo.placeholder {
       background: rgba(250,250,245,.18);
       border-color: rgba(250,250,245,.35);
       display: flex; align-items: center; justify-content: center;
@@ -606,161 +1287,29 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       font-weight: 900;
       font-family: 'Noto Sans TC', sans-serif;
     }
-    .spk-card:hover .spk-card-photo { transform: scale(1.18); }
-    .spk-card-name {
+    .spk-view-marquee .spk-card:hover { transform: none; border-color: transparent; background: transparent; }
+    .spk-view-marquee .spk-card:hover .spk-card-photo { transform: scale(1.18); }
+    .spk-view-marquee .spk-card-name {
       font-size: clamp(.9rem, 1.4vw, 1.25rem); font-weight: 900; color: #FAFAF5; white-space: nowrap;
+      line-height: normal; margin-bottom: 0;
     }
-    .spk-card-role {
-      font-size: clamp(.62rem, 1vw, .9rem); color: rgba(250,250,245,.65); white-space: nowrap;
+    .spk-view-marquee .spk-card-role {
+      min-height: 0; font-size: clamp(.62rem, 1vw, .9rem); color: rgba(250,250,245,.65); white-space: nowrap;
       max-height: 0; overflow: hidden; opacity: 0;
       transition: max-height .3s ease, opacity .25s ease;
+      display: block; margin-bottom: 0;
     }
-    .spk-card:hover .spk-card-role { max-height: 2em; opacity: 1; }
-    .spk-card-tag {
-      font-size: clamp(.58rem, .8vw, .75rem); font-weight: 700; padding: .12rem .45rem; border-radius: 3px;
+    .spk-view-marquee .spk-card:hover .spk-card-role { max-height: 2em; opacity: 1; }
+    .spk-view-marquee .spk-card-tag {
+      margin-top: 0; font-size: clamp(.58rem, .8vw, .75rem); font-weight: 700; padding: .12rem .45rem; border-radius: 3px;
       text-decoration: none; white-space: nowrap;
     }
-    .spk-card-tag.cat-film     { background: var(--t); color: var(--y); }
-    .spk-card-tag.cat-method   { background: var(--g); color: #fff; }
-    .spk-card-tag.cat-visual   { background: var(--b); color: #fff; }
-    .spk-card-tag.cat-product  { background: var(--b); color: #fff; }
-    .spk-card-tag.cat-space    { background: var(--b); color: #fff; }
-    .spk-card-tag.cat-interior { background: var(--p); color: #fff; }
-    .spk-card-tag.cat-concept  { background: var(--p); color: #fff; }
-
     @media(max-width:600px){
-      .spk-marquee-wrap { max-width: 100vw; overflow: hidden; }
-      .spk-card { width: 50vw; }
-    }
-
-    /* ── SCHOOLS (Map) ── */
-    #schools {
-      background: var(--y);
-      border-top: 2px solid var(--t);
-      padding: clamp(3rem,6vw,5rem) clamp(1.5rem,6vw,4rem);
-    }
-    #schools .sec-title { color: var(--t); }
-    .sch-map-outer {
-      display: flex;
-      justify-content: center;
-      margin-top: 2.5rem;
-    }
-    .sch-map-wrap {
-      position: relative;
-      width: 100%;
-      max-width: 400px;
-      flex-shrink: 0;
-    }
-    .sch-map-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 4px 20px rgba(51,51,51,0.18));
-    }
-    /* ── School Pins ── */
-    .sch-pins {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-    .sch-pin {
-      position: absolute;
-      left: var(--px);
-      top: var(--py);
-      pointer-events: auto;
-      z-index: 5;
-    }
-    .pin-dot {
-      position: absolute;
-      width: 14px; height: 14px;
-      background: var(--g);
-      border-radius: 50%;
-      border: 2px solid var(--t);
-      transform: translate(-50%,-50%);
-      transition: transform 0.15s ease, box-shadow 0.15s;
-      z-index: 3;
-      box-shadow: 0 0 0 4px rgba(94,194,35,0.3);
-    }
-    .sch-pin:hover .pin-dot {
-      transform: translate(-50%,-50%) scale(1.5);
-      box-shadow: 0 0 0 6px rgba(94,194,35,0.2);
-    }
-    .pin-arm {
-      position: absolute;
-      top: 0;
-      display: flex;
-      align-items: center;
-      transform: translateY(-50%);
-    }
-    .pin-right .pin-arm { left: 7px; flex-direction: row; }
-    .pin-left  .pin-arm { right: 7px; flex-direction: row-reverse; }
-    .pin-right.pin-below .pin-arm { top: 7px; transform: none; align-items: flex-start; }
-    .pin-line {
-      width: 28px; height: 2px;
-      background: var(--t);
-      flex-shrink: 0;
-    }
-    .pin-card-wrap { position: relative; }
-    .pin-card {
-      background: var(--t);
-      color: var(--bg);
-      padding: 8px 14px 7px;
-      border-radius: 6px;
-      white-space: nowrap;
-      line-height: 1.3;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.15s, color 0.15s;
-    }
-    .sch-pin:hover .pin-card { background: var(--y); color: var(--t); }
-    .pin-name { font-size: 21px; font-weight: 700; letter-spacing: 0.01em; }
-    .pin-city-tag { font-size: 14px; opacity: 0.6; margin-top: 2px; }
-    .pin-dropdown {
-      position: absolute;
-      top: 100%;
-      background: var(--t);
-      border-top: 1px solid rgba(250,250,245,0.15);
-      border-radius: 0 0 6px 6px;
-      min-width: 220px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.25s ease, opacity 0.2s;
-      opacity: 0;
-      z-index: 20;
-      pointer-events: none;
-    }
-    .sch-pin:hover .pin-dropdown {
-      max-height: 280px;
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .pin-right .pin-dropdown { left: 0; }
-    .pin-left  .pin-dropdown { right: 0; }
-    .pin-sess {
-      display: block; width: 100%;
-      padding: 10px 14px;
-      text-align: left;
-      background: none;
-      border: none;
-      border-top: 1px solid rgba(250,250,245,0.07);
-      color: var(--bg);
-      cursor: pointer;
-      font-family: inherit;
-      line-height: 1.5;
-      white-space: nowrap;
-    }
-    .pin-sess:first-child { border-top: none; }
-    .pin-sess:hover { background: rgba(250,250,245,0.09); }
-    .ps-date { display: block; font-size: 14px; opacity: 0.6; }
-    .ps-name { font-size: 18px; font-weight: 600; }
-    @media (max-width: 480px) {
-      .sch-map-wrap { max-width: 320px; }
-      .pin-line { width: 20px; }
-      .pin-name { font-size: 16px; }
-      .pin-city-tag { font-size: 12px; }
-      .pin-dropdown { min-width: 180px; }
-      .ps-date { font-size: 12px; }
-      .ps-name { font-size: 14px; }
+      .spk-head-row { flex-direction: column; }
+      .spk-view-toggle { align-self: flex-start; }
+      .spk-view-marquee .spk-marquee-wrap { max-width: 100vw; overflow: hidden; }
+      .spk-view-marquee .spk-card { width: 50vw; display: inline-flex; }
+      .spk-view-marquee .spk-card-photo { width: clamp(72px, 18vw, 220px); height: clamp(72px, 18vw, 220px); }
     }
 
     /* ── FORUM ── */
@@ -827,11 +1376,14 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem;
     }
     .ft-copy { font-size: .73rem; color: rgba(255,255,255,.25); }
+    @media(max-width:600px){
+      .ft-logo img { max-width: 100%; height: auto; }
+    }
 
     /* ── REVEAL ── */
-    .rv { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
+    .rv { opacity: 1; transform: none; transition: opacity .55s ease, transform .55s ease; }
     .rv.in { opacity: 1; transform: translateY(0); }
-    .rv2 { opacity: 0; transform: translateY(20px); transition: opacity .55s ease .12s, transform .55s ease .12s; }
+    .rv2 { opacity: 1; transform: none; transition: opacity .55s ease .12s, transform .55s ease .12s; }
     .rv2.in { opacity: 1; transform: translateY(0); }
   </style>
 </head>
@@ -876,16 +1428,64 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   </p>
 </section>
 
-<!-- INTRO -->
-<section id="intro">
-  <h2 class="intro-headline rv">AI 正在改變<br><em>設計產業</em>，<br>你準備好了嗎？</h2>
-  <p class="intro-desc rv2">人工智慧技術正以前所未有的速度滲透各設計領域。從概念發想到最終呈現，工具、流程與思維都在快速轉型。這系列工作坊由 Taiwan AI Academy 聯合五所大學，帶領設計職人從實戰中掌握 AI 新工作法。</p>
-  <div class="stats rv">
-    <div class="stat"><div class="stat-n">7</div><div class="stat-l">場工作坊</div></div>
-    <div class="stat"><div class="stat-n">5</div><div class="stat-l">所合作大學</div></div>
-    <div class="stat"><div class="stat-n">4</div><div class="stat-l">大城市巡迴</div></div>
-  </div>
-</section>
+<!-- HERO + SCHOOLS INTEGRATED -->
+<section class="integrated-hero-schools" aria-labelledby="hero-schools-title">
+    <div class="hs-shell">
+      <div class="hs-grid">
+        <div class="hs-copy">
+          <div class="hs-kicker reveal">Taiwan AI Academy × Design Industry</div>
+          <h1 id="hero-schools-title" class="hs-title reveal">AI 正在改變<em>設計產業</em>，你準備好了嗎？</h1>
+          <p class="hs-desc reveal">人工智慧技術正以前所未有的速度滲透各設計領域。從概念發想到最終呈現，工具、流程與思維都在快速轉型。這系列工作坊由 Taiwan AI Academy 聯合五所大學，帶領設計職人從實戰中掌握 AI 新工作法。</p>
+          <div class="hs-stats reveal" aria-label="合作規模統計">
+            <div class="hs-stat"><strong>5</strong><span>所合作大學</span></div>
+            <div class="hs-stat"><strong>7</strong><span>場工作坊</span></div>
+            <div class="hs-stat"><strong>4</strong><span>大城市巡迴</span></div>
+          </div>
+        </div>
+
+        <div class="schools-card reveal" aria-labelledby="schools-title">
+          <div class="schools-heading">
+            <h2 id="schools-title">合作學校</h2>
+            <p>跨校聯合・全台佈點</p>
+          </div>
+
+          <div class="map-stage" aria-label="合作學校地圖位置展示">
+            <div class="map-wrap">
+              <img class="map-img" src="img/taiwan-political-division.svg" alt="台灣地圖">
+
+              <div class="school-pin is-right" style="--x:82%; --y:9%;" aria-label="臺科大，台北">
+                <div class="pin-label"><span class="pin-name">臺科大</span><span class="pin-city">台北</span></div>
+              </div>
+
+              <div class="school-pin is-left" style="--x:72%; --y:11%;" aria-label="元智大學，桃園">
+                <div class="pin-label"><span class="pin-name">元智大學</span><span class="pin-city">桃園</span></div>
+              </div>
+
+              <div class="school-pin is-right" style="--x:90%; --y:17%;" aria-label="宜蘭大學，宜蘭">
+                <div class="pin-label"><span class="pin-name">宜蘭大學</span><span class="pin-city">宜蘭</span></div>
+              </div>
+
+              <div class="school-pin is-left" style="--x:48%; --y:33%;" aria-label="逢甲大學，台中">
+                <div class="pin-label"><span class="pin-name">逢甲大學</span><span class="pin-city">台中</span></div>
+              </div>
+
+              <div class="school-pin is-left" style="--x:33%; --y:65%;" aria-label="南臺科技大學，台南">
+                <div class="pin-label"><span class="pin-name">南臺科技大學</span><span class="pin-city">台南</span></div>
+              </div>
+            </div>
+          </div>
+
+          <ul class="school-list-mobile" aria-label="合作學校條列">
+            <li><strong>臺科大</strong><span>台北・1 場</span></li>
+            <li><strong>元智大學</strong><span>桃園・1 場</span></li>
+            <li><strong>宜蘭大學</strong><span>宜蘭・1 場</span></li>
+            <li><strong>逢甲大學</strong><span>台中・2 場</span></li>
+            <li><strong>南臺科技大學</strong><span>台南・2 場</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
 <!-- COURSES -->
 <section class="courses">
@@ -1078,11 +1678,31 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 </section>
 
 <!-- SPEAKERS -->
-<section id="speakers">
-  <div class="rv">
-    <h2 class="sec-title">講師陣容</h2>
-    <p class="sec-sub">來自產學界的設計 × AI 實踐者</p>
+<section id="speakers" data-speakers-view="grid">
+  <div class="rv spk-head-row">
+    <div>
+      <h2 class="sec-title">講師陣容</h2>
+      <p class="sec-sub">來自產學界的設計 × AI 實踐者</p>
+    </div>
+    <div class="spk-view-toggle" role="group" aria-label="講師區塊版型切換">
+      <button type="button" class="spk-view-btn" data-speakers-view-btn="grid" aria-pressed="true">◎ Grid</button>
+      <button type="button" class="spk-view-btn" data-speakers-view-btn="marquee" aria-pressed="false">▶ Marquee</button>
+    </div>
   </div>
+  <div class="spk-view spk-view-grid" data-speakers-view="grid">
+  <div class="spk-grid">
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/黃飛藏.png" alt="黃飛藏 講師照片"></div><div class="spk-card-name">黃飛藏</div><div class="spk-card-role">夢想動畫 AI 產品經理</div><a href="#course-1" class="spk-card-tag cat-film">影視動畫</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/邵唯晏.png" alt="邵唯晏 講師照片"></div><div class="spk-card-name">邵唯晏</div><div class="spk-card-role">竹工凡木設計研究室 創辦人/總監</div><a href="#course-2" class="spk-card-tag cat-method">設計方法</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/黃綝怡.png" alt="黃綝怡 講師照片"></div><div class="spk-card-name">黃綝怡</div><div class="spk-card-role">南臺科大 視覺傳達設計系 系主任</div><a href="#course-3" class="spk-card-tag cat-visual">商業視覺</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/沈彥霖.png" alt="沈彥霖 講師照片"></div><div class="spk-card-name">沈彥霖</div><div class="spk-card-role">獨立視覺設計師</div><a href="#course-3" class="spk-card-tag cat-visual">商業視覺</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/陳柏全.png" alt="陳柏全 講師照片"></div><div class="spk-card-name">陳柏全</div><div class="spk-card-role">逢甲大學通識中心兼任助理教授／全盛電機董事長</div><a href="#course-4" class="spk-card-tag cat-product">產品設計</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/林楚卿.png" alt="林楚卿 講師照片"></div><div class="spk-card-name">林楚卿</div><div class="spk-card-role">元智大學藝術與設計學系 系主任兼所長</div><a href="#course-5" class="spk-card-tag cat-space">產品空間</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/李元榮.png" alt="李元榮 講師照片"></div><div class="spk-card-name">李元榮</div><div class="spk-card-role">逢甲大學室內設計學士學位學程 主任</div><a href="#course-6" class="spk-card-tag cat-interior">室內設計</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/蘇迺薇.png" alt="蘇迺薇 講師照片"></div><div class="spk-card-name">蘇迺薇</div><div class="spk-card-role">資策會數位教育研究所人才發展中心 主任</div><a href="#course-7" class="spk-card-tag cat-concept">概念提案</a></div>
+    <div class="spk-card is-pending"><div class="spk-card-photo"><img src="https://placehold.co/600x600/F5E400/333333?text=No+Photo" alt="楊俊益 講師照片待補"></div><div class="spk-card-name">楊俊益</div><div class="spk-card-role">講師資料待補</div><a href="#course-7" class="spk-card-tag cat-concept">概念提案</a></div>
+  </div>
+  </div>
+  <div class="spk-view spk-view-marquee" data-speakers-view="marquee" hidden>
   <div class="spk-marquee-wrap">
 
     <!-- 第一排：往左，黃飛藏・邵唯晏・黃綝怡・沈彥霖 -->
@@ -1114,131 +1734,21 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     </div>
 
   </div>
-</section>
-
-<!-- SCHOOLS -->
-<section id="schools">
-  <div class="sec-hd rv">
-    <h2 class="sec-title">合作學校</h2>
-    <p class="sec-sub">跨校聯合・全台佈點</p>
   </div>
-  <div class="sch-map-outer rv">
-    <div class="sch-map-wrap">
-      <img class="sch-map-img" src="img/taiwan-political-division.svg" alt="合作學校分佈地圖">
-      <div class="sch-pins">
-
-        <!-- 南臺科技大學 台南 23.02509, 120.22581 -->
-        <div class="sch-pin pin-left" style="--px:33%;--py:65%">
-          <div class="pin-dot"></div>
-          <div class="pin-arm">
-            <div class="pin-line"></div>
-            <div class="pin-card-wrap">
-              <div class="pin-card">
-                <div class="pin-name">南臺科技大學</div>
-                <div class="pin-city-tag">台南・2 場</div>
-              </div>
-              <div class="pin-dropdown">
-                <button class="pin-sess" data-course="1">
-                  <span class="ps-date">5/06（三）</span>
-                  <span class="ps-name">AI 影像生成實戰營</span>
-                </button>
-                <button class="pin-sess" data-course="3">
-                  <span class="ps-date">5/27（三）</span>
-                  <span class="ps-name">AI 傳達設計工作坊</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 國立臺灣科技大學 台北 25.01427, 121.54188 -->
-        <div class="sch-pin pin-right" style="--px:82%;--py:9%">
-          <div class="pin-dot"></div>
-          <div class="pin-arm">
-            <div class="pin-line"></div>
-            <div class="pin-card-wrap">
-              <div class="pin-card">
-                <div class="pin-name">臺科大</div>
-                <div class="pin-city-tag">台北・1 場</div>
-              </div>
-              <div class="pin-dropdown">
-                <button class="pin-sess" data-course="2">
-                  <span class="ps-date">5/09（六）</span>
-                  <span class="ps-name">AI 設計工作系統</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 逢甲大學 台中 24.17906, 120.64671 -->
-        <div class="sch-pin pin-left" style="--px:48%;--py:33%">
-          <div class="pin-dot"></div>
-          <div class="pin-arm">
-            <div class="pin-line"></div>
-            <div class="pin-card-wrap">
-              <div class="pin-card">
-                <div class="pin-name">逢甲大學</div>
-                <div class="pin-city-tag">台中・2 場</div>
-              </div>
-              <div class="pin-dropdown">
-                <button class="pin-sess" data-course="4">
-                  <span class="ps-date">6/05（五）</span>
-                  <span class="ps-name">3D 邏輯建模視覺化工作坊</span>
-                </button>
-                <button class="pin-sess" data-course="6">
-                  <span class="ps-date">6/15（一）</span>
-                  <span class="ps-name">用 AI 加速空間提案工作坊</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 元智大學 桃園 24.97031, 121.26344 -->
-        <div class="sch-pin pin-left" style="--px:72%;--py:11%">
-          <div class="pin-dot"></div>
-          <div class="pin-arm">
-            <div class="pin-line"></div>
-            <div class="pin-card-wrap">
-              <div class="pin-card">
-                <div class="pin-name">元智大學</div>
-                <div class="pin-city-tag">桃園・1 場</div>
-              </div>
-              <div class="pin-dropdown">
-                <button class="pin-sess" data-course="5">
-                  <span class="ps-date">6/13（六）</span>
-                  <span class="ps-name">Rhino × AI 渲染工作流</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 宜蘭大學 宜蘭 24.74624, 121.7477 -->
-        <div class="sch-pin pin-right pin-below" style="--px:90%;--py:17%">
-          <div class="pin-dot"></div>
-          <div class="pin-arm">
-            <div class="pin-line"></div>
-            <div class="pin-card-wrap">
-              <div class="pin-card">
-                <div class="pin-name">宜蘭大學</div>
-                <div class="pin-city-tag">宜蘭・1 場</div>
-              </div>
-              <div class="pin-dropdown">
-                <button class="pin-sess" data-course="7">
-                  <span class="ps-date">7/16（四）</span>
-                  <span class="ps-name">AI 設計實務工作坊</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /.sch-pins -->
-    </div><!-- /.sch-map-wrap -->
-  </div><!-- /.sch-map-outer -->
 </section>
+<!--
+#speakers integration notes
+- Two layouts are kept in parallel:
+  - `.spk-view-grid` = static card grid, currently the default.
+  - `.spk-view-marquee` = original two-row infinite marquee.
+- The small toggle lives in `.spk-head-row` next to the section title.
+- Switching is client-side only: JS toggles the `hidden` attribute on the two `.spk-view` containers; the page is not reloaded.
+- URL parameter: `speakers=grid` or `speakers=marquee`.
+  - Example: `/?speakers=grid#speakers`
+  - Example: `/?speakers=marquee#speakers`
+- URL parameter takes precedence over localStorage.
+- localStorage key: `design2026:speakersView`.
+-->
 
 <!-- FORUM -->
 <section id="forum">
@@ -1716,22 +2226,42 @@ fBtns.forEach(btn => {
     btn.addEventListener('click', () => openLightbox(parseInt(btn.dataset.course)));
   });
 
-  // Map pin sessions
-  document.querySelectorAll('.pin-sess').forEach(btn => {
-    btn.addEventListener('click', () => openLightbox(parseInt(btn.dataset.course)));
-  });
 
-  // Marquee entrance: WAAPI playbackRate 無縫減速
+  // Speakers dual-layout switcher: URL param (?speakers=grid|marquee) overrides localStorage.
   (function(){
-    const wrap = document.querySelector('.spk-marquee-wrap');
-    const rows = [...document.querySelectorAll('.spk-marquee-row')];
+    const section = document.getElementById('speakers');
+    if (!section) return;
+    const views = [...section.querySelectorAll('.spk-view')];
+    const btns = [...section.querySelectorAll('[data-speakers-view-btn]')];
+    const key = 'design2026:speakersView';
+    const valid = new Set(['grid', 'marquee']);
+    const params = new URLSearchParams(window.location.search);
+    const fromUrl = params.get('speakers');
+    const stored = localStorage.getItem(key);
+    const initial = valid.has(fromUrl) ? fromUrl : (valid.has(stored) ? stored : 'grid');
+
+    function apply(view, persist = true) {
+      if (!valid.has(view)) view = 'grid';
+      section.dataset.speakersView = view;
+      views.forEach(el => { el.hidden = el.dataset.speakersView !== view; });
+      btns.forEach(btn => btn.setAttribute('aria-pressed', String(btn.dataset.speakersViewBtn === view)));
+      if (persist) localStorage.setItem(key, view);
+    }
+
+    btns.forEach(btn => btn.addEventListener('click', () => apply(btn.dataset.speakersViewBtn)));
+    apply(initial, true);
+  })();
+
+  // Marquee entrance: WAAPI playbackRate 無縫減速（only affects the preserved Marquee view）
+  (function(){
+    const wrap = document.querySelector('.spk-view-marquee .spk-marquee-wrap');
+    const rows = [...document.querySelectorAll('.spk-view-marquee .spk-marquee-row')];
     if (!wrap || !rows.length) return;
 
-    const DUR        = 16000; // normal loop duration (ms)
-    const START_RATE = 24;    // burst speed multiplier (24x ≈ 0.67s/loop)
-    const RAMP       = 1000;  // deceleration window (ms)
+    const DUR        = 16000;
+    const START_RATE = 24;
+    const RAMP       = 1000;
 
-    // Replace CSS animation with WAAPI so playbackRate works smoothly
     rows.forEach(r => r.style.animation = 'none');
     const anims = rows.map(r => r.animate(
       r.classList.contains('right')
@@ -1740,10 +2270,7 @@ fBtns.forEach(btn => {
       { duration: DUR, iterations: Infinity, easing: 'linear' }
     ));
 
-    // Start fast
     anims.forEach(a => a.playbackRate = START_RATE);
-
-    // Hover pause via JS (CSS rule removed)
     wrap.addEventListener('mouseenter', () => anims.forEach(a => a.pause()));
     wrap.addEventListener('mouseleave', () => anims.forEach(a => a.play()));
 
@@ -1754,13 +2281,37 @@ fBtns.forEach(btn => {
       const t0 = performance.now();
       (function tick(now) {
         const p    = Math.min((now - t0) / RAMP, 1);
-        const ease = 1 - Math.pow(1 - p, 3);           // ease-out cubic
-        const rate = START_RATE * (1 - ease) + 1 * ease; // START_RATE → 1
+        const ease = 1 - Math.pow(1 - p, 3);
+        const rate = START_RATE * (1 - ease) + 1 * ease;
         anims.forEach(a => a.playbackRate = rate);
         if (p < 1) requestAnimationFrame(tick);
       })(t0);
     }, { threshold: 0.15 }).observe(wrap);
   })();
 </script>
+<script>
+(() => {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const items = document.querySelectorAll('.reveal');
+      if (reduced || !('IntersectionObserver' in window)) {
+        items.forEach((item) => item.classList.add('in'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.16 });
+
+      items.forEach((item, index) => {
+        item.style.transitionDelay = `${Math.min(index * 80, 320)}ms`;
+        observer.observe(item);
+      });
+    })();
+</script>
+
 </body>
 </html>
