@@ -3,3 +3,16 @@
 package*.json
 node_modules/
 .claude/
+nohup.out
+.agents/
+skills/
+skills-lock.json
+.impeccable.md
+CLAUDE.md
+landing-page-proposal.md
+AIA_design_workshop_guideline.html
+courses_section_new.html
+hero_schools_section.html
+schools_section.html
+speakers_section.html
+update_courses.js
