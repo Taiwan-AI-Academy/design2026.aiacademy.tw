@@ -1229,33 +1229,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       .spk-view-marquee .spk-card-photo { width: clamp(72px, 18vw, 220px); height: clamp(72px, 18vw, 220px); }
     }
 
-    /* ── FORUM ── */
-    #forum {
-      background: #1A1A1A; color: #fff;
-      padding: clamp(5rem,10vw,10rem) clamp(1.5rem,6vw,4rem);
-      text-align: center;
-    }
-    .forum-label {
-      display: inline-block; background: var(--p); color: #fff;
-      font-size: .7rem; font-weight: 900; letter-spacing: .14em;
-      text-transform: uppercase; padding: .3rem .75rem; border-radius: 4px;
-      margin-bottom: 1.75rem;
-    }
-    .forum-title {
-      font-size: clamp(3.2rem,10vw,9rem); font-weight: 900;
-      line-height: .92; letter-spacing: -.03em;
-      color: var(--y); margin-bottom: 1.5rem;
-    }
-    .forum-sub { font-size: clamp(.95rem,1.6vw,1.45rem); color: rgba(255,255,255,.55); margin-bottom: .65rem; }
-    .forum-date { font-size: clamp(.85rem,1.2vw,1.05rem); color: rgba(255,255,255,.3); line-height: 2; margin-bottom: 2.75rem; }
-    .forum-cta {
-      display: inline-block; background: var(--p); color: #fff;
-      font-size: .9rem; font-weight: 700; padding: .85rem 2.5rem;
-      border-radius: 8px; text-decoration: none; letter-spacing: .05em;
-      transition: background .15s, transform .15s;
-    }
-    .forum-cta:hover { background: #e05590; transform: translateY(-2px); }
-
     /* ── FAQ ── */
     #faq {
       background: var(--bg);
@@ -1315,7 +1288,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   <ul>
     <li><a href="#courses">工作坊</a></li>
     <li><a href="#speakers">講師</a></li>
-    <li><a href="#forum">大論壇</a></li>
+
     <li><a href="#faq">FAQ</a></li>
   </ul>
 </nav>
@@ -1666,18 +1639,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 - URL parameter takes precedence over localStorage.
 - localStorage key: `design2026:speakersView`.
 -->
-
-<!-- FORUM -->
-<section id="forum">
-  <div class="forum-label">即將到來</div>
-  <h2 class="forum-title">AI × 設計<br>大論壇</h2>
-  <p class="forum-sub">2026 壓軸・全台設計界年度盛事</p>
-  <p class="forum-date">
-    10/1（四）中研院人文館國際會議廳<br>
-    10/8（四）集思交通部國際會議中心
-  </p>
-  <a href="#" class="forum-cta">訂閱最新消息</a>
-</section>
 
 <!-- FAQ -->
 <section id="faq">
