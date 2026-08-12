@@ -729,29 +729,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   letter-spacing: 2px;
 }
 
-/* filter pills */
-.filters {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-.f-btn {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 6px 16px;
-  border-radius: 99px;
-  border: 1.5px solid var(--ink);
-  background: transparent;
-  color: var(--ink);
-  cursor: pointer;
-  transition: background .15s, color .15s;
-}
-.f-btn.active, .f-btn:hover {
-  background: var(--ink);
-  color: var(--y);
-}
-
 /* ─── MONTH GROUPS ─── */
 .month-group {
   margin-bottom: 16px;
@@ -916,11 +893,263 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 }
 .more-link:hover { filter: brightness(.9); transform: translateY(-1px); }
 
-/* hidden */
-.card[data-hidden] { display: none; }
+/* ─── FORUM AGENDA（單日論壇節目表） ─── */
+.agenda-count {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--ink2);
+  padding-bottom: 6px;
+}
 
-/* ③ 奇數卡片置中 */
-.card-grid.col1 { grid-template-columns: minmax(0, 640px); justify-content: center; }
+.agenda-group + .agenda-group { margin-top: 34px; }
+.agenda-group-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+.agenda-ampm {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: var(--ink);
+  opacity: .16;
+  flex-shrink: 0;
+}
+.agenda-group-line { flex: 1; height: 1.5px; background: rgba(51,51,51,.15); }
+.agenda-group-tag {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--ink2);
+  flex-shrink: 0;
+}
+
+/* 時間軸列表 */
+.agenda-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.agenda-list::before {
+  content: '';
+  position: absolute;
+  left: 106px;
+  top: 23px;
+  bottom: 26px;
+  width: 2px;
+  margin-left: -1px;
+  background: rgba(51,51,51,.18);
+}
+.agenda-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 92px 28px minmax(0, 1fr) auto;
+  align-items: stretch;
+  padding: 3px 0;
+}
+
+/* 時間欄 */
+.agenda-time {
+  text-align: right;
+  padding: 11px 14px 11px 0;
+}
+.agenda-hour {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.agenda-dur {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  line-height: 1.2;
+  color: var(--ink2);
+}
+.agenda-item--minor .agenda-hour { font-size: 17px; color: var(--ink2); }
+
+/* 時間軸節點 */
+.agenda-rail { position: relative; }
+.agenda-rail::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 17px;
+  width: 11px;
+  height: 11px;
+  margin-left: -5.5px;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 0 3px var(--y);
+}
+.agenda-item--minor .agenda-rail::before {
+  top: 16px;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  background: rgba(51,51,51,.35);
+}
+
+/* 內容欄 */
+.agenda-main {
+  min-width: 0;
+  padding: 11px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+}
+.agenda-item--talk .agenda-main,
+.agenda-item--case .agenda-main {
+  background: #fff;
+  border-radius: 10px 0 0 10px;
+  border-left: 3px solid var(--ink);
+}
+.agenda-item--talk .agenda-main:last-child,
+.agenda-item--case .agenda-main:last-child { border-radius: 10px; }
+.agenda-item[data-cat="商業視覺"] .agenda-main { border-left-color: var(--b); }
+.agenda-item[data-cat="室內設計"] .agenda-main { border-left-color: var(--p); }
+
+.agenda-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1.45;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+.agenda-item--minor .agenda-title { font-size: 15px; font-weight: 700; }
+.agenda-kind {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  margin-right: 8px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  background: var(--ink);
+  color: var(--y);
+}
+.agenda-item[data-cat="商業視覺"] .agenda-kind { background: var(--b); color: #fff; }
+.agenda-item[data-cat="室內設計"] .agenda-kind { background: var(--p); color: #fff; }
+
+.agenda-speaker {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink2);
+  overflow-wrap: break-word;
+}
+.agenda-name { font-weight: 700; color: var(--ink); }
+.agenda-role::before {
+  content: '｜';
+  color: rgba(51,51,51,.3);
+}
+.agenda-sublist {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 18px;
+}
+.agenda-sublist li {
+  position: relative;
+  padding-left: 12px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink2);
+}
+.agenda-sublist li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: .62em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(51,51,51,.3);
+}
+
+/* 操作欄 */
+.agenda-act {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px 8px 8px;
+}
+.agenda-item--talk .agenda-act {
+  background: #fff;
+  border-radius: 0 10px 10px 0;
+}
+.agenda-act .more-link {
+  padding: 7px 15px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* ─── AGENDA MOBILE ─── */
+@media (max-width: 700px) {
+  .agenda-list::before { display: none; }
+  .agenda-rail { display: none; }
+  .agenda-item {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0;
+    margin-bottom: 8px;
+  }
+  .agenda-item--talk,
+  .agenda-item--case {
+    background: #fff;
+    border-radius: 10px;
+    border-left: 3px solid var(--ink);
+  }
+  .agenda-item--talk[data-cat="商業視覺"] { border-left-color: var(--b); }
+  .agenda-item--case[data-cat="室內設計"] { border-left-color: var(--p); }
+  .agenda-item--minor {
+    border-bottom: 1px solid rgba(51,51,51,.12);
+    padding-bottom: 8px;
+  }
+  .agenda-list > .agenda-item:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+  }
+  .agenda-time {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    text-align: left;
+    padding: 10px 14px 0;
+  }
+  .agenda-item--minor .agenda-time { padding: 2px 0 0; }
+  .agenda-hour { font-size: 19px; }
+  .agenda-dur { margin-top: 0; }
+  .agenda-main { padding: 4px 14px 12px; }
+  .agenda-item--minor .agenda-main { padding: 2px 0 0; }
+  .agenda-item--talk .agenda-main,
+  .agenda-item--case .agenda-main,
+  .agenda-item--talk .agenda-main:last-child,
+  .agenda-item--case .agenda-main:last-child,
+  .agenda-item--talk .agenda-act {
+    background: transparent;
+    border-left: 0;
+    border-radius: 0;
+  }
+  .agenda-act { padding: 0 14px 12px; }
+  .agenda-ampm { font-size: 44px; }
+  .agenda-sublist { flex-direction: column; gap: 2px; }
+}
 
 
 /* ─── MOBILE ─── */
@@ -1446,191 +1675,184 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     </div>
   </section>
 
-<!-- COURSES -->
-<section class="courses">
+<!-- FORUM AGENDA -->
+<section id="agenda" class="courses">
 <div class="wrap">
 
   <div class="top-bar">
     <div class="heading-group">
-      <div class="en-label">Workshop Schedule · 2026</div>
-      <h2 class="main-title">工作坊場次 <em>SCHEDULE</em></h2>
+      <div class="en-label">Forum Agenda · 2026.09.11</div>
+      <h2 class="main-title">論壇議程 <em>AGENDA</em></h2>
     </div>
-    <div class="filters">
-      <button class="f-btn active" data-filter="all">全部 7場</button>
-      <button class="f-btn" data-filter="north">北部</button>
-      <button class="f-btn" data-filter="central">中部</button>
-      <button class="f-btn" data-filter="south">南部</button>
-      <button class="f-btn" data-filter="east">東部</button>
-    </div>
+    <div class="agenda-count">11 場・09:00–16:30</div>
   </div>
 
-  <!-- ── 5月 ── -->
-  <div class="month-group" data-month="5">
-    <div class="month-label-row">
-      <div class="month-num">05</div>
-      <div class="month-line"></div>
-      <div class="month-tag">MAY</div>
+  <!-- ── 上午 ── -->
+  <div class="agenda-group">
+    <div class="agenda-group-head">
+      <div class="agenda-ampm">AM</div>
+      <div class="agenda-group-line"></div>
+      <div class="agenda-group-tag">MORNING</div>
     </div>
-    <div class="card-grid">
+    <ol class="agenda-list">
 
-      <div class="card" id="course-1" data-region="南部" data-r="south" data-cat="影視動畫">
-        <div class="card-top">
-          <div>
-            <div class="date-big">5/06</div>
-            <div class="date-dow">週三・台南</div>
-          </div>
-          <span class="cat-badge">影視動畫</span>
+      <li class="agenda-item agenda-item--minor" id="agenda-1" data-cat="設計方法">
+        <div class="agenda-time">
+          <span class="agenda-hour">09:00</span>
+          <span class="agenda-dur">30 分鐘</span>
         </div>
-        <div class="card-title">AI 影像生成實戰營</div>
-        <div class="card-meta">
-          <span class="loc">南臺科技大學</span><br>
-          黃飛藏｜夢想動畫 AI 產品經理
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title">與會者報到</h3>
         </div>
-        <div class="card-bottom">
-          <span class="region-pill">南部</span>
-          <button class="more-link" data-course="1">了解更多</button>
-        </div>
-      </div>
+      </li>
 
-      <div class="card" id="course-2" data-region="北部" data-r="north" data-cat="設計方法">
-        <div class="card-top">
-          <div>
-            <div class="date-big">5/09</div>
-            <div class="date-dow">週六・台北</div>
-          </div>
-          <span class="cat-badge">設計方法</span>
+      <li class="agenda-item agenda-item--minor" id="agenda-2" data-cat="設計方法">
+        <div class="agenda-time">
+          <span class="agenda-hour">09:30</span>
+          <span class="agenda-dur">10 分鐘</span>
         </div>
-        <div class="card-title">AI 設計工作系統</div>
-        <div class="card-meta">
-          <span class="loc">臺灣科技大學</span><br>
-          邵唯晏｜竹工凡木設計研究室 創辦人／總監
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title">貴賓致詞與合照</h3>
+          <p class="agenda-speaker">數發部鍾佳蓉副組長、中經院連賢明院長、逢甲大學長官</p>
         </div>
-        <div class="card-bottom">
-          <span class="region-pill">北部</span>
-          <button class="more-link" data-course="2">了解更多</button>
-        </div>
-      </div>
+      </li>
 
-      <div class="card" id="course-3" data-region="南部" data-r="south" data-cat="商業視覺">
-        <div class="card-top">
-          <div>
-            <div class="date-big">5/27</div>
-            <div class="date-dow">週三・台南</div>
-          </div>
-          <span class="cat-badge">商業視覺</span>
+      <li class="agenda-item agenda-item--talk" id="agenda-3" data-cat="影視動畫">
+        <div class="agenda-time">
+          <span class="agenda-hour">09:40</span>
+          <span class="agenda-dur">100 分鐘</span>
         </div>
-        <div class="card-title">AI 傳達設計工作坊</div>
-        <div class="card-meta">
-          <span class="loc">南臺科技大學</span><br>
-          黃綝怡 系主任・沈彥霖 視覺設計師
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title"><span class="agenda-kind">專題演講</span>打造你的 AI CASA — 室內與建築設計 AI 系統工作流</h3>
+          <p class="agenda-speaker"><span class="agenda-name">邵唯晏</span><span class="agenda-role">竹工凡木設計集團 創辦人</span></p>
         </div>
-        <div class="card-bottom">
-          <span class="region-pill">南部</span>
-          <button class="more-link" data-course="3">了解更多</button>
+        <div class="agenda-act">
+          <button class="more-link" data-course="1">講者介紹</button>
         </div>
-      </div>
+      </li>
 
-    </div>
+      <li class="agenda-item agenda-item--talk" id="agenda-4" data-cat="影視動畫">
+        <div class="agenda-time">
+          <span class="agenda-hour">11:20</span>
+          <span class="agenda-dur">50 分鐘</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title"><span class="agenda-kind">專題演講</span>空間設計產業的 AI 專案管理實踐</h3>
+          <p class="agenda-speaker"><span class="agenda-name">曾思遠</span><span class="agenda-role">Nautilus AI 執行長</span></p>
+        </div>
+        <div class="agenda-act">
+          <button class="more-link" data-course="2">講者介紹</button>
+        </div>
+      </li>
+
+      <li class="agenda-item agenda-item--minor" id="agenda-5" data-cat="設計方法">
+        <div class="agenda-time">
+          <span class="agenda-hour">12:10</span>
+          <span class="agenda-dur">50 分鐘</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title">午餐交流（大會提供）</h3>
+        </div>
+      </li>
+
+    </ol>
   </div>
 
-  <!-- ── 6月 ── -->
-  <div class="month-group" data-month="6">
-    <div class="month-label-row">
-      <div class="month-num">06</div>
-      <div class="month-line"></div>
-      <div class="month-tag">JUN</div>
+  <!-- ── 下午 ── -->
+  <div class="agenda-group">
+    <div class="agenda-group-head">
+      <div class="agenda-ampm">PM</div>
+      <div class="agenda-group-line"></div>
+      <div class="agenda-group-tag">AFTERNOON</div>
     </div>
-    <div class="card-grid">
+    <ol class="agenda-list">
 
-      <div class="card" id="course-4" data-region="中部" data-r="central" data-cat="產品設計">
-        <div class="card-top">
-          <div>
-            <div class="date-big">6/05</div>
-            <div class="date-dow">週五・台中</div>
-          </div>
-          <span class="cat-badge">產品設計</span>
+      <li class="agenda-item agenda-item--minor" id="agenda-6" data-cat="設計方法">
+        <div class="agenda-time">
+          <span class="agenda-hour">13:00</span>
+          <span class="agenda-dur">10 分鐘</span>
         </div>
-        <div class="card-title">3D 邏輯建模視覺化工作坊</div>
-        <div class="card-meta">
-          <span class="loc">逢甲大學</span><br>
-          陳柏全｜逢甲大學 通識教育中心
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title">貴賓致詞與合照</h3>
+          <p class="agenda-speaker">台灣人工智慧學校 蔡明順校務長</p>
         </div>
-        <div class="card-bottom">
-          <span class="region-pill">中部</span>
-          <button class="more-link" data-course="4">了解更多</button>
-        </div>
-      </div>
+      </li>
 
-      <div class="card" id="course-5" data-region="北部" data-r="north" data-cat="產品空間">
-        <div class="card-top">
-          <div>
-            <div class="date-big">6/13</div>
-            <div class="date-dow">週六・桃園</div>
-          </div>
-          <span class="cat-badge">產品空間</span>
+      <li class="agenda-item agenda-item--talk" id="agenda-7" data-cat="商業視覺">
+        <div class="agenda-time">
+          <span class="agenda-hour">13:10</span>
+          <span class="agenda-dur">40 分鐘</span>
         </div>
-        <div class="card-title">Rhino × AI 渲染工作流</div>
-        <div class="card-meta">
-          <span class="loc">元智大學</span><br>
-          林楚卿｜藝術與設計學 系主任兼所長
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title"><span class="agenda-kind">專題短講</span>用 AI 建模與渲染工作流</h3>
+          <p class="agenda-speaker"><span class="agenda-name">林楚卿</span><span class="agenda-role">元智大學藝術與設計學系 教授</span></p>
         </div>
-        <div class="card-bottom">
-          <span class="region-pill">北部</span>
-          <button class="more-link" data-course="5">了解更多</button>
+        <div class="agenda-act">
+          <button class="more-link" data-course="3">講者介紹</button>
         </div>
-      </div>
+      </li>
 
-      <div class="card" id="course-6" data-region="中部" data-r="central" data-cat="室內設計">
-        <div class="card-top">
-          <div>
-            <div class="date-big">6/15</div>
-            <div class="date-dow">週一・台中</div>
-          </div>
-          <span class="cat-badge">室內設計</span>
+      <li class="agenda-item agenda-item--talk" id="agenda-8" data-cat="商業視覺">
+        <div class="agenda-time">
+          <span class="agenda-hour">13:50</span>
+          <span class="agenda-dur">40 分鐘</span>
         </div>
-        <div class="card-title">用 AI 加速空間提案工作坊</div>
-        <div class="card-meta">
-          <span class="loc">逢甲大學</span><br>
-          李元榮｜室內設計學士學位學程 主任
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title"><span class="agenda-kind">專題短講</span>用 AI 加速室內空間提案</h3>
+          <p class="agenda-speaker"><span class="agenda-name">李元榮</span><span class="agenda-role">逢甲大學建築專業學院 教授</span></p>
         </div>
-        <div class="card-bottom">
-          <span class="region-pill">中部</span>
-          <button class="more-link" data-course="6">了解更多</button>
+        <div class="agenda-act">
+          <button class="more-link" data-course="4">講者介紹</button>
         </div>
-      </div>
+      </li>
 
-    </div>
-  </div>
-
-  <!-- ── 7月 ── -->
-  <div class="month-group" data-month="7">
-    <div class="month-label-row">
-      <div class="month-num">07</div>
-      <div class="month-line"></div>
-      <div class="month-tag">JUL</div>
-    </div>
-    <div class="card-grid single">
-
-      <div class="card" id="course-7" data-region="東部" data-r="east" data-cat="概念提案">
-        <div class="card-top">
-          <div>
-            <div class="date-big">7/16</div>
-            <div class="date-dow">週四・宜蘭</div>
-          </div>
-          <span class="cat-badge">概念提案</span>
+      <li class="agenda-item agenda-item--minor" id="agenda-9" data-cat="設計方法">
+        <div class="agenda-time">
+          <span class="agenda-hour">14:30</span>
+          <span class="agenda-dur">30 分鐘</span>
         </div>
-        <div class="card-title">AI 設計實務工作坊</div>
-        <div class="card-meta">
-          <span class="loc">宜蘭大學</span><br>
-          蘇迺薇・楊俊益
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title">午茶交流</h3>
         </div>
-        <div class="card-bottom">
-          <span class="region-pill">東部</span>
-          <button class="more-link" data-course="7">了解更多</button>
-        </div>
-      </div>
+      </li>
 
-    </div>
+      <li class="agenda-item agenda-item--case" id="agenda-10" data-cat="室內設計">
+        <div class="agenda-time">
+          <span class="agenda-hour">15:00</span>
+          <span class="agenda-dur">90 分鐘</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title"><span class="agenda-kind">案例分享</span>工作坊案例分享</h3>
+          <p class="agenda-speaker"><span class="agenda-name">三組師生</span></p>
+          <ul class="agenda-sublist">
+            <li>元智大學｜AI 建模與渲染</li>
+            <li>逢甲大學｜室內空間提案</li>
+            <li>南臺科技大學｜AI 與動畫</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="agenda-item agenda-item--minor" id="agenda-11" data-cat="設計方法">
+        <div class="agenda-time">
+          <span class="agenda-hour">16:30</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title">賦歸</h3>
+        </div>
+      </li>
+
+    </ol>
   </div>
 
 </div>
@@ -1789,40 +2011,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 </div>
 
 <script>
-  const fBtns = document.querySelectorAll('.f-btn');
-const cards = document.querySelectorAll('.card');
-const months = document.querySelectorAll('.month-group');
-
-function updateGridLayout() {
-  months.forEach(mg => {
-    const grids = mg.querySelectorAll('.card-grid');
-    grids.forEach(grid => {
-      const visible = [...grid.querySelectorAll('.card')].filter(c => !c.hasAttribute('data-hidden'));
-      grid.classList.toggle('col1', visible.length === 1);
-    });
-  });
-}
-
-fBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    fBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const f = btn.dataset.filter;
-
-    cards.forEach(c => {
-      const show = f === 'all' || c.dataset.r === f;
-      c.toggleAttribute('data-hidden', !show);
-    });
-
-    months.forEach(mg => {
-      const visible = [...mg.querySelectorAll('.card')].some(c => !c.hasAttribute('data-hidden'));
-      mg.style.display = visible ? '' : 'none';
-    });
-
-    updateGridLayout();
-  });
-});
-
     // FAQ
   document.querySelectorAll('.faq-item').forEach(item => {
     item.querySelector('.faq-q').addEventListener('click', () => {
