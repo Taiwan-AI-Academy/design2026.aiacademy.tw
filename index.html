@@ -1436,102 +1436,16 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       .spk-card-tag { grid-area: tag; justify-self: start; margin-top: 0; }
     }
 
-    /* ── SPEAKERS view toggle ── */
-    .spk-head-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 1rem;
+    /* ── SPEAKERS 貴賓名條 ── */
+    .spk-guests {
+      max-width: 1180px;
+      margin: 1.75rem auto 0;
+      padding: 0 clamp(1.5rem,6vw,4rem);
+      font-size: clamp(.82rem, .95vw, .92rem);
+      line-height: 1.7;
+      color: rgba(250,250,245,.68);
     }
-    .spk-view-toggle {
-      display: inline-flex;
-      gap: .25rem;
-      padding: .25rem;
-      border: 1px solid rgba(250,250,245,.2);
-      border-radius: 999px;
-      background: rgba(250,250,245,.06);
-      flex-shrink: 0;
-    }
-    .spk-view-btn {
-      border: 0;
-      border-radius: 999px;
-      padding: .28rem .65rem;
-      background: transparent;
-      color: rgba(250,250,245,.62);
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: .72rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background .15s ease, color .15s ease;
-    }
-    .spk-view-btn[aria-pressed="true"] { background: var(--y); color: var(--t); }
-    .spk-view[hidden] { display: none !important; }
-
-    /* ── SPEAKERS marquee ── */
-    .spk-view-marquee .spk-marquee-wrap {
-      display: flex; flex-direction: column; gap: 1.75rem;
-      margin-top: 2.5rem;
-      overflow: hidden;
-      max-width: 100%;
-      padding-bottom: 2.25rem;
-    }
-    .spk-view-marquee .spk-marquee-row {
-      display: flex; width: max-content;
-      overflow: visible;
-    }
-    @keyframes mq-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
-    @keyframes mq-right { from { transform: translateX(-50%); } to { transform: translateX(0); }    }
-    .spk-view-marquee .spk-marquee-row.left  { animation: mq-left  16s linear infinite; }
-    .spk-view-marquee .spk-marquee-row.right { animation: mq-right 16s linear infinite; }
-    .spk-view-marquee .spk-card {
-      display: inline-flex; flex-direction: column; align-items: center;
-      gap: .4rem; width: 25vw; flex-shrink: 0; padding: 1rem 0;
-      min-height: 0; border: 0; border-radius: 0; background: transparent; overflow: visible;
-    }
-    .spk-view-marquee .spk-card::before { display: none; }
-    .spk-view-marquee .spk-card-photo {
-      width: clamp(72px, 18vw, 220px); height: clamp(72px, 18vw, 220px);
-      border-radius: 50%; overflow: hidden;
-      border: 2.5px solid var(--p); flex-shrink: 0;
-      transition: transform .35s ease;
-      background: rgba(250,250,245,.16); margin-bottom: 0;
-    }
-    .spk-view-marquee .spk-card-photo img {
-      width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block;
-    }
-    .spk-view-marquee .spk-card-photo.placeholder {
-      background: rgba(250,250,245,.18);
-      border-color: rgba(250,250,245,.35);
-      display: flex; align-items: center; justify-content: center;
-      color: #FAFAF5;
-      font-size: clamp(1.25rem, 4vw, 3rem);
-      font-weight: 900;
-      font-family: 'Noto Sans TC', sans-serif;
-    }
-    .spk-view-marquee .spk-card:hover { transform: none; border-color: transparent; background: transparent; }
-    .spk-view-marquee .spk-card:hover .spk-card-photo { transform: scale(1.18); }
-    .spk-view-marquee .spk-card-name {
-      font-size: clamp(.9rem, 1.4vw, 1.25rem); font-weight: 900; color: #FAFAF5; white-space: nowrap;
-      line-height: normal; margin-bottom: 0;
-    }
-    .spk-view-marquee .spk-card-role {
-      min-height: 0; font-size: clamp(.62rem, 1vw, .9rem); color: rgba(250,250,245,.65); white-space: nowrap;
-      max-height: 0; overflow: hidden; opacity: 0;
-      transition: max-height .3s ease, opacity .25s ease;
-      display: block; margin-bottom: 0;
-    }
-    .spk-view-marquee .spk-card:hover .spk-card-role { max-height: 2em; opacity: 1; }
-    .spk-view-marquee .spk-card-tag {
-      margin-top: 0; font-size: clamp(.58rem, .8vw, .75rem); font-weight: 700; padding: .12rem .45rem; border-radius: 3px;
-      text-decoration: none; white-space: nowrap;
-    }
-    @media(max-width:600px){
-      .spk-head-row { flex-direction: column; }
-      .spk-view-toggle { align-self: flex-start; }
-      .spk-view-marquee .spk-marquee-wrap { max-width: 100vw; overflow: hidden; }
-      .spk-view-marquee .spk-card { width: 50vw; display: inline-flex; }
-      .spk-view-marquee .spk-card-photo { width: clamp(72px, 18vw, 220px); height: clamp(72px, 18vw, 220px); }
-    }
+    .spk-guests strong { color: #FAFAF5; font-weight: 700; }
 
     /* ── FAQ ── */
     #faq {
@@ -1859,77 +1773,23 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 </section>
 
 <!-- SPEAKERS -->
-<section id="speakers" data-speakers-view="grid">
-  <div class="rv spk-head-row">
-    <div>
-      <h2 class="sec-title">講師陣容</h2>
-      <p class="sec-sub">來自產學界的設計 × AI 實踐者</p>
-    </div>
-    <div class="spk-view-toggle" role="group" aria-label="講師區塊版型切換">
-      <button type="button" class="spk-view-btn" data-speakers-view-btn="grid" aria-pressed="true">◎ Grid</button>
-      <button type="button" class="spk-view-btn" data-speakers-view-btn="marquee" aria-pressed="false">▶ Marquee</button>
-    </div>
+<section id="speakers">
+  <div class="rv">
+    <h2 class="sec-title">講者陣容</h2>
+    <p class="sec-sub">產業與學界的空間設計 AI 實踐者</p>
   </div>
-  <div class="spk-view spk-view-grid" data-speakers-view="grid">
   <div class="spk-grid">
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/黃飛藏.png" alt="黃飛藏 講師照片"></div><div class="spk-card-name">黃飛藏</div><div class="spk-card-role">夢想動畫 AI 產品經理</div><a href="#course-1" class="spk-card-tag cat-film">影視動畫</a></div>
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/邵唯晏.png" alt="邵唯晏 講師照片"></div><div class="spk-card-name">邵唯晏</div><div class="spk-card-role">竹工凡木設計研究室 創辦人/總監</div><a href="#course-2" class="spk-card-tag cat-method">設計方法</a></div>
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/黃綝怡.png" alt="黃綝怡 講師照片"></div><div class="spk-card-name">黃綝怡</div><div class="spk-card-role">南臺科大 視覺傳達設計系 系主任</div><a href="#course-3" class="spk-card-tag cat-visual">商業視覺</a></div>
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/沈彥霖.png" alt="沈彥霖 講師照片"></div><div class="spk-card-name">沈彥霖</div><div class="spk-card-role">獨立視覺設計師</div><a href="#course-3" class="spk-card-tag cat-visual">商業視覺</a></div>
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/陳柏全.png" alt="陳柏全 講師照片"></div><div class="spk-card-name">陳柏全</div><div class="spk-card-role">逢甲大學通識中心兼任助理教授／全盛電機董事長</div><a href="#course-4" class="spk-card-tag cat-product">產品設計</a></div>
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/林楚卿.png" alt="林楚卿 講師照片"></div><div class="spk-card-name">林楚卿</div><div class="spk-card-role">元智大學藝術與設計學系 系主任兼所長</div><a href="#course-5" class="spk-card-tag cat-space">產品空間</a></div>
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/李元榮.png" alt="李元榮 講師照片"></div><div class="spk-card-name">李元榮</div><div class="spk-card-role">逢甲大學室內設計學士學位學程 主任</div><a href="#course-6" class="spk-card-tag cat-interior">室內設計</a></div>
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/蘇迺薇.png" alt="蘇迺薇 講師照片"></div><div class="spk-card-name">蘇迺薇</div><div class="spk-card-role">資策會數位教育研究所人才發展中心 主任</div><a href="#course-7" class="spk-card-tag cat-concept">概念提案</a></div>
-    <div class="spk-card is-pending"><div class="spk-card-photo"><img src="https://placehold.co/600x600/F5E400/333333?text=No+Photo" alt="楊俊益 講師照片待補"></div><div class="spk-card-name">楊俊益</div><div class="spk-card-role">講師資料待補</div><a href="#course-7" class="spk-card-tag cat-concept">概念提案</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/邵唯晏_croped.png" alt="邵唯晏 講者照片"></div><div class="spk-card-name">邵唯晏</div><div class="spk-card-role">竹工凡木設計集團 創辦人</div><a href="#agenda-3" class="spk-card-tag cat-film">AI CASA</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/曾思遠_croped.png" alt="曾思遠 講者照片"></div><div class="spk-card-name">曾思遠</div><div class="spk-card-role">Nautilus AI 執行長</div><a href="#agenda-4" class="spk-card-tag cat-visual">專案管理</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/林楚卿_croped.png" alt="林楚卿 講者照片"></div><div class="spk-card-name">林楚卿</div><div class="spk-card-role">元智大學藝術與設計學系 教授</div><a href="#agenda-7" class="spk-card-tag cat-interior">建模渲染</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/李元榮_croped.png" alt="李元榮 講者照片"></div><div class="spk-card-name">李元榮</div><div class="spk-card-role">逢甲大學建築專業學院 教授</div><a href="#agenda-8" class="spk-card-tag cat-space">空間提案</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/高逸峯_croped.jpg" alt="高逸峯 講者照片"></div><div class="spk-card-name">高逸峯</div><div class="spk-card-role">南臺科技大學 老師</div><a href="#agenda-10" class="spk-card-tag cat-interior">案例分享</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/徐偉泓_croped.png" alt="徐偉泓 講者照片"></div><div class="spk-card-name">徐偉泓</div><div class="spk-card-role">參與學員</div><a href="#agenda-10" class="spk-card-tag cat-interior">案例分享</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/李永鋒_croped.png" alt="李永鋒 講者照片"></div><div class="spk-card-name">李永鋒</div><div class="spk-card-role">參與學員</div><a href="#agenda-10" class="spk-card-tag cat-interior">案例分享</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/郭爵綸_croped.png" alt="郭爵綸 講者照片"></div><div class="spk-card-name">郭爵綸</div><div class="spk-card-role">參與學員</div><a href="#agenda-10" class="spk-card-tag cat-interior">案例分享</a></div>
   </div>
-  </div>
-  <div class="spk-view spk-view-marquee" data-speakers-view="marquee" hidden>
-  <div class="spk-marquee-wrap">
-
-    <!-- 第一排：往左，黃飛藏・邵唯晏・黃綝怡・沈彥霖 -->
-    <div class="spk-marquee-row left">
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/黃飛藏.png" alt="黃飛藏"></div><div class="spk-card-name">黃飛藏</div><div class="spk-card-role">夢想動畫 AI 產品經理</div><a href="#course-1" class="spk-card-tag cat-film">影視動畫</a></div>
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/邵唯晏.png" alt="邵唯晏"></div><div class="spk-card-name">邵唯晏</div><div class="spk-card-role">竹工凡木設計研究室 創辦人/總監</div><a href="#course-2" class="spk-card-tag cat-method">設計方法</a></div>
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/黃綝怡.png" alt="黃綝怡"></div><div class="spk-card-name">黃綝怡</div><div class="spk-card-role">南臺科大 視覺傳達設計 系主任</div><a href="#course-3" class="spk-card-tag cat-visual">商業視覺</a></div>
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/沈彥霖.png" alt="沈彥霖"></div><div class="spk-card-name">沈彥霖</div><div class="spk-card-role">獨立視覺設計師</div><a href="#course-3" class="spk-card-tag cat-visual">商業視覺</a></div>
-      <!-- duplicate set B for seamless loop -->
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/黃飛藏.png" alt="黃飛藏"></div><div class="spk-card-name">黃飛藏</div><div class="spk-card-role">夢想動畫 AI 產品經理</div><a href="#course-1" class="spk-card-tag cat-film">影視動畫</a></div>
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/邵唯晏.png" alt="邵唯晏"></div><div class="spk-card-name">邵唯晏</div><div class="spk-card-role">竹工凡木設計研究室 創辦人/總監</div><a href="#course-2" class="spk-card-tag cat-method">設計方法</a></div>
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/黃綝怡.png" alt="黃綝怡"></div><div class="spk-card-name">黃綝怡</div><div class="spk-card-role">南臺科大 視覺傳達設計 系主任</div><a href="#course-3" class="spk-card-tag cat-visual">商業視覺</a></div>
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/沈彥霖.png" alt="沈彥霖"></div><div class="spk-card-name">沈彥霖</div><div class="spk-card-role">獨立視覺設計師</div><a href="#course-3" class="spk-card-tag cat-visual">商業視覺</a></div>
-    </div>
-
-    <!-- 第二排：往右，陳柏全・林楚卿・李元榮・蘇迺薇・楊俊益 -->
-    <div class="spk-marquee-row right">
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/陳柏全.png" alt="陳柏全"></div><div class="spk-card-name">陳柏全</div><div class="spk-card-role">逢甲大學 通識教育中心兼任助理教授</div><a href="#course-4" class="spk-card-tag cat-product">產品設計</a></div>
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/林楚卿.png" alt="林楚卿"></div><div class="spk-card-name">林楚卿</div><div class="spk-card-role">元智大學 藝術與設計學 系主任兼所長</div><a href="#course-5" class="spk-card-tag cat-space">產品空間</a></div>
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/李元榮.png" alt="李元榮"></div><div class="spk-card-name">李元榮</div><div class="spk-card-role">逢甲大學 室內設計學士學位學程 主任</div><a href="#course-6" class="spk-card-tag cat-interior">室內設計</a></div>
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/蘇迺薇.png" alt="蘇迺薇"></div><div class="spk-card-name">蘇迺薇</div><div class="spk-card-role">資策會 數位教育研究所 人才發展中心主任</div><a href="#course-7" class="spk-card-tag cat-concept">概念提案</a></div>
-      <div class="spk-card"><div class="spk-card-photo placeholder" aria-label="楊俊益 講師照片佔位">楊</div><div class="spk-card-name">楊俊益</div><div class="spk-card-role">講師資料待補</div><a href="#course-7" class="spk-card-tag cat-concept">概念提案</a></div>
-      <!-- duplicate set B for seamless loop -->
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/陳柏全.png" alt="陳柏全"></div><div class="spk-card-name">陳柏全</div><div class="spk-card-role">逢甲大學 通識教育中心兼任助理教授</div><a href="#course-4" class="spk-card-tag cat-product">產品設計</a></div>
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/林楚卿.png" alt="林楚卿"></div><div class="spk-card-name">林楚卿</div><div class="spk-card-role">元智大學 藝術與設計學 系主任兼所長</div><a href="#course-5" class="spk-card-tag cat-space">產品空間</a></div>
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/李元榮.png" alt="李元榮"></div><div class="spk-card-name">李元榮</div><div class="spk-card-role">逢甲大學 室內設計學士學位學程 主任</div><a href="#course-6" class="spk-card-tag cat-interior">室內設計</a></div>
-      <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/蘇迺薇.png" alt="蘇迺薇"></div><div class="spk-card-name">蘇迺薇</div><div class="spk-card-role">資策會 數位教育研究所 人才發展中心主任</div><a href="#course-7" class="spk-card-tag cat-concept">概念提案</a></div>
-      <div class="spk-card"><div class="spk-card-photo placeholder" aria-label="楊俊益 講師照片佔位">楊</div><div class="spk-card-name">楊俊益</div><div class="spk-card-role">講師資料待補</div><a href="#course-7" class="spk-card-tag cat-concept">概念提案</a></div>
-    </div>
-
-  </div>
-  </div>
+  <p class="spk-guests rv"><strong>貴賓致詞</strong>｜數位發展部數位產業署 鍾佳蓉 副組長・財團法人中華經濟研究院 連賢明 院長・台灣人工智慧學校 蔡明順 校務長</p>
 </section>
-<!--
-#speakers integration notes
-- Two layouts are kept in parallel:
-  - `.spk-view-grid` = static card grid, currently the default.
-  - `.spk-view-marquee` = original two-row infinite marquee.
-- The small toggle lives in `.spk-head-row` next to the section title.
-- Switching is client-side only: JS toggles the `hidden` attribute on the two `.spk-view` containers; the page is not reloaded.
-- URL parameter: `speakers=grid` or `speakers=marquee`.
-  - Example: `/?speakers=grid#speakers`
-  - Example: `/?speakers=marquee#speakers`
-- URL parameter takes precedence over localStorage.
-- localStorage key: `design2026:speakersView`.
--->
 
 <!-- FAQ -->
 <section id="faq">
@@ -1997,14 +1857,14 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       <div class="lb-meta" id="lb-meta"></div>
     </div>
     <div class="lb-body">
-      <div class="lb-section-label">核心 AI 工具</div>
+      <div class="lb-section-label">講題關鍵詞</div>
       <div class="lb-tools" id="lb-tools"></div>
-      <div class="lb-section-label">講師</div>
+      <div class="lb-section-label">講者</div>
       <div class="lb-speakers" id="lb-speakers"></div>
     </div>
     <div class="lb-footer">
       <div class="lb-deadline" id="lb-deadline-note"></div>
-      <a href="#" class="lb-reg-btn" id="lb-reg-btn" target="_blank" rel="noopener">立即報名 →</a>
+      <a href="#" class="lb-reg-btn" id="lb-reg-btn" target="_blank" rel="noopener">提交報名申請 →</a>
     </div>
   </div><!-- lb-box -->
   </div><!-- lb-stage -->
@@ -2095,102 +1955,58 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   // Course lightbox data
   const COURSES = {
     1: {
-      name: '影視動畫：AI 影像生成實戰營',
-      dateDisplay: '2026年 5/06（三）',
-      uni: '南臺科技大學',
-      venue: '台南市永康區南台街1號 W棟808教室、810教室',
-      url: 'https://neti.cc/V7y5Y71',
-      deadline: '2026-04-27',
-      deadlineDisplay: '4/27',
-      tools: ['moonland', 'Gemini', 'LLM'],
+      name: '打造你的 AI CASA — 室內與建築設計 AI 系統工作流',
+      dateDisplay: '2026/09/11（五） 09:40–11:20',
+      uni: '逢甲大學 學思樓第九國際會議廳',
+      venue: '臺中市西屯區文華路 100 號',
+      url: 'https://sted.neticrm.tw/civicrm/event/register?id=322&reset=1',
+      deadline: '2026-09-01',
+      deadlineDisplay: '9/1',
+      tools: ['AI CASA', '室內設計', '建築設計', '系統工作流'],
       speakers: [
-        { name: '黃飛藏', role: '夢想動畫 AI 產品經理', photo: 'img/speakers/黃飛藏.png',
-          bio: '經歷：前製概念美術 Concept Artist、AI 技術美術 Technical Artists、AI 產品經理 Product Manager。專業項目：AI 工具開發測試、AI 社群經營、AI 製程結合應用、前製概念美術設計。' }
+        { name: '邵唯晏', role: '竹工凡木設計集團 創辦人', photo: 'img/speakers/邵唯晏_croped.png',
+          bio: '邵唯晏長期投入設計、科技與研究的跨域整合，工作橫跨建築、室內、產品與策展；其設計方法以使用者為核心，結合理性分析與感性創造，發展整合性設計思維。' }
       ]
     },
     2: {
-      name: '設計方法：AI 設計工作系統',
-      dateDisplay: '2026年 5/09（六）',
-      uni: '臺科大',
-      venue: '臺北市大安區基隆路四段43號 工程二館 E2-324 教室',
-      url: 'https://neti.cc/Y9x1Lqn',
-      deadline: '2026-05-01',
-      deadlineDisplay: '5/1',
-      tools: ['Gemini', 'NotebookLM'],
+      name: '空間設計產業的 AI 專案管理實踐',
+      dateDisplay: '2026/09/11（五） 11:20–12:10',
+      uni: '逢甲大學 學思樓第九國際會議廳',
+      venue: '臺中市西屯區文華路 100 號',
+      url: 'https://sted.neticrm.tw/civicrm/event/register?id=322&reset=1',
+      deadline: '2026-09-01',
+      deadlineDisplay: '9/1',
+      tools: ['AI 專案管理', '空間設計產業'],
       speakers: [
-        { name: '邵唯晏', role: '竹工凡木設計研究室 創辦人／總監', photo: 'img/speakers/邵唯晏.png',
-          bio: '台灣建築與設計領域的重要實踐者，長期致力於設計、科技與研究的跨域整合。工作橫跨建築、室內、產品與策展，強調以「使用者為核心」的設計方法，並結合理性分析與感性創造，建立整合性設計思維。' }
+        { name: '曾思遠', role: 'Nautilus AI 執行長', photo: 'img/speakers/曾思遠_croped.png', bio: '' }
       ]
     },
     3: {
-      name: '商業視覺：AI 傳達設計工作坊',
-      dateDisplay: '2026年 5/27（三）',
-      uni: '南臺科技大學',
-      venue: '台南市永康區南台街1號 W棟808教室、810教室',
-      url: 'https://neti.cc/EewkZK4',
-      deadline: '2026-05-18',
-      deadlineDisplay: '5/18',
-      tools: ['Google Mixboard', 'Nano Banana 2 & Pro', 'Lovart', 'Adobe Firefly', 'Photoshop', 'Gemini'],
+      name: '用 AI 建模與渲染工作流',
+      dateDisplay: '2026/09/11（五） 13:10–13:50',
+      uni: '逢甲大學 學思樓第九國際會議廳',
+      venue: '臺中市西屯區文華路 100 號',
+      url: 'https://sted.neticrm.tw/civicrm/event/register?id=322&reset=1',
+      deadline: '2026-09-01',
+      deadlineDisplay: '9/1',
+      tools: ['AI 建模', 'AI 渲染', '工作流'],
       speakers: [
-        { name: '黃綝怡', role: '南臺科大 視覺傳達設計系主任 ／ 品牌及包裝設計中心主任', photo: 'img/speakers/黃綝怡.png',
-          bio: '專長領域：企業識別系統、廣告企劃、包裝設計、網頁設計、感性工學研究、使用性工程研究。' },
-        { name: '沈彥霖', role: '獨立視覺設計師', photo: 'img/speakers/沈彥霖.png', bio: '' }
+        { name: '林楚卿', role: '元智大學藝術與設計學系 教授', photo: 'img/speakers/林楚卿_croped.png',
+          bio: '林楚卿的研究主軸為數位設計應用，涵蓋數位構築、數位工具、設計思考、互動設計及跨領域數位設計整合，並探索其在建築、藝術、產品與工程等領域的應用及創新教學。' }
       ]
     },
     4: {
-      name: '產品設計：3D 邏輯建模視覺化工作坊',
-      dateDisplay: '2026年 6/05（五）',
-      uni: '逢甲大學',
-      venue: '台中市西屯區文華路100號 行政一館2F 208電腦教室',
-      url: 'https://neti.cc/Nq9n5vm',
-      deadline: '2026-06-02',
-      deadlineDisplay: '6/2',
-      tools: ['ChatGPT', 'SolidWorks', 'KeyShot AI'],
+      name: '用 AI 加速室內空間提案',
+      dateDisplay: '2026/09/11（五） 13:50–14:30',
+      uni: '逢甲大學 學思樓第九國際會議廳',
+      venue: '臺中市西屯區文華路 100 號',
+      url: 'https://sted.neticrm.tw/civicrm/event/register?id=322&reset=1',
+      deadline: '2026-09-01',
+      deadlineDisplay: '9/1',
+      tools: ['AI 加速', '室內空間提案'],
       speakers: [
-        { name: '陳柏全', role: '逢甲大學 通識教育中心兼任助理教授 ／ 全盛電機 董事長', photo: 'img/speakers/陳柏全.png',
-          bio: '專長：初階產品3D建模、電腦輔助產品設計、創新產品設計與思考、創新商品設計與設計邏輯觀念建立、時事脈動分析與創造。全英文教學。' }
-      ]
-    },
-    5: {
-      name: '產品空間：Rhino × AI 渲染工作流',
-      dateDisplay: '2026年 6/13（六）',
-      uni: '元智大學',
-      venue: '桃園市中壢區遠東路135號 三館二樓 3204電腦教室',
-      url: 'https://neti.cc/W7Mb0yO',
-      deadline: '2026-06-05',
-      deadlineDisplay: '6/5',
-      tools: ['Rhino', 'AI 渲染'],
-      speakers: [
-        { name: '林楚卿', role: '元智大學 藝術與設計學系主任兼所長', photo: 'img/speakers/林楚卿.png',
-          bio: '研究主軸為數位設計之相關應用，研究、教學與設計並重。鑽研數位構築、數位工具、設計思考、互動設計、跨領域數位設計整合，探討其在建築、藝術、產品、工程等領域的設計應用。' }
-      ]
-    },
-    6: {
-      name: '室內設計：用 AI 加速空間提案工作坊',
-      dateDisplay: '2026年 6/15（一）',
-      uni: '逢甲大學',
-      venue: '台中市西屯區文華路100號 行政一館2F 208電腦教室',
-      url: 'https://neti.cc/gZRWxVN',
-      deadline: '2026-06-10',
-      deadlineDisplay: '6/10',
-      tools: ['Gemini', 'NotebookLM', 'Midjourney', 'KLING'],
-      speakers: [
-        { name: '李元榮', role: '逢甲大學 室內設計學士學位學程主任', photo: 'img/speakers/李元榮.png',
-          bio: '專長：建築設計、室內設計、數位構築、互動設計。' }
-      ]
-    },
-    7: {
-      name: '概念提案：AI 設計實務工作坊',
-      dateDisplay: '2026年 7/16（四）',
-      uni: '宜蘭大學',
-      venue: '宜蘭縣宜蘭市神農路1段1號 圖資大樓一樓 電腦教室 2',
-      url: 'https://neti.cc/MpOvME7',
-      deadline: '2026-07-13',
-      deadlineDisplay: '7/13',
-      tools: ['Gemini', 'Nano Banana 2', 'Canva AI'],
-      speakers: [
-        { name: '蘇迺薇', role: '資策會 數位教育研究所人才發展中心主任', photo: 'img/speakers/蘇迺薇.png', bio: '' },
-        { name: '楊俊益', role: '', photo: '', bio: '' }
+        { name: '李元榮', role: '逢甲大學建築專業學院 教授', photo: 'img/speakers/李元榮_croped.png',
+          bio: '李元榮的專長包括建築設計、室內設計、數位構築與互動設計。' }
       ]
     }
   };
@@ -2300,7 +2116,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       lbRegBtn.classList.add('closed');
       lbRegBtn.removeAttribute('href');
     } else {
-      lbRegBtn.textContent = '立即報名 →';
+      lbRegBtn.textContent = '提交報名申請 →';
       lbRegBtn.classList.remove('closed');
       lbRegBtn.href = c.url;
     }
@@ -2360,69 +2176,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   document.querySelectorAll('.more-link[data-course]').forEach(btn => {
     btn.addEventListener('click', () => openLightbox(parseInt(btn.dataset.course)));
   });
-
-
-  // Speakers dual-layout switcher: URL param (?speakers=grid|marquee) overrides localStorage.
-  (function(){
-    const section = document.getElementById('speakers');
-    if (!section) return;
-    const views = [...section.querySelectorAll('.spk-view')];
-    const btns = [...section.querySelectorAll('[data-speakers-view-btn]')];
-    const key = 'design2026:speakersView';
-    const valid = new Set(['grid', 'marquee']);
-    const params = new URLSearchParams(window.location.search);
-    const fromUrl = params.get('speakers');
-    const stored = localStorage.getItem(key);
-    const initial = valid.has(fromUrl) ? fromUrl : (valid.has(stored) ? stored : 'grid');
-
-    function apply(view, persist = true) {
-      if (!valid.has(view)) view = 'grid';
-      section.dataset.speakersView = view;
-      views.forEach(el => { el.hidden = el.dataset.speakersView !== view; });
-      btns.forEach(btn => btn.setAttribute('aria-pressed', String(btn.dataset.speakersViewBtn === view)));
-      if (persist) localStorage.setItem(key, view);
-    }
-
-    btns.forEach(btn => btn.addEventListener('click', () => apply(btn.dataset.speakersViewBtn)));
-    apply(initial, true);
-  })();
-
-  // Marquee entrance: WAAPI playbackRate 無縫減速（only affects the preserved Marquee view）
-  (function(){
-    const wrap = document.querySelector('.spk-view-marquee .spk-marquee-wrap');
-    const rows = [...document.querySelectorAll('.spk-view-marquee .spk-marquee-row')];
-    if (!wrap || !rows.length) return;
-
-    const DUR        = 16000;
-    const START_RATE = 24;
-    const RAMP       = 1000;
-
-    rows.forEach(r => r.style.animation = 'none');
-    const anims = rows.map(r => r.animate(
-      r.classList.contains('right')
-        ? [{ transform: 'translateX(-50%)' }, { transform: 'translateX(0)' }]
-        : [{ transform: 'translateX(0)' },    { transform: 'translateX(-50%)' }],
-      { duration: DUR, iterations: Infinity, easing: 'linear' }
-    ));
-
-    anims.forEach(a => a.playbackRate = START_RATE);
-    wrap.addEventListener('mouseenter', () => anims.forEach(a => a.pause()));
-    wrap.addEventListener('mouseleave', () => anims.forEach(a => a.play()));
-
-    let fired = false;
-    new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting || fired) return;
-      fired = true;
-      const t0 = performance.now();
-      (function tick(now) {
-        const p    = Math.min((now - t0) / RAMP, 1);
-        const ease = 1 - Math.pow(1 - p, 3);
-        const rate = START_RATE * (1 - ease) + 1 * ease;
-        anims.forEach(a => a.playbackRate = rate);
-        if (p < 1) requestAnimationFrame(tick);
-      })(t0);
-    }, { threshold: 0.15 }).observe(wrap);
-  })();
 </script>
 <script>
 (() => {
