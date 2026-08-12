@@ -59,7 +59,7 @@
 
     /* ── HERO ── */
     #hero {
-      height: 100svh; background: var(--y);
+      height: calc(100svh - 112px); background: var(--y);
       padding: clamp(80px,14vh,160px) clamp(1.5rem,6vw,4rem) clamp(4rem,8vw,6rem);
       display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;
       position: sticky; top: 0; z-index: 1; overflow: hidden;
@@ -73,6 +73,9 @@
       transform: translate(-50%, -50%);
       width: clamp(300px, 88vw, 1600px);
       user-select: none;
+    }
+    @media (min-width: 900px) {
+      #design-logo { top: 72%; width: clamp(300px, 78vw, 1450px); }
     }
     .dl-inner {
       position: relative; width: 100%;
@@ -116,6 +119,46 @@
     @media (max-width: 639px) {
       .hero-sub img { width: min(85vw, 380px); }
     }
+    .hero-info-bar {
+      position: relative; z-index: 2;
+      background: var(--bg);
+      border-top: 2px solid var(--t);
+      border-bottom: 2px solid var(--t);
+    }
+    .hero-info-inner {
+      min-height: 112px;
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+    }
+    .hero-info-item,
+    .hero-info-action {
+      padding: 1.25rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-info-item { border-right: 1px solid var(--line); }
+    .hero-info-label {
+      margin-bottom: .35rem;
+      color: var(--ts);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    .hero-info-item strong { font-size: 1rem; line-height: 1.5; }
+    .hero-info-action { align-items: center; min-width: 260px; }
+    .hero-cta { padding: 11px 22px; }
+    .hero-note { margin-top: .6rem; color: var(--ts); font-size: .78rem; }
+    @media (max-width: 639px) {
+      #hero { padding-top: 72px; padding-bottom: 2rem; }
+      .hero-tag, h1 { margin-bottom: .75rem; }
+      .hero-sub { margin-bottom: 1.25rem; }
+      .hero-info-inner { grid-template-columns: 1fr; }
+      .hero-info-item,
+      .hero-info-action { padding: 1rem 1.5rem; }
+      .hero-info-item { border-right: 0; border-bottom: 1px solid var(--line); }
+      .hero-info-action { align-items: flex-start; min-width: 0; }
+    }
 
     /* All sections after hero stack above it */
     section:not(#hero), footer { position: relative; z-index: 2; }
@@ -126,6 +169,7 @@
       overflow: hidden;
       background: var(--t);
       isolation: isolate;
+      scroll-margin-top: 56px;
     }
 
     .integrated-hero-schools::before,
@@ -255,7 +299,7 @@
     }
 
     .schools-card::before {
-      content: 'COLLABORATION';
+      content: 'EVENT INFO';
       position: absolute;
       top: -16px;
       left: 24px;
@@ -393,7 +437,36 @@
       white-space: nowrap;
     }
 
-    .school-list-mobile { display: none; }
+    .school-list-mobile {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0 12px 12px 0;
+      list-style: none;
+    }
+
+    .school-list-mobile li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 15px 16px;
+      border: 2px solid var(--t);
+      background: var(--bg);
+      box-shadow: 4px 4px 0 var(--p);
+    }
+
+    .school-list-mobile strong {
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .school-list-mobile span {
+      color: var(--ts);
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
 
     .reveal {
       opacity: 1;
@@ -831,9 +904,11 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   font-family: 'Noto Sans TC', sans-serif;
   font-size: 12px;
   font-weight: 700;
+  display: inline-block;
   padding: 8px 18px;
   background: var(--p);
   color: #fff;
+  text-decoration: none;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -1286,10 +1361,11 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 <nav class="topnav">
   <a href="#" class="logo"><img src="img/logo/D-Logo-1-n.svg" alt="Taiwan AI Academy"></a>
   <ul>
-    <li><a href="#courses">工作坊</a></li>
-    <li><a href="#speakers">講師</a></li>
-
+    <li><a href="#agenda">議程</a></li>
+    <li><a href="#speakers">講者</a></li>
+    <li><a href="#info">活動資訊</a></li>
     <li><a href="#faq">FAQ</a></li>
+    <li><a class="more-link" href="https://sted.neticrm.tw/civicrm/event/register?id=322&amp;reset=1" target="_blank" rel="noopener">報名</a></li>
   </ul>
 </nav>
 
@@ -1303,7 +1379,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       <img class="dl-layer" data-layer="4" src="img/logo/Design-4.svg" alt="">
     </div>
   </div>
-  <div class="hero-tag">Taiwan AI Academy × 設計產業</div>
+  <div class="hero-tag">系列最終場 ・ 2026.09.11 FRI</div>
   <h1>
     <picture>
       <source media="(min-width: 640px)" srcset="img/logo/D-Logo-1-w.svg" type="image/svg+xml">
@@ -1318,59 +1394,52 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   </p>
 </section>
 
+<section class="hero-info-bar" aria-label="論壇活動資訊">
+  <div class="hero-info-inner">
+    <div class="hero-info-item">
+      <span class="hero-info-label">日期</span>
+      <strong>2026 年 9 月 11 日（五）09:30–16:30</strong>
+    </div>
+    <div class="hero-info-item">
+      <span class="hero-info-label">地點</span>
+      <strong>逢甲大學學思樓第九國際會議廳</strong>
+    </div>
+    <div class="hero-info-action">
+      <a class="hero-cta more-link" href="https://sted.neticrm.tw/civicrm/event/register?id=322&amp;reset=1" target="_blank" rel="noopener">提交報名申請 →</a>
+      <div class="hero-note">審核制錄取・報名至 9/1 23:59</div>
+    </div>
+  </div>
+</section>
+
 <!-- HERO + SCHOOLS INTEGRATED -->
-<section class="integrated-hero-schools" aria-labelledby="hero-schools-title">
+<section id="info" class="integrated-hero-schools" aria-labelledby="hero-schools-title">
     <div class="hs-shell">
       <div class="hs-grid">
         <div class="hs-copy">
-          <div class="hs-kicker reveal">Taiwan AI Academy × Design Industry</div>
-          <h1 id="hero-schools-title" class="hs-title reveal">AI 正在改變<em>設計產業</em>，你準備好了嗎？</h1>
-          <p class="hs-desc reveal">人工智慧技術正以前所未有的速度滲透各設計領域。從概念發想到最終呈現，工具、流程與思維都在快速轉型。這系列工作坊由 Taiwan AI Academy 聯合五所大學，帶領設計職人從實戰中掌握 AI 新工作法。</p>
-          <div class="hs-stats reveal" aria-label="合作規模統計">
-            <div class="hs-stat"><strong>5</strong><span>所合作大學</span></div>
-            <div class="hs-stat"><strong>7</strong><span>場工作坊</span></div>
-            <div class="hs-stat"><strong>4</strong><span>大城市巡迴</span></div>
+          <div class="hs-kicker reveal">SPACE DESIGN FORUM · 2026</div>
+          <h1 id="hero-schools-title" class="hs-title reveal">AI 正在重新定義<em>空間設計</em>的整套流程</h1>
+          <p class="hs-desc reveal">從設計概念、建模渲染到跨團隊協作，AI 已進入空間設計的每一個環節。本場論壇為 AI X 設計職人產業實戰工作坊系列的最終場，集結產業與學界實踐者，分享可實際導入的工作方法與專案管理經驗。</p>
+          <div class="hs-stats reveal" aria-label="論壇議程統計">
+            <div class="hs-stat"><strong>4</strong><span>場專題演講</span></div>
+            <div class="hs-stat"><strong>3</strong><span>組實戰案例</span></div>
+            <div class="hs-stat"><strong>7</strong><span>小時議程</span></div>
           </div>
         </div>
 
         <div class="schools-card reveal" aria-labelledby="schools-title">
           <div class="schools-heading">
-            <h2 id="schools-title">合作學校</h2>
-            <p>跨校聯合・全台佈點</p>
+            <h2 id="schools-title">活動資訊</h2>
+            <p>單日議程・審核錄取</p>
           </div>
 
-          <div class="map-stage" aria-label="合作學校地圖位置展示">
-            <div class="map-wrap">
-              <img class="map-img" src="img/taiwan-political-division.svg" alt="台灣地圖">
-
-              <div class="school-pin is-right" style="--x:82%; --y:9%; --pin-c:var(--g);" aria-label="臺科大">
-                <div class="pin-label"><span class="pin-name">臺科大</span></div>
-              </div>
-
-              <div class="school-pin is-left" style="--x:72%; --y:11%; --pin-c:var(--b);" aria-label="元智大學">
-                <div class="pin-label"><span class="pin-name">元智大學</span></div>
-              </div>
-
-              <div class="school-pin is-left" style="--x:90%; --y:17%; --pin-c:var(--p);" aria-label="宜蘭大學">
-                <div class="pin-label"><span class="pin-name">宜蘭大學</span></div>
-              </div>
-
-              <div class="school-pin is-left" style="--x:48%; --y:33%; --pin-c:var(--g);" aria-label="逢甲大學">
-                <div class="pin-label"><span class="pin-name">逢甲大學</span></div>
-              </div>
-
-              <div class="school-pin is-left" style="--x:33%; --y:65%; --pin-c:var(--p);" aria-label="南臺科技大學">
-                <div class="pin-label"><span class="pin-name">南臺科技大學</span></div>
-              </div>
-            </div>
-          </div>
-
-          <ul class="school-list-mobile" aria-label="合作學校條列">
-            <li><strong>臺科大</strong><span>台北・1 場</span></li>
-            <li><strong>元智大學</strong><span>桃園・1 場</span></li>
-            <li><strong>宜蘭大學</strong><span>宜蘭・1 場</span></li>
-            <li><strong>逢甲大學</strong><span>台中・2 場</span></li>
-            <li><strong>南臺科技大學</strong><span>台南・2 場</span></li>
+          <ul class="school-list-mobile" aria-label="活動資訊條列">
+            <li><strong>日期</strong><span>2026/09/11（五）</span></li>
+            <li><strong>時間</strong><span>09:30–16:30（09:00 報到）</span></li>
+            <li><strong>地點</strong><span>逢甲大學 學思樓第九國際會議廳</span></li>
+            <li><strong>地址</strong><span>臺中市西屯區文華路 100 號</span></li>
+            <li><strong>報名期間</strong><span>2026/07/01 – 09/01</span></li>
+            <li><strong>錄取方式</strong><span>審核制</span></li>
+            <li><strong>餐飲</strong><span>大會提供午餐</span></li>
           </ul>
         </div>
       </div>
@@ -2100,7 +2169,7 @@ fBtns.forEach(btn => {
     if (e.key === 'ArrowRight' && !lbNextBtn.disabled) lbNextBtn.click();
   });
 
-  document.querySelectorAll('.more-link').forEach(btn => {
+  document.querySelectorAll('.more-link[data-course]').forEach(btn => {
     btn.addEventListener('click', () => openLightbox(parseInt(btn.dataset.course)));
   });
 
