@@ -102,25 +102,21 @@
     }
     h1 {
       position: relative; z-index: 1;
-      margin-bottom: 1.4rem;
-      max-width: 100%;
+      margin-bottom: 1.2rem;
+      width: min(88vw, 1440px);
     }
-    h1 img { display: block; width: min(88vw, 560px); height: auto; }
-    @media (min-width: 900px) {
-      h1 img { width: min(88vw, 1400px); }
+    h1 img { display: block; width: 100%; height: auto; }
+    @media (max-width: 639px) {
+      h1 { width: 100%; max-width: 100%; }
     }
     .hero-sub {
       position: relative; z-index: 1;
       margin-bottom: 2.5rem;
-      max-width: 26em;
-      color: var(--t);
-      font-size: clamp(1rem, 1.7vw, 1.5rem);
-      font-weight: 700;
-      line-height: 1.6;
-      letter-spacing: .01em;
-    }
-    @media (min-width: 900px) {
-      .hero-sub { max-width: none; }
+      max-width: 54rem;
+      font-size: clamp(1rem, 1.8vw, 1.45rem);
+      font-weight: 900;
+      line-height: 1.5;
+      letter-spacing: .02em;
     }
     .hero-info-bar {
       position: relative; z-index: 2;
@@ -153,9 +149,9 @@
     .hero-cta { padding: 11px 22px; }
     .hero-note { margin-top: .6rem; color: var(--ts); font-size: .78rem; }
     @media (max-width: 639px) {
-      #hero { padding-top: 72px; padding-bottom: 2rem; }
+      #hero { padding: 72px 1.5rem 2rem; }
       .hero-tag, h1 { margin-bottom: .75rem; }
-      .hero-sub { margin-bottom: 1.25rem; }
+      .hero-sub { width: 100%; max-width: 100%; margin-bottom: 1.25rem; font-size: .95rem; overflow-wrap: anywhere; }
       .hero-info-inner { grid-template-columns: 1fr; }
       .hero-info-item,
       .hero-info-action { padding: 1rem 1.5rem; }
@@ -236,12 +232,11 @@
     }
 
     .hs-desc {
-      max-width: 34ch;
-      margin: 4px 0 0;
-      color: #fff;
-      font-size: clamp(18px, 2.1vw, 28px);
-      font-weight: 700;
-      line-height: 1.9;
+      max-width: 52ch;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: clamp(15px, 1.45vw, 18px);
+      line-height: 2;
     }
 
     .schools-card {
@@ -462,9 +457,7 @@
       }
 
       .hs-desc {
-        max-width: none;
-        margin-top: 18px;
-        font-size: 17px;
+        font-size: 15px;
         line-height: 1.9;
       }
 
@@ -588,7 +581,6 @@
     @media (max-width: 420px) {
       .hs-shell { width: min(100% - 28px, 680px); }
       .hs-kicker { font-size: 11px; letter-spacing: 0.12em; }
-      .hs-desc { font-size: 16px; }
       .schools-card { padding-left: 14px; padding-right: 14px; }
       .school-list-mobile li {
         align-items: flex-start;
@@ -1212,6 +1204,55 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     .faq-a p { padding-bottom: 1.15rem; font-size: .9rem; line-height: 1.8; color: var(--ts); }
     .faq-a a { color: inherit; text-decoration: underline; }
 
+    /* ── FINAL CTA ── */
+    #register {
+      scroll-margin-top: 56px;
+      background: var(--y);
+      border-top: 2px solid var(--t);
+      border-bottom: 2px solid var(--t);
+      padding: clamp(4rem, 9vw, 7rem) clamp(1.5rem, 6vw, 4rem);
+      text-align: center;
+    }
+    .register-inner { max-width: 900px; margin: 0 auto; }
+    .register-kicker {
+      margin-bottom: 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: .75rem;
+      font-weight: 900;
+      letter-spacing: .16em;
+    }
+    .register-title {
+      margin-bottom: 1.75rem;
+      font-size: clamp(2.4rem, 7vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+    .register-venue {
+      margin-bottom: 1.75rem;
+      color: var(--ts);
+      font-size: clamp(.9rem, 1.3vw, 1.05rem);
+      font-weight: 700;
+      line-height: 1.8;
+    }
+    .register-link {
+      display: inline-block;
+      padding: .9rem 2rem;
+      background: var(--p);
+      border: 2px solid var(--t);
+      box-shadow: 7px 7px 0 var(--t);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+      text-decoration: none;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .register-link:hover,
+    .register-link:focus-visible {
+      transform: translate(3px, 3px);
+      box-shadow: 4px 4px 0 var(--t);
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--t); color: #fff;
@@ -1230,46 +1271,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     @media(max-width:600px){
       .ft-logo img { max-width: 100%; height: auto; }
     }
-
-    /* ── FINAL CTA ── */
-    #register {
-      background: var(--y);
-      border-top: 2px solid var(--t);
-      padding: clamp(4rem,9vw,7rem) clamp(1.5rem,6vw,4rem);
-      text-align: center;
-      scroll-margin-top: 56px;
-    }
-    .cta-inner { max-width: 860px; margin: 0 auto; }
-    .cta-kicker {
-      display: inline-block;
-      margin-bottom: 1.5rem;
-      padding: .3rem .75rem;
-      background: var(--t); color: var(--y);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: .72rem; font-weight: 700; letter-spacing: .14em;
-    }
-    .cta-title {
-      margin: 0;
-      color: var(--t);
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 900; line-height: 1.25; letter-spacing: -.03em;
-    }
-    .cta-desc {
-      margin: 1.25rem 0 2.25rem;
-      color: var(--ts);
-      font-size: clamp(.9rem, 1.3vw, 1.05rem);
-      font-weight: 700; line-height: 1.9;
-    }
-    .cta-btn {
-      display: inline-block;
-      padding: 1rem 3rem;
-      background: var(--t); color: var(--y);
-      border-radius: 10px;
-      font-size: clamp(1rem, 1.5vw, 1.15rem); font-weight: 900; letter-spacing: .04em;
-      text-decoration: none;
-      transition: transform .15s ease, filter .15s ease;
-    }
-    .cta-btn:hover { transform: translateY(-2px); filter: brightness(1.35); }
 
     /* ── REVEAL ── */
     .rv { opacity: 1; transform: none; transition: opacity .55s ease, transform .55s ease; }
@@ -1308,8 +1309,8 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   <div class="hero-tag">系列最終場 ・ 2026.09.11 FRI</div>
   <h1>
     <picture>
-      <source media="(min-width: 900px)" srcset="img/logo/0911-W.svg" type="image/svg+xml">
-      <img src="img/logo/0911-N.svg" alt="AI 賦能空間設計產業論壇">
+      <source media="(min-width: 640px)" srcset="img/logo/0911-W.svg" type="image/svg+xml">
+      <img src="img/logo/0911-N.svg" alt="2026 AI 賦能空間設計產業論壇">
     </picture>
   </h1>
   <p class="hero-sub">空間設計師 AI 賦能後的下一步：從 Creator 到 Curator</p>
@@ -1568,12 +1569,12 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 </section>
 
 <!-- FINAL CTA -->
-<section id="register" aria-labelledby="cta-title">
-  <div class="cta-inner rv">
-    <div class="cta-kicker">SPACE DESIGN FORUM · 2026.09.11 FRI</div>
-    <h2 id="cta-title" class="cta-title">一起走出空間設計的下一步</h2>
-    <p class="cta-desc">2026 年 9 月 11 日（五）09:30–16:30<br>逢甲大學 學思樓第九國際會議廳</p>
-    <a class="cta-btn" href="https://sted.neticrm.tw/civicrm/event/register?id=322&amp;reset=1" target="_blank" rel="noopener">立刻報名</a>
+<section id="register" aria-labelledby="register-title">
+  <div class="register-inner rv">
+    <p class="register-kicker">2026.09.11 FRI</p>
+    <h2 id="register-title" class="register-title">一起走向<br>AI 賦能後的下一步</h2>
+    <p class="register-venue">逢甲大學 學思樓第九國際會議廳</p>
+    <a class="register-link" href="https://sted.neticrm.tw/civicrm/event/register?id=322&amp;reset=1" target="_blank" rel="noopener">立刻報名</a>
   </div>
 </section>
 
