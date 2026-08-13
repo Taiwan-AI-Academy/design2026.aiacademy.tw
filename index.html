@@ -102,27 +102,25 @@
     }
     h1 {
       position: relative; z-index: 1;
-      margin-bottom: 1.2rem;
-      max-width: clamp(300px, 62vw, 1300px);
+      margin-bottom: 1.4rem;
+      max-width: 100%;
     }
-    h1 img { display: block; width: 100%; height: auto; }
+    h1 img { display: block; width: min(88vw, 560px); height: auto; }
     @media (min-width: 900px) {
-      h1 img { width: clamp(600px, 60vw, 1300px); }
-    }
-    @media (max-width: 639px) {
-      h1 img { width: min(85vw, 340px); }
+      h1 img { width: min(88vw, 1400px); }
     }
     .hero-sub {
       position: relative; z-index: 1;
       margin-bottom: 2.5rem;
-      max-width: clamp(280px, 52vw, 1100px);
+      max-width: 26em;
+      color: var(--t);
+      font-size: clamp(1rem, 1.7vw, 1.5rem);
+      font-weight: 700;
+      line-height: 1.6;
+      letter-spacing: .01em;
     }
-    .hero-sub img { display: block; width: 100%; height: auto; }
     @media (min-width: 900px) {
-      .hero-sub img { width: clamp(480px, 50vw, 1100px); }
-    }
-    @media (max-width: 639px) {
-      .hero-sub img { width: min(85vw, 380px); }
+      .hero-sub { max-width: none; }
     }
     .hero-info-bar {
       position: relative; z-index: 2;
@@ -237,61 +235,13 @@
       align-items: start;
     }
 
-    .hs-title {
-      max-width: 10.8em;
-      margin: 0;
-      color: #fff;
-      font-size: clamp(42px, 6.8vw, 88px);
-      font-weight: 900;
-      line-height: 1.08;
-      letter-spacing: -0.06em;
-    }
-
-    .hs-title em {
-      color: var(--y);
-      font-style: normal;
-    }
-
     .hs-desc {
-      max-width: 52ch;
-      margin: 28px 0 0;
-      color: rgba(255, 255, 255, 0.72);
-      font-size: clamp(15px, 1.45vw, 18px);
-      line-height: 2;
-    }
-
-    .hs-stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-top: clamp(32px, 5vw, 52px);
-      border: 2px solid var(--y);
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .hs-stat {
-      min-height: 128px;
-      padding: 22px 18px;
-      display: grid;
-      align-content: center;
-      gap: 8px;
-      border-left: 2px solid var(--y);
-    }
-
-    .hs-stat:first-child { border-left: 0; }
-
-    .hs-stat strong {
-      color: var(--y);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(40px, 5vw, 64px);
-      font-weight: 700;
-      line-height: 0.95;
-    }
-
-    .hs-stat span {
+      max-width: 34ch;
+      margin: 4px 0 0;
       color: #fff;
-      font-size: 13px;
+      font-size: clamp(18px, 2.1vw, 28px);
       font-weight: 700;
-      letter-spacing: 0.04em;
+      line-height: 1.9;
     }
 
     .schools-card {
@@ -445,7 +395,7 @@
     .school-list-mobile {
       display: grid;
       gap: 10px;
-      margin: 0;
+      margin: 18px 0 0;
       padding: 0 12px 12px 0;
       list-style: none;
     }
@@ -511,37 +461,16 @@
         bottom: 36%;
       }
 
-      .hs-title {
-        font-size: clamp(38px, 12vw, 56px);
-        letter-spacing: -0.05em;
-      }
-
       .hs-desc {
-        margin-top: 22px;
-        font-size: 15px;
+        max-width: none;
+        margin-top: 18px;
+        font-size: 17px;
         line-height: 1.9;
       }
 
       .hs-grid {
         display: block;
       }
-
-      .hs-stats {
-        grid-template-columns: 1fr;
-      }
-
-      .hs-stat {
-        min-height: auto;
-        grid-template-columns: auto 1fr;
-        align-items: baseline;
-        padding: 16px 18px;
-        border-left: 0;
-        border-top: 2px solid var(--y);
-      }
-
-      .hs-stat:first-child { border-top: 0; }
-      .hs-stat strong { font-size: 42px; }
-      .hs-stat span { font-size: 14px; }
 
       .schools-card {
         margin-top: 20px;
@@ -659,7 +588,7 @@
     @media (max-width: 420px) {
       .hs-shell { width: min(100% - 28px, 680px); }
       .hs-kicker { font-size: 11px; letter-spacing: 0.12em; }
-      .hs-title { font-size: 36px; }
+      .hs-desc { font-size: 16px; }
       .schools-card { padding-left: 14px; padding-right: 14px; }
       .school-list-mobile li {
         align-items: flex-start;
@@ -955,7 +884,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 .agenda-item {
   position: relative;
   display: grid;
-  grid-template-columns: 92px 28px minmax(0, 1fr) auto;
+  grid-template-columns: 92px 28px minmax(0, 1fr);
   align-items: stretch;
   padding: 3px 0;
 }
@@ -972,13 +901,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   font-weight: 700;
   line-height: 1.1;
   color: var(--ink);
-}
-.agenda-dur {
-  display: block;
-  margin-top: 3px;
-  font-size: 11px;
-  line-height: 1.2;
-  color: var(--ink2);
 }
 .agenda-item--minor .agenda-hour { font-size: 17px; color: var(--ink2); }
 
@@ -1089,22 +1011,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   background: rgba(51,51,51,.3);
 }
 
-/* 操作欄 */
-.agenda-act {
-  display: flex;
-  align-items: center;
-  padding: 8px 16px 8px 8px;
-}
-.agenda-item--talk .agenda-act {
-  background: #fff;
-  border-radius: 0 10px 10px 0;
-}
-.agenda-act .more-link {
-  padding: 7px 15px;
-  font-size: 12px;
-  white-space: nowrap;
-}
-
 /* ─── AGENDA MOBILE ─── */
 @media (max-width: 700px) {
   .agenda-list::before { display: none; }
@@ -1139,19 +1045,16 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   }
   .agenda-item--minor .agenda-time { padding: 2px 0 0; }
   .agenda-hour { font-size: 19px; }
-  .agenda-dur { margin-top: 0; }
   .agenda-main { padding: 4px 14px 12px; }
   .agenda-item--minor .agenda-main { padding: 2px 0 0; }
   .agenda-item--talk .agenda-main,
   .agenda-item--case .agenda-main,
   .agenda-item--talk .agenda-main:last-child,
-  .agenda-item--case .agenda-main:last-child,
-  .agenda-item--talk .agenda-act {
+  .agenda-item--case .agenda-main:last-child {
     background: transparent;
     border-left: 0;
     border-radius: 0;
   }
-  .agenda-act { padding: 0 14px 12px; }
   .agenda-ampm { font-size: 44px; }
   .agenda-sublist { flex-direction: column; gap: 2px; }
 }
@@ -1167,145 +1070,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   .top-bar { flex-direction: column; align-items: flex-start; }
 }
 
-        /* ── LIGHTBOX ── */
-    .lb-overlay {
-      position: fixed; inset: 0; z-index: 9000;
-      background: rgba(51,51,51,.45);
-      display: flex; align-items: center; justify-content: center;
-      padding: 1.5rem;
-      opacity: 0; pointer-events: none;
-      transition: opacity .22s;
-    }
-    .lb-overlay.open { opacity: 1; pointer-events: auto; }
-
-    /* Stage = sizing wrapper holding layers + box */
-    .lb-stage {
-      position: relative;
-      max-width: 560px; width: 100%;
-      overflow: hidden;
-      transform: translateY(20px);
-      transition: transform .25s cubic-bezier(.2,0,0,1);
-    }
-    .lb-overlay.open .lb-stage { transform: translateY(0); }
-
-    /* Three colour layers behind the main box */
-    .lb-layer {
-      position: absolute; inset: 0;
-      pointer-events: none; will-change: transform;
-      opacity: .5;
-    }
-    .lb-l1 { background: var(--p); z-index: 1; } /* pink  – furthest */
-    .lb-l2 { background: var(--b); z-index: 2; } /* blue  – middle  */
-    .lb-l3 { background: var(--g); z-index: 3; } /* green – closest */
-
-    .lb-box {
-      background: var(--y);
-      border: 2px dashed var(--t);
-      border-radius: 0;
-      max-height: 88vh; overflow-y: auto;
-      position: relative; z-index: 4;
-      scrollbar-width: thin;
-    }
-    .lb-close {
-      position: sticky; top: .75rem; float: right; margin: .75rem .75rem 0 0;
-      width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(51,51,51,.1); border: none; cursor: pointer;
-      font-size: 1.1rem; line-height: 32px; text-align: center; color: var(--t);
-      font-weight: 900; transition: background .15s;
-      z-index: 10;
-    }
-    .lb-close:hover { background: rgba(51,51,51,.22); }
-    .lb-header {
-      padding: 1.5rem 1.5rem .9rem;
-      border-bottom: 1.5px solid rgba(51,51,51,.15);
-    }
-    .lb-course-name {
-      font-size: 1.12rem; font-weight: 900; color: var(--t);
-      line-height: 1.35; margin-bottom: .5rem;
-    }
-    .lb-meta {
-      display: flex; flex-wrap: wrap; gap: .45rem .9rem;
-    }
-    .lb-meta-item {
-      font-size: .78rem; color: #666; display: flex; align-items: center; gap: .3rem;
-    }
-    .lb-meta-item strong { color: var(--t); }
-    .lb-body { padding: 1.25rem 1.5rem; }
-    .lb-tools {
-      display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.25rem;
-    }
-    .lb-tool-tag {
-      font-size: .7rem; font-weight: 700; padding: .18rem .6rem;
-      border-radius: 4px; background: rgba(255,112,162,.12); color: var(--p);
-      border: 1px solid rgba(255,112,162,.3);
-    }
-    .lb-section-label {
-      font-size: .72rem; font-weight: 700; color: #999; letter-spacing: .06em;
-      text-transform: uppercase; margin-bottom: .75rem;
-    }
-    .lb-speakers { display: flex; flex-direction: column; gap: 1.1rem; }
-    .lb-speaker {
-      display: flex; gap: .9rem; align-items: flex-start;
-    }
-    .lb-spk-photo {
-      width: 56px; height: 56px; flex-shrink: 0;
-      border-radius: 50%; overflow: hidden;
-      border: 2px solid var(--p);
-    }
-    .lb-spk-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .lb-spk-info { flex: 1; min-width: 0; }
-    .lb-spk-name { font-size: .95rem; font-weight: 900; color: var(--t); }
-    .lb-spk-role { font-size: .78rem; color: #666; margin: .15rem 0 .4rem; }
-    .lb-spk-bio { font-size: .78rem; color: #666; line-height: 1.6; }
-    .lb-nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: .6rem 1.5rem;
-      border-bottom: 1.5px solid rgba(51,51,51,.15);
-    }
-    .lb-nav-btn {
-      display: flex; align-items: center; gap: .35rem;
-      background: none; border: none; cursor: pointer;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: .76rem; font-weight: 700; color: var(--t);
-      padding: .3rem .5rem; border-radius: 0;
-      transition: background .15s, opacity .15s;
-    }
-    .lb-nav-btn:hover:not(:disabled) { background: rgba(51,51,51,.08); }
-    .lb-nav-btn:disabled { opacity: .25; cursor: default; }
-    .lb-nav-btn .arrow { font-size: .9rem; }
-    .lb-nav-counter {
-      font-size: .72rem; font-weight: 700; color: #999;
-      letter-spacing: .04em;
-    }
-    .lb-footer {
-      padding: 1rem 1.5rem 1.5rem;
-      border-top: 1.5px solid rgba(51,51,51,.15);
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .lb-deadline { font-size: .78rem; color: rgba(51,51,51,.5); }
-    .lb-deadline strong { color: var(--t); }
-    .lb-reg-btn {
-      display: inline-block; background: var(--p); color: #fff;
-      font-size: .82rem; font-weight: 700; padding: .5rem 1.4rem;
-      border-radius: 8px; text-decoration: none;
-      transition: background .15s, transform .15s;
-    }
-    .lb-reg-btn:hover { background: #e05590; transform: translateY(-1px); }
-    .lb-reg-btn.closed {
-      background: rgba(51,51,51,.12); color: rgba(51,51,51,.35); pointer-events: none;
-    }
-    @media(max-width:600px){
-      .lb-overlay { position: fixed; inset: 0; padding: 0; align-items: flex-end; }
-      .lb-overlay .lb-stage,
-      .lb-overlay.open .lb-stage { position: fixed; left: var(--vv-left, 0px); right: auto; bottom: 0; width: 100%; max-width: 100%; max-height: 92vh; padding: 0 .75rem .75rem; margin: 0; box-sizing: border-box; transform: none !important; }
-      .lb-box { max-height: 85vh; border-radius: 16px 16px 0 0; }
-    }
-    @media(max-width:480px){
-      .lb-header, .lb-body, .lb-footer { padding-left: 1.1rem; padding-right: 1.1rem; }
-      .lb-speaker { gap: .65rem; }
-      .lb-spk-photo { width: 46px; height: 46px; }
-    }
 
     @media(max-width:600px){
       .icon-circle { width: 60px; height: 60px; margin-right: -14px; }
@@ -1392,29 +1156,13 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       font-size: clamp(.82rem, .95vw, .9rem);
       line-height: 1.45;
       color: rgba(250,250,245,.72);
-      margin-bottom: .85rem;
+      margin-bottom: 0;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
     .spk-card.is-pending { display: none; }
-    .spk-card-tag {
-      margin-top: auto;
-      font-size: clamp(.68rem, .8vw, .78rem);
-      font-weight: 700;
-      padding: .22rem .55rem;
-      border-radius: 4px;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    .spk-card-tag.cat-film     { background: #FAFAF5; color: var(--t); }
-    .spk-card-tag.cat-method   { background: var(--g); color: #FAFAF5; }
-    .spk-card-tag.cat-visual   { background: var(--b); color: #FAFAF5; }
-    .spk-card-tag.cat-product  { background: var(--b); color: #FAFAF5; }
-    .spk-card-tag.cat-space    { background: var(--g); color: #FAFAF5; }
-    .spk-card-tag.cat-interior { background: var(--p); color: #FAFAF5; }
-    .spk-card-tag.cat-concept  { background: var(--p); color: #FAFAF5; }
 
     @media(max-width:900px){
       .spk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1427,8 +1175,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
         grid-template-columns: 72px minmax(0, 1fr);
         grid-template-areas:
           "photo name"
-          "photo role"
-          "photo tag";
+          "photo role";
         column-gap: 1rem;
         align-items: center;
         text-align: left;
@@ -1437,20 +1184,8 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       .spk-card::before { width: 4px; height: 100%; inset: 0 auto 0 0; }
       .spk-card-photo { grid-area: photo; width: 72px; height: 72px; margin: 0; }
       .spk-card-name { grid-area: name; margin: 0 0 .25rem; }
-      .spk-card-role { grid-area: role; min-height: 0; margin: 0 0 .5rem; font-size: .94rem; }
-      .spk-card-tag { grid-area: tag; justify-self: start; margin-top: 0; }
+      .spk-card-role { grid-area: role; min-height: 0; margin: 0; font-size: .94rem; }
     }
-
-    /* ── SPEAKERS 貴賓名條 ── */
-    .spk-guests {
-      max-width: 1180px;
-      margin: 1.75rem auto 0;
-      padding: 0 clamp(1.5rem,6vw,4rem);
-      font-size: clamp(.82rem, .95vw, .92rem);
-      line-height: 1.7;
-      color: rgba(250,250,245,.68);
-    }
-    .spk-guests strong { color: #FAFAF5; font-weight: 700; }
 
     /* ── FAQ ── */
     #faq {
@@ -1496,6 +1231,46 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       .ft-logo img { max-width: 100%; height: auto; }
     }
 
+    /* ── FINAL CTA ── */
+    #register {
+      background: var(--y);
+      border-top: 2px solid var(--t);
+      padding: clamp(4rem,9vw,7rem) clamp(1.5rem,6vw,4rem);
+      text-align: center;
+      scroll-margin-top: 56px;
+    }
+    .cta-inner { max-width: 860px; margin: 0 auto; }
+    .cta-kicker {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      padding: .3rem .75rem;
+      background: var(--t); color: var(--y);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: .72rem; font-weight: 700; letter-spacing: .14em;
+    }
+    .cta-title {
+      margin: 0;
+      color: var(--t);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900; line-height: 1.25; letter-spacing: -.03em;
+    }
+    .cta-desc {
+      margin: 1.25rem 0 2.25rem;
+      color: var(--ts);
+      font-size: clamp(.9rem, 1.3vw, 1.05rem);
+      font-weight: 700; line-height: 1.9;
+    }
+    .cta-btn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: var(--t); color: var(--y);
+      border-radius: 10px;
+      font-size: clamp(1rem, 1.5vw, 1.15rem); font-weight: 900; letter-spacing: .04em;
+      text-decoration: none;
+      transition: transform .15s ease, filter .15s ease;
+    }
+    .cta-btn:hover { transform: translateY(-2px); filter: brightness(1.35); }
+
     /* ── REVEAL ── */
     .rv { opacity: 1; transform: none; transition: opacity .55s ease, transform .55s ease; }
     .rv.in { opacity: 1; transform: translateY(0); }
@@ -1512,11 +1287,11 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 <nav class="topnav">
   <a href="#" class="logo"><img src="img/logo/D-Logo-1-n.svg" alt="Taiwan AI Academy"></a>
   <ul>
+    <li><a href="#info">活動資訊</a></li>
     <li><a href="#agenda">議程</a></li>
     <li><a href="#speakers">講者</a></li>
-    <li><a href="#info">活動資訊</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a class="more-link" href="https://sted.neticrm.tw/civicrm/event/register?id=322&amp;reset=1" target="_blank" rel="noopener">報名</a></li>
+    <li><a class="more-link" href="#register">報名</a></li>
   </ul>
 </nav>
 
@@ -1533,16 +1308,11 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   <div class="hero-tag">系列最終場 ・ 2026.09.11 FRI</div>
   <h1>
     <picture>
-      <source media="(min-width: 640px)" srcset="img/logo/D-Logo-1-w.svg" type="image/svg+xml">
-      <img src="img/logo/D-Logo-1-n.svg" alt="AI X 設計職人 產業實戰 工作坊">
+      <source media="(min-width: 900px)" srcset="img/logo/0911-W.svg" type="image/svg+xml">
+      <img src="img/logo/0911-N.svg" alt="AI 賦能空間設計產業論壇">
     </picture>
   </h1>
-  <p class="hero-sub">
-    <picture>
-      <source media="(min-width: 640px)" srcset="img/logo/D-Logo-2-w.svg" type="image/svg+xml">
-      <img src="img/logo/D-Logo-2-n.svg" alt="從動畫、影視、產品、空間到品牌，用 AI 賦能產業迎戰高衝擊浪潮">
-    </picture>
-  </p>
+  <p class="hero-sub">空間設計師 AI 賦能後的下一步：從 Creator 到 Curator</p>
 </section>
 
 <section class="hero-info-bar" aria-label="論壇活動資訊">
@@ -1556,41 +1326,39 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       <strong>逢甲大學學思樓第九國際會議廳</strong>
     </div>
     <div class="hero-info-action">
-      <a class="hero-cta more-link" href="https://sted.neticrm.tw/civicrm/event/register?id=322&amp;reset=1" target="_blank" rel="noopener">提交報名申請 →</a>
-      <div class="hero-note">審核制錄取・報名至 9/1 23:59</div>
+      <a class="hero-cta more-link" href="https://sted.neticrm.tw/civicrm/event/register?id=322&amp;reset=1" target="_blank" rel="noopener">立刻報名</a>
     </div>
   </div>
 </section>
 
-<!-- HERO + SCHOOLS INTEGRATED -->
-<section id="info" class="integrated-hero-schools" aria-labelledby="hero-schools-title">
+<!-- 活動資訊 -->
+<section id="info" class="integrated-hero-schools" aria-labelledby="schools-title">
     <div class="hs-shell">
       <div class="hs-grid">
         <div class="hs-copy">
           <div class="hs-kicker reveal">SPACE DESIGN FORUM · 2026</div>
-          <h1 id="hero-schools-title" class="hs-title reveal">AI 正在重新定義<em>空間設計</em>的整套流程</h1>
-          <p class="hs-desc reveal">從設計概念、建模渲染到跨團隊協作，AI 已進入空間設計的每一個環節。本場論壇為 AI X 設計職人產業實戰工作坊系列的最終場，集結產業與學界實踐者，分享可實際導入的工作方法與專案管理經驗。</p>
-          <div class="hs-stats reveal" aria-label="論壇議程統計">
-            <div class="hs-stat"><strong>4</strong><span>場專題演講</span></div>
-            <div class="hs-stat"><strong>3</strong><span>組實戰案例</span></div>
-            <div class="hs-stat"><strong>7</strong><span>小時議程</span></div>
-          </div>
+          <p class="hs-desc reveal">本論壇將總結台灣人工智慧學校本年度橫跨台灣北、中、南、東的【 AI X 設計職人產業實戰工作坊 】成果，從動畫、影視、產品、空間到品牌等八場工作坊中選擇聚焦在空間設計的AI賦能深化。</p>
         </div>
 
         <div class="schools-card reveal" aria-labelledby="schools-title">
           <div class="schools-heading">
-            <h2 id="schools-title">活動資訊</h2>
-            <p>單日議程・審核錄取</p>
+            <h2 id="schools-title">活動地點</h2>
+            <p>台中・逢甲大學</p>
+          </div>
+
+          <!-- TODO: placeholder，待換上正式的台灣圖 -->
+          <div class="map-stage" aria-label="論壇舉辦地點地圖">
+            <div class="map-wrap">
+              <img class="map-img" src="img/taiwan-political-division.svg" alt="台灣地圖">
+              <div class="school-pin is-left" style="--x:48%; --y:33%; --pin-c:var(--g);" aria-label="逢甲大學">
+                <div class="pin-label"><span class="pin-name">逢甲大學</span></div>
+              </div>
+            </div>
           </div>
 
           <ul class="school-list-mobile" aria-label="活動資訊條列">
-            <li><strong>日期</strong><span>2026/09/11（五）</span></li>
-            <li><strong>時間</strong><span>09:30–16:30（09:00 報到）</span></li>
             <li><strong>地點</strong><span>逢甲大學 學思樓第九國際會議廳</span></li>
             <li><strong>地址</strong><span>臺中市西屯區文華路 100 號</span></li>
-            <li><strong>報名期間</strong><span>2026/07/01 – 09/01</span></li>
-            <li><strong>錄取方式</strong><span>審核制</span></li>
-            <li><strong>餐飲</strong><span>大會提供午餐</span></li>
           </ul>
         </div>
       </div>
@@ -1621,7 +1389,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       <li class="agenda-item agenda-item--minor" id="agenda-1" data-cat="設計方法">
         <div class="agenda-time">
           <span class="agenda-hour">09:00</span>
-          <span class="agenda-dur">30 分鐘</span>
         </div>
         <div class="agenda-rail" aria-hidden="true"></div>
         <div class="agenda-main">
@@ -1632,49 +1399,38 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       <li class="agenda-item agenda-item--minor" id="agenda-2" data-cat="設計方法">
         <div class="agenda-time">
           <span class="agenda-hour">09:30</span>
-          <span class="agenda-dur">10 分鐘</span>
         </div>
         <div class="agenda-rail" aria-hidden="true"></div>
         <div class="agenda-main">
           <h3 class="agenda-title">貴賓致詞與合照</h3>
-          <p class="agenda-speaker">數發部鍾佳蓉副組長、中經院連賢明院長、逢甲大學長官</p>
         </div>
       </li>
 
       <li class="agenda-item agenda-item--talk" id="agenda-3" data-cat="影視動畫">
         <div class="agenda-time">
           <span class="agenda-hour">09:40</span>
-          <span class="agenda-dur">100 分鐘</span>
         </div>
         <div class="agenda-rail" aria-hidden="true"></div>
         <div class="agenda-main">
           <h3 class="agenda-title"><span class="agenda-kind">專題演講</span>打造你的 AI CASA — 室內與建築設計 AI 系統工作流</h3>
           <p class="agenda-speaker"><span class="agenda-name">邵唯晏</span><span class="agenda-role">竹工凡木設計集團 創辦人</span></p>
         </div>
-        <div class="agenda-act">
-          <button class="more-link" data-course="1">講者介紹</button>
-        </div>
       </li>
 
       <li class="agenda-item agenda-item--talk" id="agenda-4" data-cat="影視動畫">
         <div class="agenda-time">
           <span class="agenda-hour">11:20</span>
-          <span class="agenda-dur">50 分鐘</span>
         </div>
         <div class="agenda-rail" aria-hidden="true"></div>
         <div class="agenda-main">
           <h3 class="agenda-title"><span class="agenda-kind">專題演講</span>空間設計產業的 AI 專案管理實踐</h3>
           <p class="agenda-speaker"><span class="agenda-name">曾思遠</span><span class="agenda-role">Nautilus AI 執行長</span></p>
         </div>
-        <div class="agenda-act">
-          <button class="more-link" data-course="2">講者介紹</button>
-        </div>
       </li>
 
       <li class="agenda-item agenda-item--minor" id="agenda-5" data-cat="設計方法">
         <div class="agenda-time">
           <span class="agenda-hour">12:10</span>
-          <span class="agenda-dur">50 分鐘</span>
         </div>
         <div class="agenda-rail" aria-hidden="true"></div>
         <div class="agenda-main">
@@ -1697,49 +1453,38 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       <li class="agenda-item agenda-item--minor" id="agenda-6" data-cat="設計方法">
         <div class="agenda-time">
           <span class="agenda-hour">13:00</span>
-          <span class="agenda-dur">10 分鐘</span>
         </div>
         <div class="agenda-rail" aria-hidden="true"></div>
         <div class="agenda-main">
           <h3 class="agenda-title">貴賓致詞與合照</h3>
-          <p class="agenda-speaker">台灣人工智慧學校 蔡明順校務長</p>
         </div>
       </li>
 
       <li class="agenda-item agenda-item--talk" id="agenda-7" data-cat="商業視覺">
         <div class="agenda-time">
           <span class="agenda-hour">13:10</span>
-          <span class="agenda-dur">40 分鐘</span>
         </div>
         <div class="agenda-rail" aria-hidden="true"></div>
         <div class="agenda-main">
           <h3 class="agenda-title"><span class="agenda-kind">專題短講</span>用 AI 建模與渲染工作流</h3>
           <p class="agenda-speaker"><span class="agenda-name">林楚卿</span><span class="agenda-role">元智大學藝術與設計學系 教授</span></p>
         </div>
-        <div class="agenda-act">
-          <button class="more-link" data-course="3">講者介紹</button>
-        </div>
       </li>
 
       <li class="agenda-item agenda-item--talk" id="agenda-8" data-cat="商業視覺">
         <div class="agenda-time">
           <span class="agenda-hour">13:50</span>
-          <span class="agenda-dur">40 分鐘</span>
         </div>
         <div class="agenda-rail" aria-hidden="true"></div>
         <div class="agenda-main">
           <h3 class="agenda-title"><span class="agenda-kind">專題短講</span>用 AI 加速室內空間提案</h3>
           <p class="agenda-speaker"><span class="agenda-name">李元榮</span><span class="agenda-role">逢甲大學建築專業學院 教授</span></p>
         </div>
-        <div class="agenda-act">
-          <button class="more-link" data-course="4">講者介紹</button>
-        </div>
       </li>
 
       <li class="agenda-item agenda-item--minor" id="agenda-9" data-cat="設計方法">
         <div class="agenda-time">
           <span class="agenda-hour">14:30</span>
-          <span class="agenda-dur">30 分鐘</span>
         </div>
         <div class="agenda-rail" aria-hidden="true"></div>
         <div class="agenda-main">
@@ -1750,7 +1495,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       <li class="agenda-item agenda-item--case" id="agenda-10" data-cat="室內設計">
         <div class="agenda-time">
           <span class="agenda-hour">15:00</span>
-          <span class="agenda-dur">90 分鐘</span>
         </div>
         <div class="agenda-rail" aria-hidden="true"></div>
         <div class="agenda-main">
@@ -1787,16 +1531,15 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     <p class="sec-sub">產業與學界的空間設計 AI 實踐者</p>
   </div>
   <div class="spk-grid">
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/邵唯晏_croped.png" alt="邵唯晏 講者照片"></div><div class="spk-card-name">邵唯晏</div><div class="spk-card-role">竹工凡木設計集團 創辦人</div><a href="#agenda-3" class="spk-card-tag cat-film">AI CASA</a></div>
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/曾思遠_croped.png" alt="曾思遠 講者照片"></div><div class="spk-card-name">曾思遠</div><div class="spk-card-role">Nautilus AI 執行長</div><a href="#agenda-4" class="spk-card-tag cat-visual">專案管理</a></div>
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/林楚卿_croped.png" alt="林楚卿 講者照片"></div><div class="spk-card-name">林楚卿</div><div class="spk-card-role">元智大學藝術與設計學系 教授</div><a href="#agenda-7" class="spk-card-tag cat-interior">建模渲染</a></div>
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/李元榮_croped.png" alt="李元榮 講者照片"></div><div class="spk-card-name">李元榮</div><div class="spk-card-role">逢甲大學建築專業學院 教授</div><a href="#agenda-8" class="spk-card-tag cat-space">空間提案</a></div>
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/高逸峯_croped.jpg" alt="高逸峯 講者照片"></div><div class="spk-card-name">高逸峯</div><div class="spk-card-role">南臺科技大學 老師</div><a href="#agenda-10" class="spk-card-tag cat-interior">案例分享</a></div>
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/徐偉泓_croped.png" alt="徐偉泓 講者照片"></div><div class="spk-card-name">徐偉泓</div><div class="spk-card-role">參與學員</div><a href="#agenda-10" class="spk-card-tag cat-interior">案例分享</a></div>
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/李永鋒_croped.png" alt="李永鋒 講者照片"></div><div class="spk-card-name">李永鋒</div><div class="spk-card-role">參與學員</div><a href="#agenda-10" class="spk-card-tag cat-interior">案例分享</a></div>
-    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/郭爵綸_croped.png" alt="郭爵綸 講者照片"></div><div class="spk-card-name">郭爵綸</div><div class="spk-card-role">參與學員</div><a href="#agenda-10" class="spk-card-tag cat-interior">案例分享</a></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/邵唯晏_croped.png" alt="邵唯晏 講者照片"></div><div class="spk-card-name">邵唯晏</div><div class="spk-card-role">竹工凡木設計集團 創辦人</div></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/曾思遠_croped.png" alt="曾思遠 講者照片"></div><div class="spk-card-name">曾思遠</div><div class="spk-card-role">Nautilus AI 執行長</div></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/林楚卿_croped.png" alt="林楚卿 講者照片"></div><div class="spk-card-name">林楚卿</div><div class="spk-card-role">元智大學藝術與設計學系 教授</div></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/李元榮_croped.png" alt="李元榮 講者照片"></div><div class="spk-card-name">李元榮</div><div class="spk-card-role">逢甲大學建築專業學院 教授</div></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/高逸峯_croped.jpg" alt="高逸峯 講者照片"></div><div class="spk-card-name">高逸峯</div><div class="spk-card-role">南臺科技大學 老師</div></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/徐偉泓_croped.png" alt="徐偉泓 講者照片"></div><div class="spk-card-name">徐偉泓</div><div class="spk-card-role">參與學員</div></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/李永鋒_croped.png" alt="李永鋒 講者照片"></div><div class="spk-card-name">李永鋒</div><div class="spk-card-role">參與學員</div></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/郭爵綸_croped.png" alt="郭爵綸 講者照片"></div><div class="spk-card-name">郭爵綸</div><div class="spk-card-role">參與學員</div></div>
   </div>
-  <p class="spk-guests rv"><strong>貴賓致詞</strong>｜數位發展部數位產業署 鍾佳蓉 副組長・財團法人中華經濟研究院 連賢明 院長・台灣人工智慧學校 蔡明順 校務長</p>
 </section>
 
 <!-- FAQ -->
@@ -1824,6 +1567,16 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   </div>
 </section>
 
+<!-- FINAL CTA -->
+<section id="register" aria-labelledby="cta-title">
+  <div class="cta-inner rv">
+    <div class="cta-kicker">SPACE DESIGN FORUM · 2026.09.11 FRI</div>
+    <h2 id="cta-title" class="cta-title">一起走出空間設計的下一步</h2>
+    <p class="cta-desc">2026 年 9 月 11 日（五）09:30–16:30<br>逢甲大學 學思樓第九國際會議廳</p>
+    <a class="cta-btn" href="https://sted.neticrm.tw/civicrm/event/register?id=322&amp;reset=1" target="_blank" rel="noopener">立刻報名</a>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="ft-inner">
@@ -1841,41 +1594,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     <span class="ft-copy">aiacademy.tw</span>
   </div>
 </footer>
-
-<!-- COURSE LIGHTBOX -->
-<div id="course-lightbox" class="lb-overlay" role="dialog" aria-modal="true" aria-label="場次詳情">
-  <div class="lb-stage" id="lb-stage">
-    <div class="lb-layer lb-l1" id="lb-l1"></div>
-    <div class="lb-layer lb-l2" id="lb-l2"></div>
-    <div class="lb-layer lb-l3" id="lb-l3"></div>
-  <div class="lb-box">
-    <div class="lb-nav">
-      <button class="lb-nav-btn" id="lb-prev-btn" aria-label="上一場次">
-        <span class="arrow">←</span> 上一場
-      </button>
-      <span class="lb-nav-counter" id="lb-nav-counter"></span>
-      <button class="lb-nav-btn" id="lb-next-btn" aria-label="下一場次">
-        下一場 <span class="arrow">→</span>
-      </button>
-    </div>
-    <button class="lb-close" id="lb-close-btn" aria-label="關閉">×</button>
-    <div class="lb-header">
-      <div class="lb-course-name" id="lb-name"></div>
-      <div class="lb-meta" id="lb-meta"></div>
-    </div>
-    <div class="lb-body">
-      <div class="lb-section-label">講題關鍵詞</div>
-      <div class="lb-tools" id="lb-tools"></div>
-      <div class="lb-section-label">講者</div>
-      <div class="lb-speakers" id="lb-speakers"></div>
-    </div>
-    <div class="lb-footer">
-      <div class="lb-deadline" id="lb-deadline-note"></div>
-      <a href="#" class="lb-reg-btn" id="lb-reg-btn" target="_blank" rel="noopener">提交報名申請 →</a>
-    </div>
-  </div><!-- lb-box -->
-  </div><!-- lb-stage -->
-</div>
 
 <script>
     // FAQ
@@ -1959,230 +1677,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   })();
 
 
-  // Course lightbox data
-  const COURSES = {
-    1: {
-      name: '打造你的 AI CASA — 室內與建築設計 AI 系統工作流',
-      dateDisplay: '2026/09/11（五） 09:40–11:20',
-      uni: '逢甲大學 學思樓第九國際會議廳',
-      venue: '臺中市西屯區文華路 100 號',
-      url: 'https://sted.neticrm.tw/civicrm/event/register?id=322&reset=1',
-      deadline: '2026-09-01',
-      deadlineDisplay: '9/1',
-      tools: ['AI CASA', '室內設計', '建築設計', '系統工作流'],
-      speakers: [
-        { name: '邵唯晏', role: '竹工凡木設計集團 創辦人', photo: 'img/speakers/邵唯晏_croped.png',
-          bio: '邵唯晏長期投入設計、科技與研究的跨域整合，工作橫跨建築、室內、產品與策展；其設計方法以使用者為核心，結合理性分析與感性創造，發展整合性設計思維。' }
-      ]
-    },
-    2: {
-      name: '空間設計產業的 AI 專案管理實踐',
-      dateDisplay: '2026/09/11（五） 11:20–12:10',
-      uni: '逢甲大學 學思樓第九國際會議廳',
-      venue: '臺中市西屯區文華路 100 號',
-      url: 'https://sted.neticrm.tw/civicrm/event/register?id=322&reset=1',
-      deadline: '2026-09-01',
-      deadlineDisplay: '9/1',
-      tools: ['AI 專案管理', '空間設計產業'],
-      speakers: [
-        { name: '曾思遠', role: 'Nautilus AI 執行長', photo: 'img/speakers/曾思遠_croped.png', bio: '' }
-      ]
-    },
-    3: {
-      name: '用 AI 建模與渲染工作流',
-      dateDisplay: '2026/09/11（五） 13:10–13:50',
-      uni: '逢甲大學 學思樓第九國際會議廳',
-      venue: '臺中市西屯區文華路 100 號',
-      url: 'https://sted.neticrm.tw/civicrm/event/register?id=322&reset=1',
-      deadline: '2026-09-01',
-      deadlineDisplay: '9/1',
-      tools: ['AI 建模', 'AI 渲染', '工作流'],
-      speakers: [
-        { name: '林楚卿', role: '元智大學藝術與設計學系 教授', photo: 'img/speakers/林楚卿_croped.png',
-          bio: '林楚卿的研究主軸為數位設計應用，涵蓋數位構築、數位工具、設計思考、互動設計及跨領域數位設計整合，並探索其在建築、藝術、產品與工程等領域的應用及創新教學。' }
-      ]
-    },
-    4: {
-      name: '用 AI 加速室內空間提案',
-      dateDisplay: '2026/09/11（五） 13:50–14:30',
-      uni: '逢甲大學 學思樓第九國際會議廳',
-      venue: '臺中市西屯區文華路 100 號',
-      url: 'https://sted.neticrm.tw/civicrm/event/register?id=322&reset=1',
-      deadline: '2026-09-01',
-      deadlineDisplay: '9/1',
-      tools: ['AI 加速', '室內空間提案'],
-      speakers: [
-        { name: '李元榮', role: '逢甲大學建築專業學院 教授', photo: 'img/speakers/李元榮_croped.png',
-          bio: '李元榮的專長包括建築設計、室內設計、數位構築與互動設計。' }
-      ]
-    }
-  };
-
-  // Lightbox
-  const lbOverlay    = document.getElementById('course-lightbox');
-  const lbStage      = document.getElementById('lb-stage');
-  const lbName       = document.getElementById('lb-name');
-  const lbMeta       = document.getElementById('lb-meta');
-  const lbTools      = document.getElementById('lb-tools');
-  const lbSpeakers   = document.getElementById('lb-speakers');
-  const lbDeadline   = document.getElementById('lb-deadline-note');
-  const lbRegBtn     = document.getElementById('lb-reg-btn');
-  const lbPrevBtn    = document.getElementById('lb-prev-btn');
-  const lbNextBtn    = document.getElementById('lb-next-btn');
-  const lbNavCounter = document.getElementById('lb-nav-counter');
-  const COURSE_IDS   = Object.keys(COURSES).map(Number);
-  let currentCourseId = null;
-
-  // Parallax layer state — direction vectors match hero visual
-  // l1=pink(右下), l2=blue(左上), l3=green(上)
-  const LB_DIRS = [
-    [ 0.7,  0.7],   // pink  → lower-right
-    [-0.7, -0.7],   // blue  → upper-left
-    [ 0.0, -1.0],   // green → up
-  ];
-  const LB_BASE = 22;   // base spread magnitude (px)
-  const LB_TILT = 22;   // max mouse tilt (px)
-  const lbLayerEls = [
-    document.getElementById('lb-l1'),
-    document.getElementById('lb-l2'),
-    document.getElementById('lb-l3')
-  ];
-  let lbMx = 0, lbMy = 0;
-  let lbTargetSpread = 1;
-  let lbCurrentSpread = 1;
-  let lbRaf = null;
-
-  function lbParallaxRender() {
-    lbRaf = null;
-    lbCurrentSpread += (lbTargetSpread - lbCurrentSpread) * 0.15;
-    lbLayerEls.forEach((layer, i) => {
-      const [dx, dy] = LB_DIRS[i];
-      const spread = LB_BASE * lbCurrentSpread;
-      const tx = (dx * spread - lbMx * LB_TILT * lbCurrentSpread).toFixed(2);
-      const ty = (dy * spread - lbMy * LB_TILT * lbCurrentSpread).toFixed(2);
-      layer.style.transform = `translate(${tx}px,${ty}px)`;
-    });
-    if (Math.abs(lbCurrentSpread - lbTargetSpread) > 0.004) {
-      lbRaf = requestAnimationFrame(lbParallaxRender);
-    }
-  }
-  function lbParallaxSchedule() {
-    if (!lbRaf) lbRaf = requestAnimationFrame(lbParallaxRender);
-  }
-
-  function updateMobileLightboxViewport() {
-    if (window.visualViewport && window.innerWidth <= 600) {
-      document.documentElement.style.setProperty('--vv-left', `${window.visualViewport.offsetLeft}px`);
-    } else {
-      document.documentElement.style.removeProperty('--vv-left');
-    }
-  }
-
-  function openLightbox(courseId) {
-    const c = COURSES[courseId];
-    if (!c) return;
-    updateMobileLightboxViewport();
-    currentCourseId = courseId;
-    const isClosed = new Date() > new Date(c.deadline);
-    const idx = COURSE_IDS.indexOf(courseId);
-    lbPrevBtn.disabled = idx === 0;
-    lbNextBtn.disabled = idx === COURSE_IDS.length - 1;
-    lbNavCounter.textContent = `${idx + 1} / ${COURSE_IDS.length}`;
-
-    lbName.textContent = c.name;
-
-    const iconCalendar = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="vertical-align:-2px;flex-shrink:0"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M8 2v4m8-4v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></g></svg>`;
-    const iconSchool = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="vertical-align:-2px;flex-shrink:0"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 21v-3a2 2 0 0 0-4 0v3m8-16.067V21M4 6l7.106-3.79a2 2 0 0 1 1.788 0L20 6"/><path d="m6 11l-3.52 2.147a1 1 0 0 0-.48.854V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a1 1 0 0 0-.48-.853L18 11M6 4.933V21"/><circle cx="12" cy="9" r="2"/></g></svg>`;
-    const iconMapPin = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="vertical-align:-2px;flex-shrink:0"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></g></svg>`;
-
-    lbMeta.innerHTML = `
-      <span class="lb-meta-item">${iconCalendar} <strong>${c.dateDisplay}</strong></span>
-      <span class="lb-meta-item">${iconSchool} <strong>${c.uni}</strong></span>
-      <span class="lb-meta-item">${iconMapPin} ${c.venue}</span>
-    `;
-
-    lbTools.innerHTML = c.tools.map(t => `<span class="lb-tool-tag">${t}</span>`).join('');
-
-    lbSpeakers.innerHTML = c.speakers.map(s => `
-      <div class="lb-speaker">
-        ${s.photo ? `<div class="lb-spk-photo"><img src="${s.photo}" alt="${s.name}"></div>` : ''}
-        <div class="lb-spk-info">
-          <div class="lb-spk-name">${s.name}</div>
-          ${s.role ? `<div class="lb-spk-role">${s.role}</div>` : ''}
-          ${s.bio  ? `<div class="lb-spk-bio">${s.bio}</div>`  : ''}
-        </div>
-      </div>
-    `).join('');
-
-    lbDeadline.innerHTML = isClosed
-      ? '<strong>報名已截止</strong>'
-      : `報名截止：<strong>${c.deadlineDisplay}</strong>`;
-
-    if (isClosed) {
-      lbRegBtn.textContent = '報名已截止';
-      lbRegBtn.classList.add('closed');
-      lbRegBtn.removeAttribute('href');
-    } else {
-      lbRegBtn.textContent = '提交報名申請 →';
-      lbRegBtn.classList.remove('closed');
-      lbRegBtn.href = c.url;
-    }
-
-    // Reset parallax immediately (no lerp) then re-attach
-    lbMx = 0; lbMy = 0; lbTargetSpread = 1; lbCurrentSpread = 1;
-    lbParallaxRender();
-
-    lbOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    document.getElementById('lb-close-btn').focus();
-  }
-
-  function closeLightbox() {
-    lbOverlay.classList.remove('open');
-    document.body.style.overflow = '';
-    document.documentElement.style.removeProperty('--vv-left');
-  }
-
-  document.getElementById('lb-close-btn').addEventListener('click', closeLightbox);
-  lbOverlay.addEventListener('click', e => { if (!lbStage.contains(e.target)) closeLightbox(); });
-
-  // Parallax: track mouse relative to stage centre
-  lbOverlay.addEventListener('mousemove', e => {
-    const r = lbStage.getBoundingClientRect();
-    lbMx = (e.clientX - r.left  - r.width  / 2) / (r.width  / 2);
-    lbMy = (e.clientY - r.top   - r.height / 2) / (r.height / 2);
-    lbParallaxSchedule();
-  });
-  lbOverlay.addEventListener('mouseleave', () => { lbMx = 0; lbMy = 0; lbParallaxSchedule(); });
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', updateMobileLightboxViewport);
-    window.visualViewport.addEventListener('scroll', updateMobileLightboxViewport);
-  }
-  window.addEventListener('resize', updateMobileLightboxViewport);
-
-  // Reg button hover → collapse layers
-  lbRegBtn.addEventListener('mouseenter', () => { lbTargetSpread = 0; lbParallaxSchedule(); });
-  lbRegBtn.addEventListener('mouseleave', () => { lbTargetSpread = 1; lbParallaxSchedule(); });
-
-  lbPrevBtn.addEventListener('click', () => {
-    const idx = COURSE_IDS.indexOf(currentCourseId);
-    if (idx > 0) openLightbox(COURSE_IDS[idx - 1]);
-  });
-  lbNextBtn.addEventListener('click', () => {
-    const idx = COURSE_IDS.indexOf(currentCourseId);
-    if (idx < COURSE_IDS.length - 1) openLightbox(COURSE_IDS[idx + 1]);
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeLightbox(); return; }
-    if (!lbOverlay.classList.contains('open')) return;
-    if (e.key === 'ArrowLeft'  && !lbPrevBtn.disabled) lbPrevBtn.click();
-    if (e.key === 'ArrowRight' && !lbNextBtn.disabled) lbNextBtn.click();
-  });
-
-  document.querySelectorAll('.more-link[data-course]').forEach(btn => {
-    btn.addEventListener('click', () => openLightbox(parseInt(btn.dataset.course)));
-  });
 </script>
 <script>
 (() => {
