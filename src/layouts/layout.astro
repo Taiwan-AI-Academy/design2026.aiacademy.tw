@@ -1,0 +1,126 @@
+---
+// src/layouts/Layout.astro
+import '../styles/global.css';
+---
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 AI 賦能空間設計產業論壇 — Taiwan AI Academy</title>
+  <meta name="description" content="2026 AI 賦能空間設計產業論壇｜9/11（五）09:30–16:30，逢甲大學學思樓第九國際會議廳。總結台灣人工智慧學校「AI X 設計職人產業實戰工作坊」年度成果，聚焦空間設計的 AI 賦能深化。">
+  <meta property="og:title" content="2026 AI 賦能空間設計產業論壇">
+  <meta property="og:description" content="9/11（五）09:30–16:30，逢甲大學學思樓第九國際會議廳。總結台灣人工智慧學校「AI X 設計職人產業實戰工作坊」年度成果，聚焦空間設計的 AI 賦能深化。">
+  <meta property="og:type" content="website">
+  <!-- og:url 與 og:image 待主辦單位確認正式網域與 1200×630 論壇分享圖後補上絕對網址；未確認前不放相對路徑或推測網址。 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Space+Grotesk:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    
+    <script>
+        // previous scroll reveal
+    // (() => {
+    //   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    //   const items = document.querySelectorAll('.reveal');
+    //   if (reduced || !('IntersectionObserver' in window)) {
+    //     items.forEach((item) => item.classList.add('in'));
+    //     return;
+    //   }
+
+    //   const observer = new IntersectionObserver((entries) => {
+    //     entries.forEach((entry) => {
+    //       if (!entry.isIntersecting) return;
+    //       entry.target.classList.add('in');
+    //       observer.unobserve(entry.target);
+    //     });
+    //   }, { threshold: 0.16 });
+
+    //   items.forEach((item, index) => {
+    //     item.style.transitionDelay = `${Math.min(index * 80, 320)}ms`;
+    //     observer.observe(item);
+    //   });
+    // })();
+
+
+
+        // Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+        });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.rv, .rv2').forEach(el => obs.observe(el));
+
+    // Design Logo Parallax
+    (function () {
+        const layers = document.querySelectorAll('#design-logo .dl-layer');
+        const logo   = document.getElementById('design-logo');
+        if (!logo || !layers.length) return;
+
+        // Spread direction for each layer (normalised vectors)
+        const DIRS = [
+        [ 0.7,  0.7],   // Layer 1: right-down
+        [-1.0,  0.0],   // Layer 2: left
+        [ 0.0, -1.0],   // Layer 3: up
+        [ 0.0,  1.0],   // Layer 4: down
+        ];
+        const BASE_SPREAD_MAX = 12;  // px, resting base offset
+        const MAX_SPREAD      = 20;  // px, additional spread from scroll/mouse
+        const MAX_TILT        = 28;  // px, global parallax shift from mouse
+        const LERP            = 0.22;
+
+        let mx = 0, my = 0;
+        let currentBase = BASE_SPREAD_MAX;
+        let targetBase  = BASE_SPREAD_MAX;
+        let raf = null;
+
+        function getScrollFactor() {
+        const heroH = document.getElementById('hero').offsetHeight || window.innerHeight;
+        return Math.min(1, window.scrollY / heroH);
+        }
+
+        function render() {
+        raf = null;
+        currentBase += (targetBase - currentBase) * LERP;
+
+        const sf       = getScrollFactor();
+        const mouseMag = Math.sqrt(mx * mx + my * my) / Math.SQRT2;
+        const spread   = currentBase + (sf * 0.65 + mouseMag * 0.35) * MAX_SPREAD;
+
+        layers.forEach((el, i) => {
+            const [dx, dy] = DIRS[i];
+            const tx = dx * spread - mx * MAX_TILT;
+            const ty = dy * spread - my * MAX_TILT;
+            el.style.transform = `translate(${tx.toFixed(2)}px,${ty.toFixed(2)}px)`;
+        });
+
+        // keep animating while base is still lerping
+        if (Math.abs(currentBase - targetBase) > 0.05) schedule();
+        }
+
+        function schedule() { if (!raf) raf = requestAnimationFrame(render); }
+
+        logo.addEventListener('mouseenter', () => { targetBase = 0; schedule(); });
+        logo.addEventListener('mouseleave', () => { targetBase = BASE_SPREAD_MAX; schedule(); });
+
+        window.addEventListener('mousemove', e => {
+        mx = (e.clientX / window.innerWidth  - 0.5) * 2;
+        my = (e.clientY / window.innerHeight - 0.5) * 2;
+        schedule();
+        });
+        window.addEventListener('scroll', schedule, { passive: true });
+        window.addEventListener('resize', schedule, { passive: true });
+
+        schedule();
+    })();
+
+    </script>
+
+    <slot>
+
+    </slot>
+</body>
+</html>

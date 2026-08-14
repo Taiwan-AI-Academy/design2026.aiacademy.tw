@@ -1,0 +1,31 @@
+
+
+
+
+<!-- FAQ -->
+<section id="faq">
+    <div class="rv">
+        <h2 class="sec-title">常見問題</h2>
+    </div>
+    <div class="faq-list rv">
+        <div class="faq-item">
+        <button class="faq-q"><span>是否提供午餐？</span><span class="faq-plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>是，活動公開頁確認提供午餐；議程另安排午茶交流。報名表可選擇葷食、素食或不用餐。</p></div></div>
+        </div>
+        <div class="faq-item">
+        <button class="faq-q"><span>如何前往會場？是否提供停車？</span><span class="faq-plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>會場位於逢甲大學校本部學思樓第九國際會議廳，可由高鐵台中站、台中車站或台中捷運轉乘公車前往，詳見<a href="https://www.fcu.edu.tw/traffic/" target="_blank" rel="noopener">逢甲大學官方交通建議</a>。校內凱旋停車場與體育館地下停車場提供收費停車，滿位後須改停校外周邊收費停車場。</p></div></div>
+        </div>
+    </div>
+</section>
+
+<script>
+        // FAQ
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.querySelector('.faq-q').addEventListener('click', () => {
+        const open = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!open) item.classList.add('open');
+        });
+    });
+</script>
