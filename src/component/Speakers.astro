@@ -1,0 +1,492 @@
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 AI 賦能空間設計產業論壇 — Taiwan AI Academy</title>
+  <meta name="description" content="2026 AI 賦能空間設計產業論壇｜9/11（五）09:30–16:30，逢甲大學學思樓第九國際會議廳。總結台灣人工智慧學校「AI X 設計職人產業實戰工作坊」年度成果，聚焦空間設計的 AI 賦能深化。">
+  <meta property="og:title" content="2026 AI 賦能空間設計產業論壇">
+  <meta property="og:description" content="9/11（五）09:30–16:30，逢甲大學學思樓第九國際會議廳。總結台灣人工智慧學校「AI X 設計職人產業實戰工作坊」年度成果，聚焦空間設計的 AI 賦能深化。">
+  <meta property="og:type" content="website">
+  <!-- og:url 與 og:image 待主辦單位確認正式網域與 1200×630 論壇分享圖後補上絕對網址；未確認前不放相對路徑或推測網址。 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Space+Grotesk:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+     root {
+      --y:    #F5E400;
+      --g:    #5EC223;
+      --gb:   #AADA12;
+      --b:    #00A1F2;
+      --bb:   #7AC279;
+      --p:    #FF70A2;
+      --pb:   #FAAA51;
+      --t:    #333333;
+      --ts:   #666666;
+      --bg:   #FAFAF5;
+      --line: rgba(51,51,51,0.10);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg); color: var(--t);
+      overflow-x: hidden;
+    }
+
+    /* ── YEAR BADGE (fixed right) ── */
+    .year-fixed {
+      position: fixed; top: 50%; right: 0; z-index: 500;
+      transform: translateY(-50%);
+      background: var(--p); color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px; font-weight: 900;
+      writing-mode: vertical-rl; letter-spacing: 6px;
+      padding: 16px 6px; width: 28px;
+      pointer-events: none;
+    }
+
+    /* ── NAV ── */
+    nav.topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 400;
+      background: var(--y); border-bottom: 2px solid var(--t);
+      height: 56px; padding: 0 clamp(1.25rem,5vw,3.5rem);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .topnav .logo img { height: 28px; display: block; }
+    .topnav ul { list-style: none; display: flex; gap: 1.75rem; }
+    .topnav ul a {
+      font-size: .78rem; font-weight: 700; color: var(--t);
+      text-decoration: none; letter-spacing: .07em; text-transform: uppercase;
+    }
+    .topnav ul a:hover { text-decoration: underline; }
+    @media(max-width:700px){ .topnav ul { display: none; } nav.topnav { width: 100%; } }
+
+    /* ── HERO ── */
+    #hero {
+      height: calc(100svh - 112px); background: var(--y);
+      padding: clamp(80px,14vh,160px) clamp(1.5rem,6vw,4rem) clamp(4rem,8vw,6rem);
+      display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;
+      position: sticky; top: 0; z-index: 1; overflow: hidden;
+    }
+    @media (min-width: 900px) {
+      #hero { align-items: center; text-align: center; }
+      .hero-tag { margin-left: auto; margin-right: auto; }
+    }
+    #design-logo {
+      position: absolute; top: 58%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(300px, 88vw, 1600px);
+      user-select: none;
+    }
+    @media (min-width: 900px) {
+      #design-logo { top: 72%; width: clamp(300px, 78vw, 1450px); }
+    }
+    .dl-inner {
+      position: relative; width: 100%;
+      padding-bottom: calc(100% * 704.9 / 3002.8);
+    }
+    .dl-layer {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      will-change: transform;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    .hero-tag {
+      position: relative; z-index: 1;
+      display: inline-block; background: var(--t); color: var(--y);
+      font-size: .72rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; padding: .3rem .75rem;
+      margin-bottom: 1.2rem; width: fit-content;
+    }
+    h1 {
+      position: relative; z-index: 1;
+      margin-bottom: 1.2rem;
+      width: min(88vw, 1440px);
+    }
+    h1 img { display: block; width: 100%; height: auto; }
+    @media (max-width: 639px) {
+      h1 { width: 100%; max-width: 100%; }
+    }
+    .hero-sub {
+      position: relative; z-index: 1;
+      margin-bottom: 2.5rem;
+      max-width: 54rem;
+      font-size: clamp(1rem, 1.8vw, 1.45rem);
+      font-weight: 900;
+      line-height: 1.5;
+      letter-spacing: .02em;
+    }
+    .hero-info-bar {
+      position: relative; z-index: 2;
+      background: var(--bg);
+      border-top: 2px solid var(--t);
+      border-bottom: 2px solid var(--t);
+    }
+    .hero-info-inner {
+      min-height: 112px;
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+    }
+    .hero-info-item,
+    .hero-info-action {
+      padding: 1.25rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-info-item { border-right: 1px solid var(--line); }
+    .hero-info-label {
+      margin-bottom: .35rem;
+      color: var(--ts);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    .hero-info-item strong { font-size: 1rem; line-height: 1.5; }
+    .hero-info-action { align-items: center; min-width: 260px; }
+    .hero-cta { padding: 11px 22px; }
+    .hero-note { margin-top: .6rem; color: var(--ts); font-size: .78rem; }
+    @media (max-width: 639px) {
+      #hero { padding: 72px 1.5rem 2rem; }
+      .hero-tag, h1 { margin-bottom: .75rem; }
+      .hero-sub { width: 100%; max-width: 100%; margin-bottom: 1.25rem; font-size: .95rem; overflow-wrap: anywhere; }
+      .hero-info-inner { grid-template-columns: 1fr; }
+      .hero-info-item,
+      .hero-info-action { padding: 1rem 1.5rem; }
+      .hero-info-item { border-right: 0; border-bottom: 1px solid var(--line); }
+      .hero-info-action { align-items: flex-start; min-width: 0; }
+    }
+
+    /* All sections after hero stack above it */
+    section:not(#hero), footer { position: relative; z-index: 2; }
+
+    /* ── HERO + SCHOOLS INTEGRATED ── */
+.integrated-hero-schools {
+      position: relative;
+      overflow: hidden;
+      background: var(--t);
+      isolation: isolate;
+      scroll-margin-top: 56px;
+    }
+
+    .integrated-hero-schools::before,
+    .integrated-hero-schools::after {
+      content: '';
+      position: absolute;
+      border: 2px dashed rgba(255, 255, 255, 0.24);
+      border-radius: 999px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .integrated-hero-schools::before {
+      width: clamp(260px, 36vw, 520px);
+      height: clamp(260px, 36vw, 520px);
+      top: -150px;
+      right: -110px;
+      background: rgba(0, 161, 242, 0.5);
+    }
+
+    .integrated-hero-schools::after {
+      width: clamp(190px, 28vw, 420px);
+      height: clamp(190px, 28vw, 420px);
+      left: -120px;
+      bottom: 18%;
+      background: rgba(255, 112, 162, 0.5);
+    }
+
+    .hs-shell {
+      width: min(1200px, calc(100% - 64px));
+      margin: 0 auto;
+      padding: clamp(72px, 9vw, 128px) 0 clamp(80px, 10vw, 140px);
+    }
+
+    .hs-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      color: var(--y);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .hs-kicker::before {
+      content: '';
+      width: 40px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--g);
+    }
+
+    .hs-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(360px, 0.78fr);
+      gap: clamp(44px, 7vw, 96px);
+      align-items: start;
+    }
+
+    .hs-desc {
+      max-width: 52ch;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: clamp(15px, 1.45vw, 18px);
+      line-height: 2;
+    }
+
+    .schools-card {
+      position: relative;
+      min-width: 0;
+      border: 2px solid var(--t);
+      background: var(--y);
+      box-shadow: 14px 14px 0 var(--g);
+      padding: clamp(22px, 3vw, 32px);
+    }
+
+    .schools-card::before {
+      content: 'EVENT INFO';
+      position: absolute;
+      top: -16px;
+      left: 24px;
+      padding: 6px 12px;
+      background: var(--p);
+      border: 2px solid var(--t);
+      color: var(--t);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    }
+
+    .schools-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 20px;
+      border-bottom: 4px solid var(--t);
+      padding-bottom: 16px;
+    }
+
+    .schools-heading h2 {
+      margin: 0;
+      font-size: clamp(28px, 3.3vw, 44px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .schools-heading p {
+      margin: 0;
+      color: var(--ts);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .map-stage {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      border: 2px solid var(--t);
+      overflow: visible;
+      padding: 8px 48px 8px 16px;
+    }
+
+    .map-stage::before {
+      content: none;
+    }
+
+    .map-wrap {
+      position: relative;
+      width: min(400px, 78%);
+      margin: 4px auto;
+    }
+
+    .map-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      opacity: 0.92;
+      filter: drop-shadow(12px 12px 0 rgba(51, 51, 51, 0.14));
+    }
+
+    .school-pin {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border: 2px solid var(--t);
+      border-radius: 999px;
+      background: var(--pin-c, var(--g));
+      box-shadow: inset 0 0 0 7px var(--bg), 5px 5px 0 rgba(51, 51, 51, 0.18);
+    }
+
+    .school-pin:nth-of-type(2n) { background: var(--pin-c, var(--b)); }
+    .school-pin:nth-of-type(3n) { background: var(--pin-c, var(--p)); }
+
+    .pin-label {
+      position: absolute;
+      top: 50%;
+      display: grid;
+      gap: 2px;
+      min-width: 104px;
+      padding: 8px 10px;
+      border: 2px solid var(--t);
+      background: #fff;
+      color: var(--t);
+      transform: translateY(-50%);
+      font-weight: 900;
+      line-height: 1.2;
+      box-shadow: 5px 5px 0 var(--pin-c, var(--p));
+      pointer-events: none;
+    }
+
+    .pin-label::before {
+      display: none;
+    }
+
+    .school-pin.is-left .pin-label {
+      right: calc(100% + 10px);
+      text-align: right;
+    }
+
+    .school-pin.is-left .pin-label::before {
+      display: none;
+    }
+
+    .school-pin.is-right .pin-label {
+      left: calc(100% + 10px);
+      text-align: left;
+    }
+
+    .school-pin.is-right .pin-label::before {
+      display: none;
+    }
+
+    .pin-name {
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .pin-city {
+      color: var(--ts);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .school-list-mobile {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 0;
+      padding: 0 12px 12px 0;
+      list-style: none;
+    }
+
+    .school-list-mobile li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 15px 16px;
+      border: 2px solid var(--t);
+      background: var(--bg);
+      box-shadow: 4px 4px 0 var(--p);
+    }
+
+    .school-list-mobile strong {
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .school-list-mobile span {
+      color: var(--ts);
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .hs-grid {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .schools-card {
+        width: min(760px, 100%);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hs-shell {
+        width: min(100% - 40px, 680px);
+        padding: 64px 0 72px;
+      }
+
+      .integrated-hero-schools::before {
+        top: -120px;
+        right: -160px;
+      }
+
+      .integrated-hero-schools::after {
+        left: -150px;
+        bottom: 36%;
+      }
+</style>
+</head>
+
+
+
+<body>
+<!-- SPEAKERS -->
+<section id="speakers">
+  <div class="rv">
+    <h2 class="sec-title">講者陣容</h2>
+    <p class="sec-sub">產業與學界的空間設計 AI 實踐者</p>
+  </div>
+  <div class="spk-grid">
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/邵唯晏_croped.png" alt="邵唯晏 講者照片"></div><div class="spk-card-name">邵唯晏</div><div class="spk-card-role">竹工凡木設計集團 創辦人</div></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/曾思遠_croped.png" alt="曾思遠 講者照片"></div><div class="spk-card-name">曾思遠</div><div class="spk-card-role">Nautilus AI 執行長</div></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/林楚卿_croped.png" alt="林楚卿 講者照片"></div><div class="spk-card-name">林楚卿</div><div class="spk-card-role">元智大學藝術與設計學系 教授</div></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/李元榮_croped.png" alt="李元榮 講者照片"></div><div class="spk-card-name">李元榮</div><div class="spk-card-role">逢甲大學建築專業學院 教授</div></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/高逸峯_croped.jpg" alt="高逸峯 講者照片"></div><div class="spk-card-name">高逸峯</div><div class="spk-card-role">南臺科技大學 老師</div></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/徐偉泓_croped.png" alt="徐偉泓 講者照片"></div><div class="spk-card-name">徐偉泓</div><div class="spk-card-role">參與學員</div></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/李永鋒_croped.png" alt="李永鋒 講者照片"></div><div class="spk-card-name">李永鋒</div><div class="spk-card-role">參與學員</div></div>
+    <div class="spk-card"><div class="spk-card-photo"><img src="img/speakers/郭爵綸_croped.png" alt="郭爵綸 講者照片"></div><div class="spk-card-name">郭爵綸</div><div class="spk-card-role">參與學員</div></div>
+  </div>
+</section>
+</body>
+</html>

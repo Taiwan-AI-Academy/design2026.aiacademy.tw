@@ -1,0 +1,1447 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 AI 賦能空間設計產業論壇 — Taiwan AI Academy</title>
+  <meta name="description" content="2026 AI 賦能空間設計產業論壇｜9/11（五）09:30–16:30，逢甲大學學思樓第九國際會議廳。總結台灣人工智慧學校「AI X 設計職人產業實戰工作坊」年度成果，聚焦空間設計的 AI 賦能深化。">
+  <meta property="og:title" content="2026 AI 賦能空間設計產業論壇">
+  <meta property="og:description" content="9/11（五）09:30–16:30，逢甲大學學思樓第九國際會議廳。總結台灣人工智慧學校「AI X 設計職人產業實戰工作坊」年度成果，聚焦空間設計的 AI 賦能深化。">
+  <meta property="og:type" content="website">
+  <!-- og:url 與 og:image 待主辦單位確認正式網域與 1200×630 論壇分享圖後補上絕對網址；未確認前不放相對路徑或推測網址。 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Space+Grotesk:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --y:    #F5E400;
+      --g:    #5EC223;
+      --gb:   #AADA12;
+      --b:    #00A1F2;
+      --bb:   #7AC279;
+      --p:    #FF70A2;
+      --pb:   #FAAA51;
+      --t:    #333333;
+      --ts:   #666666;
+      --bg:   #FAFAF5;
+      --line: rgba(51,51,51,0.10);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg); color: var(--t);
+      overflow-x: hidden;
+    }
+
+    /* ── YEAR BADGE (fixed right) ── */
+    .year-fixed {
+      position: fixed; top: 50%; right: 0; z-index: 500;
+      transform: translateY(-50%);
+      background: var(--p); color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px; font-weight: 900;
+      writing-mode: vertical-rl; letter-spacing: 6px;
+      padding: 16px 6px; width: 28px;
+      pointer-events: none;
+    }
+
+    /* ── NAV ── */
+    nav.topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 400;
+      background: var(--y); border-bottom: 2px solid var(--t);
+      height: 56px; padding: 0 clamp(1.25rem,5vw,3.5rem);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .topnav .logo img { height: 28px; display: block; }
+    .topnav ul { list-style: none; display: flex; gap: 1.75rem; }
+    .topnav ul a {
+      font-size: .78rem; font-weight: 700; color: var(--t);
+      text-decoration: none; letter-spacing: .07em; text-transform: uppercase;
+    }
+    .topnav ul a:hover { text-decoration: underline; }
+    @media(max-width:700px){ .topnav ul { display: none; } nav.topnav { width: 100%; } }
+
+    /* ── HERO ── */
+    #hero {
+      height: calc(100svh - 112px); background: var(--y);
+      padding: clamp(80px,14vh,160px) clamp(1.5rem,6vw,4rem) clamp(4rem,8vw,6rem);
+      display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;
+      position: sticky; top: 0; z-index: 1; overflow: hidden;
+    }
+    @media (min-width: 900px) {
+      #hero { align-items: center; text-align: center; }
+      .hero-tag { margin-left: auto; margin-right: auto; }
+    }
+    #design-logo {
+      position: absolute; top: 58%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(300px, 88vw, 1600px);
+      user-select: none;
+    }
+    @media (min-width: 900px) {
+      #design-logo { top: 72%; width: clamp(300px, 78vw, 1450px); }
+    }
+    .dl-inner {
+      position: relative; width: 100%;
+      padding-bottom: calc(100% * 704.9 / 3002.8);
+    }
+    .dl-layer {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      will-change: transform;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    .hero-tag {
+      position: relative; z-index: 1;
+      display: inline-block; background: var(--t); color: var(--y);
+      font-size: .72rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; padding: .3rem .75rem;
+      margin-bottom: 1.2rem; width: fit-content;
+    }
+    h1 {
+      position: relative; z-index: 1;
+      margin-bottom: 1.2rem;
+      width: min(88vw, 1440px);
+    }
+    h1 img { display: block; width: 100%; height: auto; }
+    @media (max-width: 639px) {
+      h1 { width: 100%; max-width: 100%; }
+    }
+    .hero-sub {
+      position: relative; z-index: 1;
+      margin-bottom: 2.5rem;
+      max-width: 54rem;
+      font-size: clamp(1rem, 1.8vw, 1.45rem);
+      font-weight: 900;
+      line-height: 1.5;
+      letter-spacing: .02em;
+    }
+    .hero-info-bar {
+      position: relative; z-index: 2;
+      background: var(--bg);
+      border-top: 2px solid var(--t);
+      border-bottom: 2px solid var(--t);
+    }
+    .hero-info-inner {
+      min-height: 112px;
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+    }
+    .hero-info-item,
+    .hero-info-action {
+      padding: 1.25rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-info-item { border-right: 1px solid var(--line); }
+    .hero-info-label {
+      margin-bottom: .35rem;
+      color: var(--ts);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    .hero-info-item strong { font-size: 1rem; line-height: 1.5; }
+    .hero-info-action { align-items: center; min-width: 260px; }
+    .hero-cta { padding: 11px 22px; }
+    .hero-note { margin-top: .6rem; color: var(--ts); font-size: .78rem; }
+    @media (max-width: 639px) {
+      #hero { padding: 72px 1.5rem 2rem; }
+      .hero-tag, h1 { margin-bottom: .75rem; }
+      .hero-sub { width: 100%; max-width: 100%; margin-bottom: 1.25rem; font-size: .95rem; overflow-wrap: anywhere; }
+      .hero-info-inner { grid-template-columns: 1fr; }
+      .hero-info-item,
+      .hero-info-action { padding: 1rem 1.5rem; }
+      .hero-info-item { border-right: 0; border-bottom: 1px solid var(--line); }
+      .hero-info-action { align-items: flex-start; min-width: 0; }
+    }
+
+    /* All sections after hero stack above it */
+    section:not(#hero), footer { position: relative; z-index: 2; }
+
+    /* ── HERO + SCHOOLS INTEGRATED ── */
+.integrated-hero-schools {
+      position: relative;
+      overflow: hidden;
+      background: var(--t);
+      isolation: isolate;
+      scroll-margin-top: 56px;
+    }
+
+    .integrated-hero-schools::before,
+    .integrated-hero-schools::after {
+      content: '';
+      position: absolute;
+      border: 2px dashed rgba(255, 255, 255, 0.24);
+      border-radius: 999px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .integrated-hero-schools::before {
+      width: clamp(260px, 36vw, 520px);
+      height: clamp(260px, 36vw, 520px);
+      top: -150px;
+      right: -110px;
+      background: rgba(0, 161, 242, 0.5);
+    }
+
+    .integrated-hero-schools::after {
+      width: clamp(190px, 28vw, 420px);
+      height: clamp(190px, 28vw, 420px);
+      left: -120px;
+      bottom: 18%;
+      background: rgba(255, 112, 162, 0.5);
+    }
+
+    .hs-shell {
+      width: min(1200px, calc(100% - 64px));
+      margin: 0 auto;
+      padding: clamp(72px, 9vw, 128px) 0 clamp(80px, 10vw, 140px);
+    }
+
+    .hs-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      color: var(--y);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .hs-kicker::before {
+      content: '';
+      width: 40px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--g);
+    }
+
+    .hs-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(360px, 0.78fr);
+      gap: clamp(44px, 7vw, 96px);
+      align-items: start;
+    }
+
+    .hs-desc {
+      max-width: 52ch;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: clamp(15px, 1.45vw, 18px);
+      line-height: 2;
+    }
+
+    .schools-card {
+      position: relative;
+      min-width: 0;
+      border: 2px solid var(--t);
+      background: var(--y);
+      box-shadow: 14px 14px 0 var(--g);
+      padding: clamp(22px, 3vw, 32px);
+    }
+
+    .schools-card::before {
+      content: 'EVENT INFO';
+      position: absolute;
+      top: -16px;
+      left: 24px;
+      padding: 6px 12px;
+      background: var(--p);
+      border: 2px solid var(--t);
+      color: var(--t);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    }
+
+    .schools-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 20px;
+      border-bottom: 4px solid var(--t);
+      padding-bottom: 16px;
+    }
+
+    .schools-heading h2 {
+      margin: 0;
+      font-size: clamp(28px, 3.3vw, 44px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .schools-heading p {
+      margin: 0;
+      color: var(--ts);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .map-stage {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      border: 2px solid var(--t);
+      overflow: visible;
+      padding: 8px 48px 8px 16px;
+    }
+
+    .map-stage::before {
+      content: none;
+    }
+
+    .map-wrap {
+      position: relative;
+      width: min(400px, 78%);
+      margin: 4px auto;
+    }
+
+    .map-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      opacity: 0.92;
+      filter: drop-shadow(12px 12px 0 rgba(51, 51, 51, 0.14));
+    }
+
+    .school-pin {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border: 2px solid var(--t);
+      border-radius: 999px;
+      background: var(--pin-c, var(--g));
+      box-shadow: inset 0 0 0 7px var(--bg), 5px 5px 0 rgba(51, 51, 51, 0.18);
+    }
+
+    .school-pin:nth-of-type(2n) { background: var(--pin-c, var(--b)); }
+    .school-pin:nth-of-type(3n) { background: var(--pin-c, var(--p)); }
+
+    .pin-label {
+      position: absolute;
+      top: 50%;
+      display: grid;
+      gap: 2px;
+      min-width: 104px;
+      padding: 8px 10px;
+      border: 2px solid var(--t);
+      background: #fff;
+      color: var(--t);
+      transform: translateY(-50%);
+      font-weight: 900;
+      line-height: 1.2;
+      box-shadow: 5px 5px 0 var(--pin-c, var(--p));
+      pointer-events: none;
+    }
+
+    .pin-label::before {
+      display: none;
+    }
+
+    .school-pin.is-left .pin-label {
+      right: calc(100% + 10px);
+      text-align: right;
+    }
+
+    .school-pin.is-left .pin-label::before {
+      display: none;
+    }
+
+    .school-pin.is-right .pin-label {
+      left: calc(100% + 10px);
+      text-align: left;
+    }
+
+    .school-pin.is-right .pin-label::before {
+      display: none;
+    }
+
+    .pin-name {
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .pin-city {
+      color: var(--ts);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .school-list-mobile {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 0;
+      padding: 0 12px 12px 0;
+      list-style: none;
+    }
+
+    .school-list-mobile li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 15px 16px;
+      border: 2px solid var(--t);
+      background: var(--bg);
+      box-shadow: 4px 4px 0 var(--p);
+    }
+
+    .school-list-mobile strong {
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .school-list-mobile span {
+      color: var(--ts);
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .hs-grid {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .schools-card {
+        width: min(760px, 100%);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hs-shell {
+        width: min(100% - 40px, 680px);
+        padding: 64px 0 72px;
+      }
+
+      .integrated-hero-schools::before {
+        top: -120px;
+        right: -160px;
+      }
+
+      .integrated-hero-schools::after {
+        left: -150px;
+        bottom: 36%;
+      }
+
+      .hs-desc {
+        font-size: 15px;
+        line-height: 1.9;
+      }
+
+      .hs-grid {
+        display: block;
+      }
+
+      .schools-card {
+        margin-top: 20px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .schools-card.reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .schools-card::before {
+        display: none;
+      }
+
+      .schools-heading {
+        display: none;
+      }
+
+      .map-stage {
+        display: grid;
+        min-height: 0;
+        height: auto;
+        padding: 18px 10px 20px;
+        margin: 0 0 18px;
+        border: 2px solid var(--t);
+        background: var(--bg);
+        overflow: hidden;
+        place-items: center;
+      }
+
+      .map-stage::before {
+        content: none;
+      }
+
+      .map-wrap {
+        width: min(270px, 78vw);
+        margin: 52px auto 0;
+      }
+
+      .map-img {
+        filter: drop-shadow(8px 8px 0 rgba(51, 51, 51, 0.12));
+        opacity: 1;
+      }
+
+      .school-pin {
+        width: 20px;
+        height: 20px;
+        box-shadow: inset 0 0 0 5px var(--bg), 4px 4px 0 rgba(51, 51, 51, 0.18);
+      }
+
+      .pin-label {
+        min-width: auto;
+        padding: 4px 6px;
+        box-shadow: 3px 3px 0 var(--pin-c, var(--p));
+      }
+
+      .pin-label::before,
+      .pin-label::after {
+        display: none;
+      }
+
+      .school-pin.is-left .pin-label {
+        right: calc(100% + 8px);
+      }
+
+      .school-pin.is-right .pin-label {
+        left: calc(100% + 8px);
+      }
+
+      .pin-name {
+        font-size: 11px;
+      }
+
+      .pin-city {
+        display: none;
+      }
+
+      .school-list-mobile {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0 12px 12px 0;
+        list-style: none;
+      }
+
+      .school-list-mobile li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 15px 16px;
+        border: 2px solid var(--t);
+        background: var(--bg);
+        box-shadow: 4px 4px 0 var(--p);
+      }
+
+      .school-list-mobile strong {
+        font-size: 16px;
+        font-weight: 900;
+      }
+
+      .school-list-mobile span {
+        color: var(--ts);
+        font-size: 14px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hs-shell { width: min(100% - 28px, 680px); }
+      .hs-kicker { font-size: 11px; letter-spacing: 0.12em; }
+      .schools-card { padding-left: 14px; padding-right: 14px; }
+      .school-list-mobile li {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ── COURSES (new design) ── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --y: #F5E400;
+  --g: #5EC223;
+  --b: #00A1F2;
+  --p: #FF70A2;
+  --ink: #333333;
+  --ink2: #666666;
+  --bg: #FAFAF5;
+}
+
+body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var(--ink); }
+
+/* ─── SECTION ─── */
+.courses {
+  background: var(--y);
+  padding: 80px 0 56px;
+}
+.wrap {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ─── TOP BAR ─── */
+.top-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.heading-group {}
+.en-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--ink2);
+  margin-bottom: 6px;
+}
+.main-title {
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+.main-title em {
+  font-style: normal;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 48px;
+  opacity: .18;
+  margin-left: 8px;
+  letter-spacing: 2px;
+}
+
+/* ─── MONTH GROUPS ─── */
+.month-group {
+  margin-bottom: 16px;
+}
+.month-label-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.month-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 80px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--ink);
+  opacity: .1;
+  flex-shrink: 0;
+  width: 80px;
+}
+.month-line {
+  flex: 1;
+  height: 1.5px;
+  background: rgba(0,0,0,.15);
+}
+.month-tag {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--ink2);
+}
+
+/* ─── CARD GRID ─── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.card-grid.single { grid-template-columns: 1fr; }
+
+/* ─── CARD ─── */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: 16px 16px 0 0;
+}
+.card[data-cat="影視動畫"]::before { background: var(--ink); }
+.card[data-cat="設計方法"]::before  { background: var(--g); }
+.card[data-cat="商業視覺"]::before  { background: var(--b); }
+.card[data-cat="產品設計"]::before  { background: var(--b); }
+.card[data-cat="產品空間"]::before  { background: var(--g); }
+.card[data-cat="室內設計"]::before  { background: var(--p); }
+.card[data-cat="概念提案"]::before  { background: var(--ink); }
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.10);
+}
+
+/* card top row */
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.date-big {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1;
+  color: var(--ink);
+}
+.date-dow {
+  font-size: 11px;
+  color: var(--ink2);
+  margin-top: 3px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.cat-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.card[data-cat="影視動畫"] .cat-badge { background: var(--ink); color: var(--y); }
+.card[data-cat="設計方法"]  .cat-badge { background: var(--g); color: #fff; }
+.card[data-cat="商業視覺"]  .cat-badge { background: var(--b); color: #fff; }
+.card[data-cat="產品設計"]  .cat-badge { background: var(--b); color: #fff; }
+.card[data-cat="產品空間"]  .cat-badge { background: var(--g); color: #fff; }
+.card[data-cat="室內設計"]  .cat-badge { background: var(--p); color: #fff; }
+.card[data-cat="概念提案"]  .cat-badge { background: var(--ink); color: var(--y); }
+
+/* title */
+.card-title {
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+/* meta */
+.card-meta {
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.8;
+  flex: 1;
+}
+.card-meta .loc { font-weight: 700; color: var(--ink); }
+
+/* bottom */
+.card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0,0,0,.07);
+}
+.region-pill {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  border: 1.5px solid rgba(0,0,0,.15);
+  color: var(--ink2);
+}
+.more-link {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-block;
+  padding: 8px 18px;
+  background: var(--p);
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: filter .15s, transform .15s;
+}
+.more-link:hover { filter: brightness(.9); transform: translateY(-1px); }
+
+/* ─── FORUM AGENDA（單日論壇節目表） ─── */
+.agenda-count {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--ink2);
+  padding-bottom: 6px;
+}
+
+.agenda-group + .agenda-group { margin-top: 34px; }
+.agenda-group-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+.agenda-ampm {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: var(--ink);
+  opacity: .16;
+  flex-shrink: 0;
+}
+.agenda-group-line { flex: 1; height: 1.5px; background: rgba(51,51,51,.15); }
+.agenda-group-tag {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--ink2);
+  flex-shrink: 0;
+}
+
+/* 時間軸列表 */
+.agenda-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.agenda-list::before {
+  content: '';
+  position: absolute;
+  left: 106px;
+  top: 23px;
+  bottom: 26px;
+  width: 2px;
+  margin-left: -1px;
+  background: rgba(51,51,51,.18);
+}
+.agenda-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 92px 28px minmax(0, 1fr);
+  align-items: stretch;
+  padding: 3px 0;
+}
+
+/* 時間欄 */
+.agenda-time {
+  text-align: right;
+  padding: 11px 14px 11px 0;
+}
+.agenda-hour {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.agenda-item--minor .agenda-hour { font-size: 17px; color: var(--ink2); }
+
+/* 時間軸節點 */
+.agenda-rail { position: relative; }
+.agenda-rail::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 17px;
+  width: 11px;
+  height: 11px;
+  margin-left: -5.5px;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 0 3px var(--y);
+}
+.agenda-item--minor .agenda-rail::before {
+  top: 16px;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  background: rgba(51,51,51,.35);
+}
+
+/* 內容欄 */
+.agenda-main {
+  min-width: 0;
+  padding: 11px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+}
+.agenda-item--talk .agenda-main,
+.agenda-item--case .agenda-main {
+  background: #fff;
+  border-radius: 10px 0 0 10px;
+  border-left: 3px solid var(--ink);
+}
+.agenda-item--talk .agenda-main:last-child,
+.agenda-item--case .agenda-main:last-child { border-radius: 10px; }
+.agenda-item[data-cat="商業視覺"] .agenda-main { border-left-color: var(--b); }
+.agenda-item[data-cat="室內設計"] .agenda-main { border-left-color: var(--p); }
+
+.agenda-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1.45;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+.agenda-item--minor .agenda-title { font-size: 15px; font-weight: 700; }
+.agenda-kind {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  margin-right: 8px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  background: var(--ink);
+  color: var(--y);
+}
+.agenda-item[data-cat="商業視覺"] .agenda-kind { background: var(--b); color: #fff; }
+.agenda-item[data-cat="室內設計"] .agenda-kind { background: var(--p); color: #fff; }
+
+.agenda-speaker {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink2);
+  overflow-wrap: break-word;
+}
+.agenda-name { font-weight: 700; color: var(--ink); }
+.agenda-role::before {
+  content: '｜';
+  color: rgba(51,51,51,.3);
+}
+.agenda-sublist {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 18px;
+}
+.agenda-sublist li {
+  position: relative;
+  padding-left: 12px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink2);
+}
+.agenda-sublist li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: .62em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(51,51,51,.3);
+}
+
+/* ─── AGENDA MOBILE ─── */
+@media (max-width: 700px) {
+  .agenda-list::before { display: none; }
+  .agenda-rail { display: none; }
+  .agenda-item {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0;
+    margin-bottom: 8px;
+  }
+  .agenda-item--talk,
+  .agenda-item--case {
+    background: #fff;
+    border-radius: 10px;
+    border-left: 3px solid var(--ink);
+  }
+  .agenda-item--talk[data-cat="商業視覺"] { border-left-color: var(--b); }
+  .agenda-item--case[data-cat="室內設計"] { border-left-color: var(--p); }
+  .agenda-item--minor {
+    border-bottom: 1px solid rgba(51,51,51,.12);
+    padding-bottom: 8px;
+  }
+  .agenda-list > .agenda-item:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+  }
+  .agenda-time {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    text-align: left;
+    padding: 10px 14px 0;
+  }
+  .agenda-item--minor .agenda-time { padding: 2px 0 0; }
+  .agenda-hour { font-size: 19px; }
+  .agenda-main { padding: 4px 14px 12px; }
+  .agenda-item--minor .agenda-main { padding: 2px 0 0; }
+  .agenda-item--talk .agenda-main,
+  .agenda-item--case .agenda-main,
+  .agenda-item--talk .agenda-main:last-child,
+  .agenda-item--case .agenda-main:last-child {
+    background: transparent;
+    border-left: 0;
+    border-radius: 0;
+  }
+  .agenda-ampm { font-size: 44px; }
+  .agenda-sublist { flex-direction: column; gap: 2px; }
+}
+
+
+/* ─── MOBILE ─── */
+@media (max-width: 700px) {
+  .wrap { padding: 0 20px; }
+  .main-title { font-size: 34px; }
+  .main-title em { font-size: 30px; }
+  .card-grid { grid-template-columns: 1fr; }
+  .month-num { font-size: 56px; width: 56px; }
+  .top-bar { flex-direction: column; align-items: flex-start; }
+}
+
+
+    @media(max-width:600px){
+      .icon-circle { width: 60px; height: 60px; margin-right: -14px; }
+      .course-content { padding: .5rem 1rem .55rem 1.4rem; }
+      .course-name { font-size: .9rem; }
+      .course-bottom { padding-left: 52px; }
+    }
+
+
+    /* ── SPEAKERS ── */
+    #speakers {
+      background: var(--t);
+      border-top: 1.5px solid rgba(250,250,245,.18);
+      padding: clamp(4rem,8vw,7rem) 0 clamp(4rem,8vw,7rem);
+      overflow: hidden;
+    }
+    #speakers > .rv {
+      padding: 0 clamp(1.5rem,6vw,4rem);
+    }
+    #speakers .sec-title { color: #FAFAF5; }
+    #speakers .sec-sub { color: rgba(250,250,245,.68); }
+    .spk-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(1rem, 2vw, 1.5rem);
+      max-width: 1180px;
+      margin: 2.5rem auto 0;
+      padding: 0 clamp(1.5rem,6vw,4rem);
+    }
+    .spk-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100%;
+      padding: 1.35rem 1rem 1.25rem;
+      border: 1px solid rgba(250,250,245,.18);
+      border-radius: 18px;
+      background: rgba(250,250,245,.06);
+      text-align: center;
+      overflow: hidden;
+      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+    }
+    .spk-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: var(--p);
+    }
+    .spk-card:nth-child(3n+2)::before { background: var(--g); }
+    .spk-card:nth-child(3n+3)::before { background: var(--b); }
+    .spk-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(250,250,245,.35);
+      background: rgba(250,250,245,.1);
+    }
+    .spk-card-photo {
+      width: clamp(104px, 12vw, 156px);
+      height: clamp(104px, 12vw, 156px);
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2.5px solid var(--p);
+      flex-shrink: 0;
+      background: rgba(250,250,245,.16);
+      margin-bottom: .9rem;
+      transition: transform .28s ease;
+    }
+    .spk-card:nth-child(3n+2) .spk-card-photo { border-color: var(--g); }
+    .spk-card:nth-child(3n+3) .spk-card-photo { border-color: var(--b); }
+    .spk-card:hover .spk-card-photo { transform: scale(1.045); }
+    .spk-card-photo img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block;
+    }
+    .spk-card-name {
+      font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+      font-weight: 900;
+      color: #FAFAF5;
+      line-height: 1.2;
+      margin-bottom: .35rem;
+    }
+    .spk-card-role {
+      min-height: 2.9em;
+      font-size: clamp(.82rem, .95vw, .9rem);
+      line-height: 1.45;
+      color: rgba(250,250,245,.72);
+      margin-bottom: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .spk-card.is-pending { display: none; }
+
+    @media(max-width:900px){
+      .spk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media(max-width:600px){
+      #speakers { padding-bottom: clamp(3.25rem, 10vw, 4.5rem); }
+      .spk-grid { grid-template-columns: 1fr; gap: .85rem; margin-top: 2rem; }
+      .spk-card {
+        display: grid;
+        grid-template-columns: 72px minmax(0, 1fr);
+        grid-template-areas:
+          "photo name"
+          "photo role";
+        column-gap: 1rem;
+        align-items: center;
+        text-align: left;
+        padding: 1rem;
+      }
+      .spk-card::before { width: 4px; height: 100%; inset: 0 auto 0 0; }
+      .spk-card-photo { grid-area: photo; width: 72px; height: 72px; margin: 0; }
+      .spk-card-name { grid-area: name; margin: 0 0 .25rem; }
+      .spk-card-role { grid-area: role; min-height: 0; margin: 0; font-size: .94rem; }
+    }
+
+    /* ── FAQ ── */
+    #faq {
+      background: var(--bg);
+      border-top: 1.5px solid var(--line);
+      padding: clamp(4rem,8vw,7rem) clamp(1.5rem,6vw,4rem);
+    }
+    .faq-list { max-width: 760px; margin-top: 2.5rem; }
+    .faq-item { border-bottom: 1.5px solid var(--line); }
+    .faq-item:first-child { border-top: 1.5px solid var(--line); }
+    .faq-q {
+      width: 100%; background: none; border: none;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.15rem 0; gap: 1rem;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: .98rem; font-weight: 700; color: var(--t);
+      cursor: pointer; text-align: left;
+    }
+    .faq-plus { font-size: 1.35rem; font-weight: 300; flex-shrink: 0; transition: transform .2s, color .2s; color: var(--g); }
+    .faq-item.open .faq-plus { transform: rotate(45deg); color: var(--p); }
+    .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .25s ease; }
+    .faq-item.open .faq-a { grid-template-rows: 1fr; }
+    .faq-a-inner { overflow: hidden; }
+    .faq-a p { padding-bottom: 1.15rem; font-size: .9rem; line-height: 1.8; color: var(--ts); }
+    .faq-a a { color: inherit; text-decoration: underline; }
+
+    /* ── FINAL CTA ── */
+    #register {
+      scroll-margin-top: 56px;
+      background: var(--y);
+      border-top: 2px solid var(--t);
+      border-bottom: 2px solid var(--t);
+      padding: clamp(4rem, 9vw, 7rem) clamp(1.5rem, 6vw, 4rem);
+      text-align: center;
+    }
+    .register-inner { max-width: 900px; margin: 0 auto; }
+    .register-kicker {
+      margin-bottom: 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: .75rem;
+      font-weight: 900;
+      letter-spacing: .16em;
+    }
+    .register-title {
+      margin-bottom: 1.75rem;
+      font-size: clamp(2.4rem, 7vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+    .register-venue {
+      margin-bottom: 1.75rem;
+      color: var(--ts);
+      font-size: clamp(.9rem, 1.3vw, 1.05rem);
+      font-weight: 700;
+      line-height: 1.8;
+    }
+    .register-link {
+      display: inline-block;
+      padding: .9rem 2rem;
+      background: var(--p);
+      border: 2px solid var(--t);
+      box-shadow: 7px 7px 0 var(--t);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+      text-decoration: none;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .register-link:hover,
+    .register-link:focus-visible {
+      transform: translate(3px, 3px);
+      box-shadow: 4px 4px 0 var(--t);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--t); color: #fff;
+      padding: clamp(3rem,6vw,5rem) clamp(1.5rem,6vw,4rem);
+    }
+    .ft-inner { margin-bottom: 2rem; }
+    .ft-logo img { height: 34px; margin-bottom: .9rem; display: block; }
+    .ft-org { font-size: .8rem; color: rgba(255,255,255,.45); line-height: 1.9; }
+    .ft-bottom {
+      border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem;
+    }
+    .ft-copy { font-size: .73rem; color: rgba(255,255,255,.25); }
+    .ft-copy a { color: inherit; text-decoration: none; }
+    .ft-copy a:hover { text-decoration: underline; }
+    @media(max-width:600px){
+      .ft-logo img { max-width: 100%; height: auto; }
+    }
+
+    /* ── REVEAL ── */
+    .rv { opacity: 1; transform: none; transition: opacity .55s ease, transform .55s ease; }
+    .rv.in { opacity: 1; transform: translateY(0); }
+    .rv2 { opacity: 1; transform: none; transition: opacity .55s ease .12s, transform .55s ease .12s; }
+    .rv2.in { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+
+<body>
+<!-- FORUM AGENDA -->
+<section id="agenda" class="courses">
+<div class="wrap">
+
+  <div class="top-bar">
+    <div class="heading-group">
+      <div class="en-label">Forum Agenda · 2026.09.11</div>
+      <h2 class="main-title">論壇議程 <em>AGENDA</em></h2>
+    </div>
+    <div class="agenda-count">11 場・09:00–16:30</div>
+  </div>
+
+  <!-- ── 上午 ── -->
+  <div class="agenda-group">
+    <div class="agenda-group-head">
+      <div class="agenda-ampm">AM</div>
+      <div class="agenda-group-line"></div>
+      <div class="agenda-group-tag">MORNING</div>
+    </div>
+    <ol class="agenda-list">
+
+      <li class="agenda-item agenda-item--minor" id="agenda-1" data-cat="設計方法">
+        <div class="agenda-time">
+          <span class="agenda-hour">09:00</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title">與會者報到</h3>
+        </div>
+      </li>
+
+      <li class="agenda-item agenda-item--minor" id="agenda-2" data-cat="設計方法">
+        <div class="agenda-time">
+          <span class="agenda-hour">09:30</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title">貴賓致詞與合照</h3>
+        </div>
+      </li>
+
+      <li class="agenda-item agenda-item--talk" id="agenda-3" data-cat="影視動畫">
+        <div class="agenda-time">
+          <span class="agenda-hour">09:40</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title"><span class="agenda-kind">專題演講</span>打造你的 AI CASA — 室內與建築設計 AI 系統工作流</h3>
+          <p class="agenda-speaker"><span class="agenda-name">邵唯晏</span><span class="agenda-role">竹工凡木設計集團 創辦人</span></p>
+        </div>
+      </li>
+
+      <li class="agenda-item agenda-item--talk" id="agenda-4" data-cat="影視動畫">
+        <div class="agenda-time">
+          <span class="agenda-hour">11:20</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title"><span class="agenda-kind">專題演講</span>空間設計產業的 AI 專案管理實踐</h3>
+          <p class="agenda-speaker"><span class="agenda-name">曾思遠</span><span class="agenda-role">Nautilus AI 執行長</span></p>
+        </div>
+      </li>
+
+      <li class="agenda-item agenda-item--minor" id="agenda-5" data-cat="設計方法">
+        <div class="agenda-time">
+          <span class="agenda-hour">12:10</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title">午餐交流（大會提供）</h3>
+        </div>
+      </li>
+
+    </ol>
+  </div>
+
+  <!-- ── 下午 ── -->
+  <div class="agenda-group">
+    <div class="agenda-group-head">
+      <div class="agenda-ampm">PM</div>
+      <div class="agenda-group-line"></div>
+      <div class="agenda-group-tag">AFTERNOON</div>
+    </div>
+    <ol class="agenda-list">
+
+      <li class="agenda-item agenda-item--minor" id="agenda-6" data-cat="設計方法">
+        <div class="agenda-time">
+          <span class="agenda-hour">13:00</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title">貴賓致詞與合照</h3>
+        </div>
+      </li>
+
+      <li class="agenda-item agenda-item--talk" id="agenda-7" data-cat="商業視覺">
+        <div class="agenda-time">
+          <span class="agenda-hour">13:10</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title"><span class="agenda-kind">專題短講</span>用 AI 建模與渲染工作流</h3>
+          <p class="agenda-speaker"><span class="agenda-name">林楚卿</span><span class="agenda-role">元智大學藝術與設計學系 教授</span></p>
+        </div>
+      </li>
+
+      <li class="agenda-item agenda-item--talk" id="agenda-8" data-cat="商業視覺">
+        <div class="agenda-time">
+          <span class="agenda-hour">13:50</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title"><span class="agenda-kind">專題短講</span>用 AI 加速室內空間提案</h3>
+          <p class="agenda-speaker"><span class="agenda-name">李元榮</span><span class="agenda-role">逢甲大學建築專業學院 教授</span></p>
+        </div>
+      </li>
+
+      <li class="agenda-item agenda-item--minor" id="agenda-9" data-cat="設計方法">
+        <div class="agenda-time">
+          <span class="agenda-hour">14:30</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title">午茶交流</h3>
+        </div>
+      </li>
+
+      <li class="agenda-item agenda-item--case" id="agenda-10" data-cat="室內設計">
+        <div class="agenda-time">
+          <span class="agenda-hour">15:00</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title"><span class="agenda-kind">案例分享</span>工作坊案例分享</h3>
+          <p class="agenda-speaker"><span class="agenda-name">三組師生</span></p>
+          <ul class="agenda-sublist">
+            <li>元智大學｜AI 建模與渲染</li>
+            <li>逢甲大學｜室內空間提案</li>
+            <li>南臺科技大學｜AI 與動畫</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="agenda-item agenda-item--minor" id="agenda-11" data-cat="設計方法">
+        <div class="agenda-time">
+          <span class="agenda-hour">16:30</span>
+        </div>
+        <div class="agenda-rail" aria-hidden="true"></div>
+        <div class="agenda-main">
+          <h3 class="agenda-title">賦歸</h3>
+        </div>
+      </li>
+
+    </ol>
+  </div>
+
+</div>
+</section>
+</body>
+</html>
