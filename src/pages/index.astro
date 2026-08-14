@@ -1,4 +1,7 @@
 ---
+
+import Layout from '../layouts/Layout.astro'
+
 import HeroAstroComponent from '../component/Hero.astro';
 import AboutAstroComponent from '../component/About.astro';
 import AgendaAstroComponent from '../component/Agenda.astro';
@@ -6,13 +9,17 @@ import SpeakersAstroComponent from '../component/Speakers.astro';
 import FAQ from '../component/FAQ.astro';
 import FinalCTA from '../component/FinalCTA.astro';
 import Footer from '../component/Footer.astro';
-
 ---
+<Layout>
 
-<HeroAstroComponent/>
-<AboutAstroComponent/>
-<AgendaAstroComponent/>
-<SpeakersAstroComponent/>
-<FAQ/>
-<FinalCTA/>
-<Footer/>
+
+	<HeroAstroComponent/>
+	<AboutAstroComponent/>
+	<AgendaAstroComponent/>
+	<SpeakersAstroComponent/>
+	<FAQ/>
+	<FinalCTA/>
+	<Footer/>
+
+
+</Layout>
