@@ -60,6 +60,22 @@
       text-decoration: none; letter-spacing: .07em; text-transform: uppercase;
     }
     .topnav ul a:hover { text-decoration: underline; }
+    /* 主選單報名鈕：沿用 #register 主 CTA 語彙，字級與其他選項一致 */
+    .topnav ul a.more-link {
+      padding: 6px 14px;
+      background: var(--p);
+      color: #fff;
+      border: 2px solid var(--t);
+      border-radius: 0;
+      box-shadow: 3px 3px 0 var(--t);
+      font-size: .78rem; font-weight: 900; line-height: 1.15;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .topnav ul a.more-link:hover {
+      text-decoration: none; filter: none;
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--t);
+    }
     @media(max-width:700px){ .topnav ul { display: none; } nav.topnav { width: 100%; } }
 
     /* ── HERO ── */
@@ -103,7 +119,7 @@
     h1 {
       position: relative; z-index: 1;
       margin-bottom: 1.2rem;
-      width: min(88vw, 1440px);
+      width: min(74vw, 1200px);
     }
     h1 img { display: block; width: 100%; height: auto; }
     @media (max-width: 639px) {
@@ -146,7 +162,22 @@
     }
     .hero-info-item strong { font-size: 1rem; line-height: 1.5; }
     .hero-info-action { align-items: center; min-width: 260px; }
-    .hero-cta { padding: 11px 22px; }
+    .hero-cta.more-link {
+      padding: .8rem 1.7rem;
+      background: var(--p);
+      color: #fff;
+      border: 2px solid var(--t);
+      border-radius: 0;
+      box-shadow: 5px 5px 0 var(--t);
+      font-size: 1rem; font-weight: 900; line-height: 1.2;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .hero-cta.more-link:hover,
+    .hero-cta.more-link:focus-visible {
+      filter: none;
+      transform: translate(3px, 3px);
+      box-shadow: 2px 2px 0 var(--t);
+    }
     .hero-note { margin-top: .6rem; color: var(--ts); font-size: .78rem; }
     @media (max-width: 639px) {
       #hero { padding: 72px 1.5rem 2rem; }
