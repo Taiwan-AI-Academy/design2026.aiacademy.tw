@@ -256,18 +256,15 @@
     }
 
     .hs-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(360px, 0.78fr);
-      gap: clamp(44px, 7vw, 96px);
-      align-items: start;
+      display: block;
     }
 
     .hs-desc {
-      max-width: 52ch;
+      max-width: 44ch;
       margin: 0;
       color: rgba(255, 255, 255, 0.72);
-      font-size: clamp(15px, 1.45vw, 18px);
-      line-height: 2;
+      font-size: clamp(22px, 2.4vw, 32px);
+      line-height: 1.75;
     }
 
     .schools-card {
@@ -488,8 +485,8 @@
       }
 
       .hs-desc {
-        font-size: 15px;
-        line-height: 1.9;
+        font-size: clamp(19px, 5vw, 23px);
+        line-height: 1.8;
       }
 
       .hs-grid {
@@ -1363,35 +1360,13 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   </div>
 </section>
 
-<!-- 活動資訊 -->
-<section id="info" class="integrated-hero-schools" aria-labelledby="schools-title">
+<!-- 論壇介紹 -->
+<section id="info" class="integrated-hero-schools" aria-label="論壇介紹">
     <div class="hs-shell">
       <div class="hs-grid">
         <div class="hs-copy">
           <div class="hs-kicker reveal">SPACE DESIGN FORUM · 2026</div>
           <p class="hs-desc reveal">本論壇將總結台灣人工智慧學校本年度橫跨台灣北、中、南、東的【 AI X 設計職人產業實戰工作坊 】成果，從動畫、影視、產品、空間到品牌等八場工作坊中選擇聚焦在空間設計的AI賦能深化。</p>
-        </div>
-
-        <div class="schools-card reveal" aria-labelledby="schools-title">
-          <div class="schools-heading">
-            <h2 id="schools-title">活動地點</h2>
-            <p>台中・逢甲大學</p>
-          </div>
-
-          <!-- TODO: placeholder，待換上正式的台灣圖 -->
-          <div class="map-stage" aria-label="論壇舉辦地點地圖">
-            <div class="map-wrap">
-              <img class="map-img" src="img/taiwan-political-division.svg" alt="台灣地圖">
-              <div class="school-pin is-left" style="--x:48%; --y:33%; --pin-c:var(--g);" aria-label="逢甲大學">
-                <div class="pin-label"><span class="pin-name">逢甲大學</span></div>
-              </div>
-            </div>
-          </div>
-
-          <ul class="school-list-mobile" aria-label="活動資訊條列">
-            <li><strong>地點</strong><span>逢甲大學 學思樓第九國際會議廳</span></li>
-            <li><strong>地址</strong><span>臺中市西屯區文華路 100 號</span></li>
-          </ul>
         </div>
       </div>
     </div>
@@ -1455,7 +1430,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
         </div>
         <div class="agenda-rail" aria-hidden="true"></div>
         <div class="agenda-main">
-          <h3 class="agenda-title"><span class="agenda-kind">專題演講</span>空間設計產業的 AI 專案管理實踐</h3>
+          <h3 class="agenda-title"><span class="agenda-kind">AI X PM 短講</span>空間設計產業的 AI 專案管理實踐</h3>
           <p class="agenda-speaker"><span class="agenda-name">曾思遠</span><span class="agenda-role">Nautilus AI 執行長</span></p>
         </div>
       </li>
@@ -1498,7 +1473,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
         </div>
         <div class="agenda-rail" aria-hidden="true"></div>
         <div class="agenda-main">
-          <h3 class="agenda-title"><span class="agenda-kind">專題短講</span>用 AI 建模與渲染工作流</h3>
+          <h3 class="agenda-title"><span class="agenda-kind">設計短講</span>用 AI 建模與渲染工作流</h3>
           <p class="agenda-speaker"><span class="agenda-name">林楚卿</span><span class="agenda-role">元智大學藝術與設計學系 教授</span></p>
         </div>
       </li>
@@ -1509,7 +1484,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
         </div>
         <div class="agenda-rail" aria-hidden="true"></div>
         <div class="agenda-main">
-          <h3 class="agenda-title"><span class="agenda-kind">專題短講</span>用 AI 加速室內空間提案</h3>
+          <h3 class="agenda-title"><span class="agenda-kind">設計短講</span>用 AI 加速室內空間提案</h3>
           <p class="agenda-speaker"><span class="agenda-name">李元榮</span><span class="agenda-role">逢甲大學建築專業學院 教授</span></p>
         </div>
       </li>
@@ -1581,12 +1556,28 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   </div>
   <div class="faq-list rv">
     <div class="faq-item">
-      <button class="faq-q"><span>是否提供午餐？</span><span class="faq-plus">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner"><p>是，活動公開頁確認提供午餐；議程另安排午茶交流。報名表可選擇葷食、素食或不用餐。</p></div></div>
+      <button class="faq-q"><span>活動是否免費？</span><span class="faq-plus">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>免費，限設計相關在職人士參加，報名時會進行資格審核。</p></div></div>
     </div>
     <div class="faq-item">
-      <button class="faq-q"><span>如何前往會場？是否提供停車？</span><span class="faq-plus">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner"><p>會場位於逢甲大學校本部學思樓第九國際會議廳，可由高鐵台中站、台中車站或台中捷運轉乘公車前往，詳見<a href="https://www.fcu.edu.tw/traffic/" target="_blank" rel="noopener">逢甲大學官方交通建議</a>。校內凱旋停車場與體育館地下停車場提供收費停車，滿位後須改停校外周邊收費停車場。</p></div></div>
+      <button class="faq-q"><span>需要具備 AI 或設計軟體經驗嗎？</span><span class="faq-plus">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>無，不需要具備 AI 或設計軟體經驗</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>臨時無法參加，如何取消或修改報名資料？</span><span class="faq-plus">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>報名審核通過後若需取消，請 9/3 前來信告知：<a href="mailto:hi@aiacademy.tw">hi@aiacademy.tw</a></p></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>是否提供研習／參與證明？</span><span class="faq-plus">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>無，本次活動會後不會提供研習／參與證明。</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>活動是否錄影回看？</span><span class="faq-plus">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>無，本次活動會後不會提供錄影回看。</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>會後是否提供簡報？</span><span class="faq-plus">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>無，本次活動會後不會提供講者的簡報。</p></div></div>
     </div>
   </div>
 </section>
