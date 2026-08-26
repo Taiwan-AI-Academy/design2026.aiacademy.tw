@@ -108,7 +108,23 @@
       will-change: transform;
       pointer-events: none;
       opacity: 0.5;
+      transition: opacity .6s ease;
     }
+    .dl-canvas {
+      position: absolute;
+      /* Bleed past the artwork box so tilting can never clip the wordmark at
+         the frame edge. The JS measures both rects and derives the camera from
+         them, so these numbers can be tuned without touching the scene maths.
+         A canvas is a replaced element, so `width:auto` would fall back to its
+         intrinsic size instead of the inset box — the size must be explicit. */
+      left: -16%; top: -50%; width: 132%; height: 200%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .6s ease;
+    }
+    /* three.js took over: cross-fade the flat img stack out, the 3D canvas in */
+    #design-logo.dl-3d .dl-layer  { opacity: 0; }
+    #design-logo.dl-3d .dl-canvas { opacity: 1; }
     .hero-tag {
       position: relative; z-index: 1;
       display: inline-block; background: var(--t); color: var(--y);
@@ -1332,6 +1348,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       <img class="dl-layer" data-layer="2" src="img/logo/Design-2.svg" alt="">
       <img class="dl-layer" data-layer="3" src="img/logo/Design-3.svg" alt="">
       <img class="dl-layer" data-layer="4" src="img/logo/Design-4.svg" alt="">
+      <canvas class="dl-canvas"></canvas>
     </div>
   </div>
   <div class="hero-tag">系列最終場 ・ 2026.09.11 FRI</div>
@@ -1658,6 +1675,8 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 
     function render() {
       raf = null;
+      // three.js has taken over the hero wordmark — stop driving the hidden img stack
+      if (logo.classList.contains('dl-3d')) return;
       currentBase += (targetBase - currentBase) * LERP;
 
       const sf       = getScrollFactor();
@@ -1692,6 +1711,309 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   })();
 
 
+</script>
+<script type="module">
+/* ── Hero DESIGN wordmark · 3D depth ──────────────────────────────────────
+   The four SVG layers become textured planes sitting at different depths in a
+   real perspective scene. Pointer (desktop) and device orientation (mobile)
+   both drive a rotation as well as a shift, so the layers shear against each
+   other rather than merely sliding — that differential is what reads as depth.
+   Progressive enhancement throughout: every bail-out below leaves the flat CSS
+   parallax above in charge, so the hero never ends up blank.
+   ────────────────────────────────────────────────────────────────────────── */
+(async () => {
+  const logo   = document.getElementById('design-logo');
+  const inner  = logo && logo.querySelector('.dl-inner');
+  const canvas = logo && logo.querySelector('.dl-canvas');
+  const hero   = document.getElementById('hero');
+  if (!logo || !inner || !canvas || !hero) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Probe WebGL before paying for the module download.
+  try {
+    const probe = document.createElement('canvas');
+    if (!probe.getContext('webgl2') && !probe.getContext('webgl')) return;
+  } catch (err) { return; }
+
+  let THREE;
+  try { THREE = await import('./js/three-slim.js'); } catch (err) { return; }
+
+  const VB_W = 3002.8, VB_H = 704.9, ASPECT = VB_W / VB_H;
+
+  // Depth in world units, plus the resting spread direction carried over from
+  // the flat version so the composition still reads the same at rest.
+  const LAYERS = [
+    { src: 'img/logo/Design-1.svg', z: -0.160, dir: [ 0.7,  0.7] }, // pink
+    { src: 'img/logo/Design-2.svg', z: -0.055, dir: [-1.0,  0.0] }, // blue
+    { src: 'img/logo/Design-3.svg', z:  0.055, dir: [ 0.0, -1.0] }, // green
+    { src: 'img/logo/Design-4.svg', z:  0.160, dir: [ 0.0,  1.0] }, // dashed outline
+  ];
+
+  const FOV          = 50;
+  const PLANE_W      = 2;
+  const PLANE_H      = PLANE_W / ASPECT;
+  // Undo most, but not all, of perspective's near-big/far-small scaling — the
+  // residual few percent is real depth cueing; full compensation looks flat.
+  const COMPENSATE   = 0.80;
+  // Camera distance is derived at resize from the measured rects so the wordmark
+  // keeps exactly the on-screen size the flat version had, whatever bleed the
+  // CSS gives the canvas.
+  let camZ = 1;
+  const BASE_SPREAD  = 0.017;  // resting XY separation, world units
+  const EXTRA_SPREAD = 0.028;  // additional separation from scroll / input
+  const MAX_ROT_Y    = 0.21;   // rad, ~12° yaw
+  const MAX_ROT_X    = 0.145;  // rad, ~8° pitch
+  const MAX_CAM_XY   = 0.065;  // camera slides against the tilt for parallax
+  const LERP         = 0.085;
+
+  const clamp = (v, lo, hi) => v < lo ? lo : v > hi ? hi : v;
+
+  /* ── Texture rasterisation ──
+     The source SVGs carry a viewBox but no width/height attributes, which
+     Firefox and Safari refuse to rasterise onto a canvas. Inject intrinsic
+     dimensions first, then draw at the pixel size the layout actually needs. */
+  async function rasterize(url, texW) {
+    const svg = await (await fetch(url)).text();
+    const sized = /<svg[^>]*\swidth=/.test(svg)
+      ? svg
+      : svg.replace(/<svg\b/, '<svg width="' + VB_W + '" height="' + VB_H + '"');
+    const blobUrl = URL.createObjectURL(new Blob([sized], { type: 'image/svg+xml' }));
+    try {
+      const img = await new Promise((res, rej) => {
+        const i = new Image();
+        i.onload = () => res(i);
+        i.onerror = rej;
+        i.src = blobUrl;
+      });
+      const c = document.createElement('canvas');
+      c.width  = texW;
+      c.height = Math.max(1, Math.round(texW / ASPECT));
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      return c;
+    } finally { URL.revokeObjectURL(blobUrl); }
+  }
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  // Pass sRGB values through untouched so the 0.5-alpha stack composites exactly
+  // the way the CSS version does. Converting to linear here would shift every
+  // overlay colour away from the values DESIGN.md fixes.
+  renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
+  renderer.setClearColor(0x000000, 0);
+
+  function texWidth() {
+    const cssW = inner.getBoundingClientRect().width || 1;
+    const dpr  = Math.min(window.devicePixelRatio || 1, 2);
+    const cap  = Math.min(renderer.capabilities.maxTextureSize, 4096);
+    return Math.max(512, Math.min(cap, Math.round(cssW * dpr)));
+  }
+
+  let currentTexW = texWidth();
+  let sources;
+  try {
+    sources = await Promise.all(LAYERS.map(l => rasterize(l.src, currentTexW)));
+  } catch (err) { renderer.dispose(); return; }
+
+  const scene  = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(FOV, ASPECT, 0.01, 20);
+
+  const group = new THREE.Group();
+  scene.add(group);
+
+  const geometry = new THREE.PlaneGeometry(PLANE_W, PLANE_H);
+  const meshes = LAYERS.map((layer, i) => {
+    const tex = new THREE.CanvasTexture(sources[i]);
+    tex.colorSpace     = THREE.NoColorSpace;
+    tex.minFilter      = THREE.LinearFilter;   // planes render near 1:1, so
+    tex.magFilter      = THREE.LinearFilter;   // mipmaps buy nothing and would
+    tex.generateMipmaps = false;               // cost 33% more texture memory
+    tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
+
+    const mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
+      map: tex, transparent: true, opacity: 0.5,
+      depthTest: false, depthWrite: false, toneMapped: false
+    }));
+    mesh.position.z = layer.z;
+    // Back-to-front paint order, matching the original DOM stacking.
+    mesh.renderOrder = i;
+    group.add(mesh);
+    return mesh;
+  });
+
+  function applyDepthScale() {
+    meshes.forEach((mesh, i) => {
+      const persp = camZ / (camZ - LAYERS[i].z);
+      mesh.scale.setScalar(Math.pow(persp, -COMPENSATE));
+    });
+  }
+
+  /* ── Input state ── */
+  let tx = 0, ty = 0;                 // target, -1..1
+  let cx = 0, cy = 0;                 // lerped current
+  let currentSpread = BASE_SPREAD;
+  let hoverCollapse = false;          // pointer is over the wordmark
+
+  let orientOK = false, orientCal = null;
+  let fallback = false;               // touch-drag + drift instead of gyroscope
+  let touchOrigin = null, touchVec = null;
+
+  const coarse = window.matchMedia('(pointer: coarse)').matches;
+
+  function onOrient(e) {
+    if (e.beta == null || e.gamma == null) return;   // fires with nulls on some desktops
+    orientOK = true;
+    fallback = false;   // a real gyroscope turned up, possibly after the timeout
+    let b = e.beta, g = e.gamma;
+    const angle = (screen.orientation && screen.orientation.angle) ||
+                  window.orientation || 0;
+    if (angle === 90)                        { const t = b; b = -g; g =  t; }
+    else if (angle === 270 || angle === -90) { const t = b; b =  g; g = -t; }
+    // Treat wherever the device is held on the first reading as neutral,
+    // otherwise the wordmark starts permanently skewed.
+    if (!orientCal) orientCal = { b, g };
+    tx = clamp((g - orientCal.g) / 28, -1, 1);
+    ty = clamp((b - orientCal.b) / 28, -1, 1);
+    schedule();
+  }
+
+  if (coarse) {
+    window.addEventListener('deviceorientation', onOrient);
+    // No permission prompt by design; if nothing arrives, drive it by touch.
+    setTimeout(() => { if (!orientOK) { fallback = true; schedule(); } }, 900);
+
+    hero.addEventListener('touchstart', e => {
+      if (!fallback) return;
+      const t = e.touches[0];
+      touchOrigin = { x: t.clientX, y: t.clientY };
+    }, { passive: true });
+    hero.addEventListener('touchmove', e => {
+      if (!fallback || !touchOrigin) return;
+      const t = e.touches[0];
+      touchVec = {
+        x: clamp((t.clientX - touchOrigin.x) / (window.innerWidth  * 0.45), -1, 1),
+        y: clamp((t.clientY - touchOrigin.y) / (window.innerHeight * 0.35), -1, 1)
+      };
+      schedule();
+    }, { passive: true });
+    const release = () => { touchOrigin = null; touchVec = null; schedule(); };
+    hero.addEventListener('touchend',    release, { passive: true });
+    hero.addEventListener('touchcancel', release, { passive: true });
+  } else {
+    window.addEventListener('mousemove', e => {
+      tx = (e.clientX / window.innerWidth  - 0.5) * 2;
+      ty = (e.clientY / window.innerHeight - 0.5) * 2;
+      schedule();
+    });
+    logo.addEventListener('mouseenter', () => { hoverCollapse = true;  schedule(); });
+    logo.addEventListener('mouseleave', () => { hoverCollapse = false; schedule(); });
+  }
+
+  function scrollFactor() {
+    return Math.min(1, window.scrollY / (hero.offsetHeight || window.innerHeight));
+  }
+
+  /* ── Sizing ── */
+  let resizeTimer = null;
+  function resize() {
+    const art = inner.getBoundingClientRect();    // the artwork box
+    const box = canvas.getBoundingClientRect();   // the bled canvas around it
+    if (!art.width || !box.width) return;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setSize(box.width, box.height, false);
+    camera.aspect = box.width / box.height;
+    // Pull the camera back until PLANE_W projects to exactly the artwork width.
+    camZ = (PLANE_W * box.height / art.width) / (2 * Math.tan(FOV * Math.PI / 360));
+    camera.position.z = camZ;
+    camera.updateProjectionMatrix();
+    applyDepthScale();
+    schedule();
+
+    // Re-rasterise only when the layout has moved enough to show, so a stream
+    // of resize events can't thrash 4 SVG redraws.
+    const want = texWidth();
+    if (Math.abs(want - currentTexW) / currentTexW < 0.2) return;
+    currentTexW = want;
+    LAYERS.forEach((layer, i) => {
+      rasterize(layer.src, want).then(c => {
+        const tex = meshes[i].material.map;
+        tex.image = c;
+        tex.needsUpdate = true;
+        schedule();
+      }).catch(() => {});
+    });
+  }
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 150);
+  }, { passive: true });
+  window.addEventListener('scroll', () => schedule(), { passive: true });
+
+  /* ── Loop ── */
+  let raf = null, visible = true;
+
+  function schedule() {
+    if (visible && raf === null) raf = requestAnimationFrame(frame);
+  }
+
+  function frame(now) {
+    raf = null;
+
+    if (fallback && !touchVec) {
+      // Slow, near-subliminal drift so the wordmark still has life when there
+      // is no gyroscope and nobody is touching it.
+      const t = now / 1000;
+      tx = Math.sin(t * 0.34) * 0.38;
+      ty = Math.cos(t * 0.26) * 0.26;
+    } else if (fallback && touchVec) {
+      tx = touchVec.x;
+      ty = touchVec.y;
+    }
+
+    const prevX = cx, prevY = cy, prevSpread = currentSpread;
+    cx += (tx - cx) * LERP;
+    cy += (ty - cy) * LERP;
+
+    const mag = Math.min(1, Math.hypot(cx, cy) / Math.SQRT2);
+    const targetSpread = (hoverCollapse ? 0 : BASE_SPREAD) +
+                         (scrollFactor() * 0.65 + mag * 0.35) * EXTRA_SPREAD;
+    currentSpread += (targetSpread - currentSpread) * 0.18;
+
+    // Rotation is the point: yaw/pitch the whole stack so the depth-separated
+    // planes slide across each other, then offset the camera the opposite way
+    // for the parallax that sells it.
+    group.rotation.y  = -cx * MAX_ROT_Y;
+    group.rotation.x  = -cy * MAX_ROT_X;
+    camera.position.x = -cx * MAX_CAM_XY;
+    camera.position.y =  cy * MAX_CAM_XY;
+
+    meshes.forEach((mesh, i) => {
+      const [dx, dy] = LAYERS[i].dir;
+      mesh.position.x = dx * currentSpread;
+      mesh.position.y = dy * currentSpread;
+    });
+
+    renderer.render(scene, camera);
+
+    const settled = Math.abs(cx - tx) < 1e-4 &&
+                    Math.abs(cy - ty) < 1e-4 &&
+                    Math.abs(currentSpread - targetSpread) < 1e-5 &&
+                    Math.abs(cx - prevX) < 1e-4 &&
+                    Math.abs(cy - prevY) < 1e-4 &&
+                    Math.abs(currentSpread - prevSpread) < 1e-5;
+    if (!settled || fallback) schedule();   // fallback drifts forever
+  }
+
+  // Don't burn frames on a hero that has scrolled away.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      visible = entries[0].isIntersecting;
+      if (visible) schedule();
+      else if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+    }, { threshold: 0 }).observe(hero);
+  }
+
+  resize();
+  logo.classList.add('dl-3d');
+})();
 </script>
 <script>
 (() => {
