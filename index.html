@@ -1322,6 +1322,39 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     .rv2 { opacity: 1; transform: none; transition: opacity .55s ease .12s, transform .55s ease .12s; }
     .rv2.in { opacity: 1; transform: translateY(0); }
   </style>
+  <style>
+    /* ========== 手機版：資訊優先（資訊列貼齊首屏底部） ========== */
+    @media (max-width: 639px) {
+      /* Hero 高度 = 首屏扣掉資訊列，讓資訊列正好落在畫面最底 */
+      #hero {
+        height: auto;
+        min-height: calc(100svh - var(--bar-h, 196px));
+        padding: 68px 1.5rem 1.1rem;
+      }
+      .hero-tag { margin-bottom: .55rem; font-size: .68rem; padding: .25rem .6rem; }
+      h1 { margin-bottom: .55rem; }
+      .hero-sub { margin-bottom: .9rem; font-size: .88rem; line-height: 1.5; }
+      /* DESIGN 大字保留在標題下方的視覺中段，不再壓在 Hero 最底部 */
+      #design-logo {
+        position: static;
+        transform: none;
+        order: 9;
+        margin: clamp(2rem, 6svh, 3.5rem) 0 0;
+        width: 100%;
+      }
+      /* 資訊列壓縮 */
+      .hero-info-inner { min-height: 0; }
+      .hero-info-item,
+      .hero-info-action { padding: .65rem 1.5rem; }
+      .hero-info-label { margin-bottom: .1rem; font-size: .66rem; }
+      .hero-info-item strong { font-size: .92rem; line-height: 1.4; }
+      .hero-info-action { padding-top: .8rem; padding-bottom: 1rem; }
+      .hero-cta.more-link {
+        width: 100%; text-align: center;
+        padding: .7rem 1.5rem; font-size: .95rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -2048,5 +2081,22 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     })();
 </script>
 
+<script>
+  /* 手機版：把資訊列實際高度餵給 --bar-h，Hero 才能剛好留出一屏 */
+  (function () {
+    var bar = document.querySelector('.hero-info-bar');
+    if (!bar) return;
+    function fit() {
+      if (window.innerWidth > 639) {
+        document.documentElement.style.removeProperty('--bar-h');
+      } else {
+        document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+      }
+    }
+    fit();
+    window.addEventListener('resize', fit);
+    window.addEventListener('load', fit);
+  })();
+</script>
 </body>
 </html>
