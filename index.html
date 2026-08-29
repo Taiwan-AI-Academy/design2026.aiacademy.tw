@@ -1047,6 +1047,29 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   background: rgba(51,51,51,.3);
 }
 
+/* 破格圓形插圖（案例分享） */
+.agenda-item--case .agenda-main { position: relative; padding-right: 190px; }
+.agenda-figure {
+  position: absolute;
+  right: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 158px;
+  height: 158px;
+  margin: 0;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--p);
+  overflow: hidden;
+  pointer-events: none;
+}
+.agenda-figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* ─── AGENDA MOBILE ─── */
 @media (max-width: 700px) {
   .agenda-list::before { display: none; }
@@ -1093,6 +1116,29 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   }
   .agenda-ampm { font-size: 44px; }
   .agenda-sublist { flex-direction: column; gap: 2px; }
+
+  /* 破格圓形插圖：手機縮小、貼右下角，不遮住文字 */
+  .agenda-item--case {
+    position: relative;
+    --fig: 104px;   /* 圓形直徑 */
+    --out: 14px;    /* 破格外露量 */
+  }
+  .agenda-item--case .agenda-main {
+    position: static;
+    padding-right: calc(var(--fig) - var(--out) + 14px);
+  }
+  .agenda-figure {
+    right: calc(var(--out) * -1);
+    top: auto;
+    bottom: calc(var(--out) * -1);
+    transform: none;
+    width: var(--fig);
+    height: var(--fig);
+    border-width: 2.5px;
+  }
+  @media (max-width: 380px) {
+    .agenda-item--case { --fig: 88px; }
+  }
 }
 
 
@@ -1571,6 +1617,9 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
             <li>逢甲大學｜室內空間提案</li>
             <li>南臺科技大學｜AI 與動畫</li>
           </ul>
+          <figure class="agenda-figure" aria-hidden="true">
+            <img src="img/course_icons/6.室內設計.png" alt="">
+          </figure>
         </div>
       </li>
 
