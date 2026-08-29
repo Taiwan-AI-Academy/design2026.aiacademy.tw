@@ -255,12 +255,6 @@
       align-items: center;
       gap: 12px;
       margin-bottom: 24px;
-      color: var(--y);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
     }
 
     .hs-kicker::before {
@@ -674,16 +668,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   gap: 24px;
   flex-wrap: wrap;
 }
-.heading-group {}
-.en-label {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: var(--ink2);
-  margin-bottom: 6px;
-}
 .main-title {
   font-size: 52px;
   font-weight: 900;
@@ -863,16 +847,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 }
 .more-link:hover { filter: brightness(.9); transform: translateY(-1px); }
 
-/* ─── FORUM AGENDA（單日論壇節目表） ─── */
-.agenda-count {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--ink2);
-  padding-bottom: 6px;
-}
-
 .agenda-group + .agenda-group { margin-top: 34px; }
 .agenda-group-head {
   display: flex;
@@ -891,14 +865,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   flex-shrink: 0;
 }
 .agenda-group-line { flex: 1; height: 1.5px; background: rgba(51,51,51,.15); }
-.agenda-group-tag {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: var(--ink2);
-  flex-shrink: 0;
-}
 
 /* 時間軸列表 */
 .agenda-list {
@@ -1461,7 +1427,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     <div class="hs-shell">
       <div class="hs-grid">
         <div class="hs-copy">
-          <div class="hs-kicker reveal">SPACE DESIGN FORUM · 2026</div>
+          <div class="hs-kicker reveal"></div>
           <p class="hs-desc reveal">本論壇將總結台灣人工智慧學校本年度橫跨台灣北、中、南、東的【 AI X 設計職人產業實戰工作坊 】成果，從動畫、影視、產品、空間到品牌等八場工作坊中選擇聚焦在空間設計的AI賦能深化。</p>
         </div>
       </div>
@@ -1474,10 +1440,8 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 
   <div class="top-bar">
     <div class="heading-group">
-      <div class="en-label">Forum Agenda · 2026.09.11</div>
       <h2 class="main-title">論壇議程 <em>AGENDA</em></h2>
     </div>
-    <div class="agenda-count">11 場・09:00–16:30</div>
   </div>
 
   <!-- ── 上午 ── -->
@@ -1485,7 +1449,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     <div class="agenda-group-head">
       <div class="agenda-ampm">AM</div>
       <div class="agenda-group-line"></div>
-      <div class="agenda-group-tag">MORNING</div>
     </div>
     <ol class="agenda-list">
 
@@ -1554,7 +1517,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     <div class="agenda-group-head">
       <div class="agenda-ampm">PM</div>
       <div class="agenda-group-line"></div>
-      <div class="agenda-group-tag">AFTERNOON</div>
     </div>
     <ol class="agenda-list">
 
