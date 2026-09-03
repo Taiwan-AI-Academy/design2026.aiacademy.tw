@@ -443,6 +443,77 @@ import '../styles/global.css';
   })();
     </script>
 
+    <script>
+  /* 工作坊紀錄・照片橫向輪播
+     把移出視窗那一端的照片搬到另一端，所以永遠不會露出空白，
+     也不需要在 DOM 裡複製第二份。data-marquee="right" 往右跑，"left" 往左跑。 */
+  (function () {
+    var SPEED = 26;                       // px / 秒
+    var section = document.getElementById('workshops');
+    if (!section) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var tracks = [].map.call(section.querySelectorAll('[data-marquee]'), function (el) {
+      return { el: el, dir: el.getAttribute('data-marquee') === 'right' ? 1 : -1, off: 0 };
+    });
+    if (!tracks.length) return;
+
+    var raf = null, last = 0;
+
+    function step(t, dt) {
+      var kids = t.el.children;
+      if (kids.length < 2) return;
+      t.off += SPEED * dt * t.dir;
+      if (t.dir > 0) {
+        while (t.off > 0) {
+          var tail = kids[kids.length - 1];
+          if (!tail.offsetWidth) return;   // 版面還沒量到寬度，別讓迴圈空轉
+          t.off -= tail.offsetWidth;
+          t.el.insertBefore(tail, kids[0]);
+        }
+      } else {
+        var w = kids[0].offsetWidth;
+        while (t.off < -w) {
+          if (!w) return;
+          t.off += w;
+          t.el.appendChild(kids[0]);
+          w = kids[0].offsetWidth;
+        }
+      }
+      t.el.style.transform = 'translateX(' + t.off.toFixed(2) + 'px)';
+    }
+
+    function frame(now) {
+      var dt = last ? Math.min((now - last) / 1000, 0.05) : 0;
+      last = now;
+      tracks.forEach(function (t) { step(t, dt); });
+      raf = requestAnimationFrame(frame);
+    }
+
+    function start() { if (raf === null) { last = 0; raf = requestAnimationFrame(frame); } }
+    function stop()  { if (raf !== null) { cancelAnimationFrame(raf); raf = null; } }
+
+    /* 軌道右邊的照片被 overflow 藏住，瀏覽器不會判定它們進入視窗，
+       lazy 就一路不載入，等輪播把它們推進來時只剩白格子。
+       所以區塊一靠近視窗，就把整排改回 eager 一次補齊。 */
+    function loadAll() {
+      [].forEach.call(section.querySelectorAll('img[loading="lazy"]'), function (img) {
+        img.loading = 'eager';
+      });
+    }
+
+    // 捲離畫面就停，別讓五條輪播在背景一直燒 frame
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { loadAll(); start(); } else stop();
+      }, { rootMargin: '400px 0px' }).observe(section);
+    } else {
+      loadAll();
+      start();
+    }
+  })();
+    </script>
+
     <slot>
 
     </slot>

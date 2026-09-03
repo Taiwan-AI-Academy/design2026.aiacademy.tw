@@ -1220,6 +1220,133 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       .spk-card-role { grid-area: role; min-height: 0; margin: 0; font-size: .94rem; }
     }
 
+    /* ── WORKSHOP RECORD ── */
+    #workshops {
+      scroll-margin-top: 56px;
+      background: var(--y);
+      border-top: 2px solid var(--t);
+      padding: 80px 0 88px;
+      overflow: hidden;
+    }
+    .wr-sub {
+      margin-top: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.7;
+      color: var(--ts);
+    }
+    .wr-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    /* 每條寬度刻意不齊，右緣像海報色帶一樣有節奏 */
+    .wr-row {
+      display: flex;
+      align-items: stretch;
+      background: #fff;
+      border: 2px solid var(--t);
+      overflow: hidden;
+    }
+    .wr-row--96 { width: 96%; }
+    .wr-row--94 { width: 94%; }
+    .wr-row--90 { width: 90%; }
+    .wr-row--82 { width: 82%; }
+    /* 欄寬抓到能讓最長的一行主題（18 個中文字）不斷行 */
+    .wr-info {
+      flex: 0 0 380px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px 24px;
+      border-right: 2px solid var(--t);
+    }
+    .wr-info--sage { background: var(--bb); }
+    .wr-info--lime { background: var(--gb); }
+    .wr-school {
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--t);
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: .06em;
+    }
+    .wr-sessions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .wr-topic {
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.4;
+      letter-spacing: .04em;
+      text-wrap: balance;   /* 別讓「⋯⋯工作坊」只剩一個字掉到下一行 */
+    }
+    .wr-tutor {
+      margin-top: 4px;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    /* 照片輪播：奇數排往右、偶數排往左，交錯移動。
+       高度給 min-height 而不是 height，左邊資訊欄變高時照片跟著撐滿，
+       不會在照片底下留一條白邊；軌道用絕對定位吃滿那個高度。 */
+    .wr-strip {
+      position: relative;
+      flex: 1;
+      min-height: 230px;
+      overflow: hidden;
+    }
+    .wr-strip--short { min-height: 190px; }
+    .wr-track {
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      display: flex;
+      width: max-content;
+      will-change: transform;
+    }
+    /* 每格都留右框；軌道永遠比視窗寬，所以尾端那道框看不到，
+       輪播搬動格子時也就不會有邊框忽有忽無的閃爍 */
+    .wr-cell {
+      flex: 0 0 300px;
+      border-right: 2px solid var(--t);
+      background: rgba(51,51,51,.06);
+      overflow: hidden;
+    }
+    .wr-cell img {
+      display: block;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    /* 不跑動畫時改成可手動橫捲，照片才不會被鎖在第一格 */
+    @media (prefers-reduced-motion: reduce) {
+      .wr-track { transform: none !important; }
+      .wr-strip { overflow-x: auto; }
+    }
+    @media (max-width: 900px) {
+      .wr-info { flex-basis: 260px; padding: 16px 18px; }
+      .wr-topic { font-size: 15px; }
+      .wr-strip { min-height: 200px; }
+      .wr-strip--short { min-height: 175px; }
+    }
+    @media (max-width: 700px) {
+      #workshops { padding: 56px 0 64px; }
+      .wr-sub { font-size: 14px; }
+      .wr-row,
+      .wr-row--96, .wr-row--94, .wr-row--90, .wr-row--82 {
+        width: 100%;
+        flex-direction: column;
+      }
+      .wr-info {
+        flex: 0 0 auto;
+        border-right: 0;
+        border-bottom: 2px solid var(--t);
+      }
+      .wr-strip,
+      .wr-strip--short { min-height: 160px; }
+      .wr-cell { flex-basis: 220px; }
+    }
+
     /* ── FAQ ── */
     #faq {
       background: var(--bg);
