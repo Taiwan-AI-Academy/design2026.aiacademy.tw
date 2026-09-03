@@ -502,13 +502,40 @@ import '../styles/global.css';
       });
     }
 
+    /* 軌道要比照片欄再多出一格，搬動時才不會露出空檔。照片本來就少的那排
+       （宜蘭只有四張）在夠寬的螢幕上會不夠長，就補上複本湊滿。
+       複本純粹是視覺填充，所以對讀屏隱藏、alt 清空。 */
+    function topUp(t) {
+      var strip = t.el.parentNode;
+      var cells = [].slice.call(t.el.children);
+      if (!cells.length) return;
+      var guard = 0;
+      while (t.el.offsetWidth < strip.clientWidth + cells[0].offsetWidth && guard++ < 8) {
+        cells.forEach(function (cell) {
+          var copy = cell.cloneNode(true);
+          copy.setAttribute('aria-hidden', 'true');
+          var img = copy.querySelector('img');
+          if (img) img.alt = '';
+          t.el.appendChild(copy);
+        });
+      }
+    }
+
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () { tracks.forEach(topUp); }, 150);
+    }, { passive: true });
+
     // 捲離畫面就停，別讓五條輪播在背景一直燒 frame
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) { loadAll(); start(); } else stop();
+        if (entries[0].isIntersecting) { loadAll(); tracks.forEach(topUp); start(); }
+        else stop();
       }, { rootMargin: '400px 0px' }).observe(section);
     } else {
       loadAll();
+      tracks.forEach(topUp);
       start();
     }
   })();

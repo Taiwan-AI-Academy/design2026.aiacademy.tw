@@ -1240,18 +1240,14 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       flex-direction: column;
       gap: 16px;
     }
-    /* 每條寬度刻意不齊，右緣像海報色帶一樣有節奏 */
     .wr-row {
       display: flex;
       align-items: stretch;
+      width: 100%;
       background: #fff;
       border: 2px solid var(--t);
       overflow: hidden;
     }
-    .wr-row--96 { width: 96%; }
-    .wr-row--94 { width: 94%; }
-    .wr-row--90 { width: 90%; }
-    .wr-row--82 { width: 82%; }
     /* 欄寬抓到能讓最長的一行主題（18 個中文字）不斷行 */
     .wr-info {
       flex: 0 0 380px;
@@ -1332,11 +1328,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
     @media (max-width: 700px) {
       #workshops { padding: 56px 0 64px; }
       .wr-sub { font-size: 14px; }
-      .wr-row,
-      .wr-row--96, .wr-row--94, .wr-row--90, .wr-row--82 {
-        width: 100%;
-        flex-direction: column;
-      }
+      .wr-row { flex-direction: column; }
       .wr-info {
         flex: 0 0 auto;
         border-right: 0;
