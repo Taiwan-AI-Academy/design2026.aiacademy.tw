@@ -1,6 +1,12 @@
 {
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "design2026",
   "compatibility_date": "2026-09-03",
+  // Cloudflare Workers Builds 只執行 deploy 指令，不會自動跑 astro build。
+  // 這個 custom build 會在 `wrangler deploy` 前先產生 dist/。
+  "build": {
+    "command": "npm run build"
+  },
   "assets": {
     "directory": "./dist"
   }
