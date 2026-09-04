@@ -1,6 +1,5 @@
 *.txt
 *.tsv
-package*.json
 node_modules/
 .claude/
 nohup.out
