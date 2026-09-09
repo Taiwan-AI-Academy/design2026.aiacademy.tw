@@ -905,7 +905,6 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
   line-height: 1.1;
   color: var(--ink);
 }
-.agenda-item--minor .agenda-hour { font-size: 17px; color: var(--ink2); }
 
 /* 時間軸節點 */
 .agenda-rail { position: relative; }
@@ -1486,4 +1485,3 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
         padding: .7rem 1.5rem; font-size: .95rem;
       }
     }
-
