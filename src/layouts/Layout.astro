@@ -229,14 +229,18 @@ import '../styles/global.css';
   scene.add(group);
 
   const geometry = new THREE.PlaneGeometry(PLANE_W, PLANE_H);
-  const meshes = LAYERS.map((layer, i) => {
-    const tex = new THREE.CanvasTexture(sources[i]);
+  function createTexture(source) {
+    const tex = new THREE.CanvasTexture(source);
     tex.colorSpace     = THREE.NoColorSpace;
     tex.minFilter      = THREE.LinearFilter;   // planes render near 1:1, so
     tex.magFilter      = THREE.LinearFilter;   // mipmaps buy nothing and would
     tex.generateMipmaps = false;               // cost 33% more texture memory
     tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
+    return tex;
+  }
 
+  const meshes = LAYERS.map((layer, i) => {
+    const tex = createTexture(sources[i]);
     const mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
       map: tex, transparent: true, opacity: 0.5,
       depthTest: false, depthWrite: false, toneMapped: false
@@ -322,6 +326,7 @@ import '../styles/global.css';
 
   /* ── Sizing ── */
   let resizeTimer = null;
+  let textureRequest = 0;
   function resize() {
     const art = inner.getBoundingClientRect();    // the artwork box
     const box = canvas.getBoundingClientRect();   // the bled canvas around it
@@ -338,17 +343,22 @@ import '../styles/global.css';
 
     // Re-rasterise only when the layout has moved enough to show, so a stream
     // of resize events can't thrash 4 SVG redraws.
+    const request = ++textureRequest;
     const want = texWidth();
     if (Math.abs(want - currentTexW) / currentTexW < 0.2) return;
-    currentTexW = want;
-    LAYERS.forEach((layer, i) => {
-      rasterize(layer.src, want).then(c => {
-        const tex = meshes[i].material.map;
-        tex.image = c;
-        tex.needsUpdate = true;
-        schedule();
-      }).catch(() => {});
-    });
+    Promise.all(LAYERS.map(layer => rasterize(layer.src, want))).then(images => {
+      if (request !== textureRequest) return;
+      // Uploaded texture dimensions are immutable. Replace the whole stack
+      // together so old pixels cannot survive a shrink or overlap new artwork.
+      const textures = images.map(createTexture);
+      meshes.forEach((mesh, i) => {
+        const previous = mesh.material.map;
+        mesh.material.map = textures[i];
+        previous.dispose();
+      });
+      currentTexW = want;
+      schedule();
+    }).catch(() => {});
   }
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
