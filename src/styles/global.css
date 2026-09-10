@@ -234,7 +234,7 @@
       height: clamp(260px, 36vw, 520px);
       top: -150px;
       right: -110px;
-      background: rgba(0, 161, 242, 0.5);
+      background: #76bfa0;
     }
 
     .integrated-hero-schools::after {
@@ -242,7 +242,7 @@
       height: clamp(190px, 28vw, 420px);
       left: -120px;
       bottom: 18%;
-      background: rgba(255, 112, 162, 0.5);
+      background: #b1cb28;
     }
 
     .hs-shell {
