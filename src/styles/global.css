@@ -1287,6 +1287,13 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
       gap: 14px;
       margin-top: 14px;
     }
+    .wr-date {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
     .wr-topic {
       font-size: 17px;
       font-weight: 900;
