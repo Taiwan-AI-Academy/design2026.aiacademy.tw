@@ -19,6 +19,7 @@ update_courses.js
 dist/
 # generated types
 .astro/
+.cache/workshop-portfolios/
 
 # dependencies
 node_modules/

@@ -1508,7 +1508,7 @@ body { background: var(--y); font-family: 'Noto Sans TC', sans-serif; color: var
 .wr-gallery img { object-fit: contain; }
 .wr-gallery figcaption { position: absolute; bottom: 0; left: 0; right: 0; display: flex; justify-content: space-between; gap: 12px; padding: 6px 10px; background: rgba(255,255,255,.92); font-size: 12px; line-height: 1.5; pointer-events: none; }
 .wr-gallery figcaption span { flex-shrink: 0; opacity: .65; }
-.wr-portfolio figure { margin: 0; position: relative; background: #fff; }
+.wr-portfolio figure { flex: 0 0 auto; height: 100%; box-sizing: content-box; margin: 0; position: relative; background: #fff; }
 .wr-portfolio img { object-fit: contain; }
 .wr-portfolio figcaption { position: absolute; bottom: 0; left: 0; right: 0; display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: rgba(255,255,255,.94); font-size: 12px; line-height: 1.5; }
 .wr-portfolio figcaption span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

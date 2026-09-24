@@ -461,6 +461,17 @@ import '../styles/global.css';
     var SPEED = 26;                       // px / 秒
     var section = document.getElementById('workshops');
     if (!section) return;
+    // Shuffle once per page load, before carousel setup (also for reduced motion).
+    section.querySelectorAll('.wr-portfolio [data-marquee]').forEach(function (track) {
+      var cells = Array.from(track.children);
+      for (var i = cells.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var cell = cells[i];
+        cells[i] = cells[j];
+        cells[j] = cell;
+      }
+      track.append(...cells);
+    });
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     var tracks = [].map.call(section.querySelectorAll('[data-marquee]'), function (el) {
@@ -478,17 +489,18 @@ import '../styles/global.css';
       if (t.dir > 0) {
         while (t.off > 0) {
           var tail = kids[kids.length - 1];
-          if (!tail.offsetWidth) return;   // 版面還沒量到寬度，別讓迴圈空轉
-          t.off -= tail.offsetWidth;
+          var tailWidth = tail.getBoundingClientRect().width;
+          if (!tailWidth) return;   // 版面還沒量到寬度，別讓迴圈空轉
+          t.off -= tailWidth;
           t.el.insertBefore(tail, kids[0]);
         }
       } else {
-        var w = kids[0].offsetWidth;
+        var w = kids[0].getBoundingClientRect().width;
         while (t.off < -w) {
           if (!w) return;
           t.off += w;
           t.el.appendChild(kids[0]);
-          w = kids[0].offsetWidth;
+          w = kids[0].getBoundingClientRect().width;
         }
       }
       t.el.style.transform = 'translateX(' + t.off.toFixed(2) + 'px)';

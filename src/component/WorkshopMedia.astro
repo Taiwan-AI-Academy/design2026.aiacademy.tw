@@ -20,7 +20,7 @@ const localURL = (path: string) => `${import.meta.env.BASE_URL}img/workshops/${p
 })}
 <div class="wr-strip wr-portfolio" data-wr-category="portfolio" hidden>
   {works.length ? <div class="wr-track" data-marquee={direction}>
-    {works.map(work => <figure class="wr-cell" data-work-id={work.id}>
+    {works.map(work => <figure class="wr-cell" data-work-id={work.id} style={`aspect-ratio: ${work.width} / ${work.height}`}>
       <a href={localURL(work.path)} data-wr-original aria-label={`放大：${work.name}`} data-astro-prefetch="false">
         <img src={localURL(work.path)} width={work.width} height={work.height} alt={work.name} loading="lazy" decoding="async" />
       </a>
