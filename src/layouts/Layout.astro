@@ -471,6 +471,7 @@ import '../styles/global.css';
     var raf = null, last = 0;
 
     function step(t, dt) {
+      if (!t.el.offsetWidth || t.el.parentNode.hidden || t.el.parentNode.matches(':hover, :focus-within')) return;
       var kids = t.el.children;
       if (kids.length < 2) return;
       t.off += SPEED * dt * t.dir;
@@ -503,12 +504,24 @@ import '../styles/global.css';
     function start() { if (raf === null) { last = 0; raf = requestAnimationFrame(frame); } }
     function stop()  { if (raf !== null) { cancelAnimationFrame(raf); raf = null; } }
 
-    /* 軌道右邊的照片被 overflow 藏住，瀏覽器不會判定它們進入視窗，
-       lazy 就一路不載入，等輪播把它們推進來時只剩白格子。
-       所以區塊一靠近視窗，就把整排改回 eager 一次補齊。 */
+    // Preload only nearby cells, including either end of the moving track.
+    // Hidden tabs and distant portfolio images retain native lazy loading.
+    var imageObservers = new WeakMap();
     function loadAll() {
-      [].forEach.call(section.querySelectorAll('img[loading="lazy"]'), function (img) {
-        img.loading = 'eager';
+      [].forEach.call(section.querySelectorAll('[data-wr-category]:not([hidden])'), function (strip) {
+        if (!('IntersectionObserver' in window)) return;
+        var observer = imageObservers.get(strip);
+        if (!observer) {
+          observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              entry.target.loading = 'eager';
+              observer.unobserve(entry.target);
+            });
+          }, { root: strip, rootMargin: '0px 600px' });
+          imageObservers.set(strip, observer);
+        }
+        strip.querySelectorAll('img[loading="lazy"]').forEach(function (img) { observer.observe(img); });
       });
     }
 
@@ -517,6 +530,7 @@ import '../styles/global.css';
        複本純粹是視覺填充，所以對讀屏隱藏、alt 清空。 */
     function topUp(t) {
       var strip = t.el.parentNode;
+      if (strip.hidden) return;
       var cells = [].slice.call(t.el.children);
       if (!cells.length) return;
       var guard = 0;
@@ -524,6 +538,7 @@ import '../styles/global.css';
         cells.forEach(function (cell) {
           var copy = cell.cloneNode(true);
           copy.setAttribute('aria-hidden', 'true');
+          copy.querySelectorAll('a').forEach(function (link) { link.tabIndex = -1; });
           var img = copy.querySelector('img');
           if (img) img.alt = '';
           t.el.appendChild(copy);
@@ -531,6 +546,9 @@ import '../styles/global.css';
       }
     }
 
+    section.addEventListener('workshop:change', function () {
+      loadAll(); tracks.forEach(topUp); start();
+    });
     var resizeTimer = null;
     window.addEventListener('resize', function () {
       clearTimeout(resizeTimer);

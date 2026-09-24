@@ -1,3 +1,8 @@
+---
+import WorkshopMedia from './WorkshopMedia.astro';
+import WorkshopImage from './WorkshopImage.astro';
+const tabs = [{ id: 'photos', label: '剪影' }, { id: 'workflow', label: '工作流' }, { id: 'portfolio', label: '作品集' }];
+---
 <!-- WORKSHOP RECORD -->
 <section id="workshops" class="wr">
   <div class="wrap">
@@ -7,9 +12,12 @@
         <h2 class="main-title">工作坊紀錄 <em>WORKSHOPS</em></h2>
         <p class="wr-sub">五所學校、八場工作坊，橫跨臺灣北、中、南、東的 AI 設計實戰現場</p>
       </div>
+      <div class="wr-tabs" role="tablist" aria-label="工作坊紀錄分類">
+        {tabs.map((tab, index) => <button type="button" role="tab" id={`wr-tab-${tab.id}`} aria-controls="wr-panel" aria-selected={index === 0} tabindex={index === 0 ? 0 : -1} data-wr-tab={tab.id}>{tab.label}</button>)}
+      </div>
     </div>
 
-    <div class="wr-rows">
+    <div class="wr-rows" id="wr-panel" role="tabpanel" aria-labelledby="wr-tab-photos" tabindex="0">
 
       <!-- 南臺科技大學：兩場 -->
       <div class="wr-row">
@@ -28,16 +36,17 @@
             </div>
           </div>
         </div>
-        <div class="wr-strip">
+        <div data-wr-category="photos" class="wr-strip">
           <div class="wr-track" data-marquee="right">
-            <div class="wr-cell"><img src="img/workshops/nantai/nantai-01.jpg" alt="南臺科技大學工作坊 講師開場簡報" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/nantai/nantai-02.jpg" alt="南臺科技大學工作坊 課堂上課情形" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/nantai/nantai-03.jpg" alt="南臺科技大學工作坊 學員上機操作" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/nantai/nantai-04.jpg" alt="南臺科技大學工作坊 講師個別指導" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/nantai/nantai-05.jpg" alt="南臺科技大學工作坊 學員以 AI 工具製作視覺" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/nantai/nantai-06.jpg" alt="南臺科技大學工作坊 學員大合照" loading="lazy" decoding="async"></div>
+            <div class="wr-cell"><WorkshopImage path="nantai/nantai-01.jpg" alt="南臺科技大學工作坊 講師開場簡報" /></div>
+            <div class="wr-cell"><WorkshopImage path="nantai/nantai-02.jpg" alt="南臺科技大學工作坊 課堂上課情形" /></div>
+            <div class="wr-cell"><WorkshopImage path="nantai/nantai-03.jpg" alt="南臺科技大學工作坊 學員上機操作" /></div>
+            <div class="wr-cell"><WorkshopImage path="nantai/nantai-04.jpg" alt="南臺科技大學工作坊 講師個別指導" /></div>
+            <div class="wr-cell"><WorkshopImage path="nantai/nantai-05.jpg" alt="南臺科技大學工作坊 學員以 AI 工具製作視覺" /></div>
+            <div class="wr-cell"><WorkshopImage path="nantai/nantai-06.jpg" alt="南臺科技大學工作坊 學員大合照" /></div>
           </div>
         </div>
+        <WorkshopMedia school="nantai" />
       </div>
 
       <!-- 元智大學：兩場 -->
@@ -57,16 +66,17 @@
             </div>
           </div>
         </div>
-        <div class="wr-strip">
+        <div data-wr-category="photos" class="wr-strip">
           <div class="wr-track" data-marquee="left">
-            <div class="wr-cell"><img src="img/workshops/yzu/yzu-01.jpg" alt="元智大學工作坊 講師示範 AI 建模與渲染" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/yzu/yzu-02.jpg" alt="元智大學工作坊 課堂上課情形" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/yzu/yzu-03.jpg" alt="元智大學工作坊 講師開場簡報" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/yzu/yzu-04.jpg" alt="元智大學工作坊 學員上機操作" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/yzu/yzu-05.jpg" alt="元智大學工作坊 講師個別指導" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/yzu/yzu-06.jpg" alt="元智大學工作坊 學員大合照" loading="lazy" decoding="async"></div>
+            <div class="wr-cell"><WorkshopImage path="yzu/yzu-01.jpg" alt="元智大學工作坊 講師示範 AI 建模與渲染" /></div>
+            <div class="wr-cell"><WorkshopImage path="yzu/yzu-02.jpg" alt="元智大學工作坊 課堂上課情形" /></div>
+            <div class="wr-cell"><WorkshopImage path="yzu/yzu-03.jpg" alt="元智大學工作坊 講師開場簡報" /></div>
+            <div class="wr-cell"><WorkshopImage path="yzu/yzu-04.jpg" alt="元智大學工作坊 學員上機操作" /></div>
+            <div class="wr-cell"><WorkshopImage path="yzu/yzu-05.jpg" alt="元智大學工作坊 講師個別指導" /></div>
+            <div class="wr-cell"><WorkshopImage path="yzu/yzu-06.jpg" alt="元智大學工作坊 學員大合照" /></div>
           </div>
         </div>
+        <WorkshopMedia school="yzu" />
       </div>
 
       <!-- 逢甲大學：兩場 -->
@@ -86,16 +96,17 @@
             </div>
           </div>
         </div>
-        <div class="wr-strip">
+        <div data-wr-category="photos" class="wr-strip">
           <div class="wr-track" data-marquee="right">
-            <div class="wr-cell"><img src="img/workshops/fcu/fcu-01.jpg" alt="逢甲大學工作坊 講師講解 AI 工作流" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/fcu/fcu-02.jpg" alt="逢甲大學工作坊 講師與學員討論" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/fcu/fcu-03.jpg" alt="逢甲大學工作坊 學員上機操作" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/fcu/fcu-04.jpg" alt="逢甲大學工作坊 課堂上課情形" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/fcu/fcu-05.jpg" alt="逢甲大學工作坊 現場活動海報與學員" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/fcu/fcu-06.jpg" alt="逢甲大學工作坊 電腦教室全景" loading="lazy" decoding="async"></div>
+            <div class="wr-cell"><WorkshopImage path="fcu/fcu-01.jpg" alt="逢甲大學工作坊 講師講解 AI 工作流" /></div>
+            <div class="wr-cell"><WorkshopImage path="fcu/fcu-02.jpg" alt="逢甲大學工作坊 講師與學員討論" /></div>
+            <div class="wr-cell"><WorkshopImage path="fcu/fcu-03.jpg" alt="逢甲大學工作坊 學員上機操作" /></div>
+            <div class="wr-cell"><WorkshopImage path="fcu/fcu-04.jpg" alt="逢甲大學工作坊 課堂上課情形" /></div>
+            <div class="wr-cell"><WorkshopImage path="fcu/fcu-05.jpg" alt="逢甲大學工作坊 現場活動海報與學員" /></div>
+            <div class="wr-cell"><WorkshopImage path="fcu/fcu-06.jpg" alt="逢甲大學工作坊 電腦教室全景" /></div>
           </div>
         </div>
+        <WorkshopMedia school="fcu" />
       </div>
 
       <!-- 國立臺東專科學校：一場 -->
@@ -110,16 +121,17 @@
             </div>
           </div>
         </div>
-        <div class="wr-strip wr-strip--short">
+        <div data-wr-category="photos" class="wr-strip wr-strip--short">
           <div class="wr-track" data-marquee="left">
-            <div class="wr-cell"><img src="img/workshops/ntc/ntc-01.jpg" alt="國立臺東專科學校工作坊 講師示範品牌設計工具" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/ntc/ntc-02.jpg" alt="國立臺東專科學校工作坊 講師個別指導" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/ntc/ntc-03.jpg" alt="國立臺東專科學校工作坊 學員上機操作" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/ntc/ntc-04.jpg" alt="國立臺東專科學校工作坊 課堂上課情形" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/ntc/ntc-05.jpg" alt="國立臺東專科學校工作坊 學員完成的小農品牌宣傳圖" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/ntc/ntc-06.jpg" alt="國立臺東專科學校工作坊 電腦教室全景" loading="lazy" decoding="async"></div>
+            <div class="wr-cell"><WorkshopImage path="ntc/ntc-01.jpg" alt="國立臺東專科學校工作坊 講師示範品牌設計工具" /></div>
+            <div class="wr-cell"><WorkshopImage path="ntc/ntc-02.jpg" alt="國立臺東專科學校工作坊 講師個別指導" /></div>
+            <div class="wr-cell"><WorkshopImage path="ntc/ntc-03.jpg" alt="國立臺東專科學校工作坊 學員上機操作" /></div>
+            <div class="wr-cell"><WorkshopImage path="ntc/ntc-04.jpg" alt="國立臺東專科學校工作坊 課堂上課情形" /></div>
+            <div class="wr-cell"><WorkshopImage path="ntc/ntc-05.jpg" alt="國立臺東專科學校工作坊 學員完成的小農品牌宣傳圖" /></div>
+            <div class="wr-cell"><WorkshopImage path="ntc/ntc-06.jpg" alt="國立臺東專科學校工作坊 電腦教室全景" /></div>
           </div>
         </div>
+        <WorkshopMedia school="ntc" />
       </div>
 
       <!-- 國立宜蘭大學：一場 -->
@@ -134,16 +146,81 @@
             </div>
           </div>
         </div>
-        <div class="wr-strip wr-strip--short">
+        <div data-wr-category="photos" class="wr-strip wr-strip--short">
           <div class="wr-track" data-marquee="right">
-            <div class="wr-cell"><img src="img/workshops/niu/niu-01.jpg" alt="國立宜蘭大學工作坊 講師開場" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/niu/niu-02.jpg" alt="國立宜蘭大學工作坊 講師個別指導" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/niu/niu-03.jpg" alt="國立宜蘭大學工作坊 課堂上課情形" loading="lazy" decoding="async"></div>
-            <div class="wr-cell"><img src="img/workshops/niu/niu-04.jpg" alt="國立宜蘭大學工作坊 學員上機操作" loading="lazy" decoding="async"></div>
+            <div class="wr-cell"><WorkshopImage path="niu/niu-01.jpg" alt="國立宜蘭大學工作坊 講師開場" /></div>
+            <div class="wr-cell"><WorkshopImage path="niu/niu-02.jpg" alt="國立宜蘭大學工作坊 講師個別指導" /></div>
+            <div class="wr-cell"><WorkshopImage path="niu/niu-03.jpg" alt="國立宜蘭大學工作坊 課堂上課情形" /></div>
+            <div class="wr-cell"><WorkshopImage path="niu/niu-04.jpg" alt="國立宜蘭大學工作坊 學員上機操作" /></div>
           </div>
         </div>
+        <WorkshopMedia school="niu" />
       </div>
 
     </div>
   </div>
 </section>
+
+<dialog class="wr-lightbox" aria-label="工作坊圖片原圖">
+  <div class="wr-lightbox-bar"><p id="wr-image-caption"></p><button type="button" data-wr-close autofocus>關閉 ×</button></div>
+  <div class="wr-lightbox-body"></div>
+  <p data-wr-error hidden>原圖載入失敗，請關閉後重試。</p>
+</dialog>
+<script>
+  const section = document.querySelector<HTMLElement>('#workshops')!;
+  const tabs = Array.from(section.querySelectorAll<HTMLButtonElement>('[data-wr-tab]'));
+  const panel = section.querySelector<HTMLElement>('#wr-panel')!;
+  function selectTab(tab: HTMLButtonElement) {
+    tabs.forEach(button => {
+      button.setAttribute('aria-selected', String(button === tab));
+      button.tabIndex = button === tab ? 0 : -1;
+    });
+    panel.setAttribute('aria-labelledby', tab.id);
+    section.dataset.category = tab.dataset.wrTab;
+    section.querySelectorAll<HTMLElement>('[data-wr-category]').forEach(content => {
+      content.hidden = content.dataset.wrCategory !== tab.dataset.wrTab;
+    });
+    section.querySelectorAll<HTMLElement>('.wr-row').forEach(row => {
+      row.hidden = tab.dataset.wrTab === 'portfolio' && !row.querySelector('[data-work-id]');
+    });
+    section.dispatchEvent(new Event('workshop:change'));
+  }
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => selectTab(tab));
+    tab.addEventListener('keydown', event => {
+      const next = event.key === 'ArrowRight' ? (index + 1) % tabs.length : event.key === 'ArrowLeft' ? (index + tabs.length - 1) % tabs.length : event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : -1;
+      if (next < 0) return;
+      event.preventDefault(); tabs[next].focus(); selectTab(tabs[next]);
+    });
+  });
+  const dialog = document.querySelector<HTMLDialogElement>('.wr-lightbox')!;
+  const body = dialog.querySelector<HTMLElement>('.wr-lightbox-body')!;
+  const caption = dialog.querySelector<HTMLElement>('#wr-image-caption')!;
+  const error = dialog.querySelector<HTMLElement>('[data-wr-error]')!;
+  let trigger: HTMLElement | null = null;
+  let previousOverflow = '';
+  section.addEventListener('click', event => {
+    const link = (event.target as Element).closest<HTMLAnchorElement>('[data-wr-original]');
+    if (!link || (event as MouseEvent).ctrlKey || (event as MouseEvent).metaKey || (event as MouseEvent).shiftKey || (event as MouseEvent).altKey) return;
+    event.preventDefault();
+    trigger = link;
+    caption.textContent = link.querySelector('img')?.alt || '工作坊圖片';
+    error.hidden = true;
+    const image = new Image();
+    image.alt = caption.textContent;
+    image.addEventListener('error', () => { error.hidden = false; });
+    body.replaceChildren(image);
+    // Do not assign an original URL to an img until the lightbox is opened.
+    image.src = link.href;
+    previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    dialog.showModal();
+  });
+  dialog.querySelector('[data-wr-close]')!.addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  dialog.addEventListener('close', () => {
+    body.replaceChildren();
+    document.body.style.overflow = previousOverflow;
+    trigger?.focus({ preventScroll: true });
+  });
+</script>
